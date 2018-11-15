@@ -170,7 +170,7 @@ public class NewClass {
         enterTime = scan.next();
     }
     else if(selectionDeliveryMode == 2){
-        System.out.print("Enter address ");
+        System.out.print("Enter address : ");
         delivery = scan.next();
     }
     else{
