@@ -41,7 +41,7 @@ public class corporatecust {
             corporatecust.setCreditAmount(totaldebt);
             char selection;
             do{
-            System.out.print("Do You want to build a snowman? (y/n) : ");
+            System.out.print("Do You want to make a payment? (y/n) : ");
             selection = (scan.next().charAt(0));
             switch(selection){
                 case 'Y':
