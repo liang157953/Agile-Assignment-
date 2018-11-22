@@ -7,12 +7,15 @@ package corporatecustomer;
 
 import fioreflowershop.Customer;
 import fioreflowershop.Order;
+import fioreflowershop.OrderList;
 import fioreflowershop.Payment;
 import fioreflowershop.Product;
 import fioreflowershop.ProductType;
 import fioreflowershop.Staff;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
@@ -30,8 +33,8 @@ public class NewClass {
         listProdType.add(new ProductType("PT102","Flower Bouquet","Yellow"));
         listProdType.add(new ProductType("PT103","Flower Arrangement","Blue"));
         
-        List<Product> listProduct = new ArrayList<>();
-       
+        List<Product> listProduct = new ArrayList<Product>();
+        List<OrderList> orderlist = new ArrayList<OrderList>();
         listProduct.add(new Product("P1001","Rose", 20.00, 50, listProdType.get(0)));
         listProduct.add(new Product("P1002","SunFlower",10.00, 30, listProdType.get(2)));
         listProduct.add(new Product("P1003","Wax Flower",5.00, 40, listProdType.get(1)));
@@ -55,8 +58,8 @@ public class NewClass {
         paymentList.add(new Payment("P1002","11-11-2018",200.0,"Unpaid"));
         paymentList.add(new Payment("P1003","15-11-2018",100.0,"UnPaid"));
         
-        List<Order> order = new ArrayList<Order>();
-        order.add(new Order("O1001","Give to my girlfriend ","11-11-2018","Process",customerList.get(0),paymentList.get(0),staffList.get(0)));
+        List<Order> orderList = new ArrayList<Order>();
+        orderList.add(new Order("O1001","Give to my girlfriend ","11-11-2018","Process",customerList.get(0),paymentList.get(0),staffList.get(0)));
         boolean addon = false;
         int selection;
         int selectionProd;
@@ -67,17 +70,23 @@ public class NewClass {
         String delivery="";
         int newQty = 0;
         double totalAmt = 0;
-        String selectionContinue="";
+        char selectionContinue;
         Scanner scan = new Scanner(System.in);
         //Scanner scanString = new Scanner(System.in);
         Product selectedProduct= new Product();
+        String indexno = orderList.get(orderList.size()-1).getOrderID();
+        int indexnum = Integer.parseInt(indexno.substring(1, 5)) +1;
+        String date = new SimpleDateFormat("dd-MM-yyyy").format(new Date());
+        orderList.add(new Order("O"+indexnum,"Description",date,"Received",customerList.get(0),null,staffList.get(0)));
         do{
         Scanner sc = new Scanner(System.in);
         Scanner scc = new Scanner(System.in);
         System.out.println("==========Product Type===========");
+        
         for(int i=0; i<listProdType.size();i++)
         {
             System.out.println(String.format("%d. %s", i + 1, listProdType.get(i).getProductTypeName()));
+            
         }
         do{
             System.out.print("Please enter product type : ");
@@ -96,13 +105,14 @@ public class NewClass {
         System.out.println("\n========Product=========");
         
         int qty =0;
+
         for(int r=0;r<listProduct.size();r++){
             if(listProduct.get(r).getProductType().equals(selectedProductType)){
                 System.out.println(String.format("%d. %s", r+1, listProduct.get(r).getProductName()));
+
             }
         }
-       
-        
+     
         do{
         System.out.print("Please enter product : ");
         selectionProd = sc.nextInt();
@@ -132,32 +142,39 @@ public class NewClass {
                 if(selectionQty > selectedProduct.getProductQuantity() ){
                     System.out.println("Please enter again quantity");
                 }
-
-                else{
-                    newQty = selectedProduct.getProductQuantity() - selectionQty;
+   
+                }while(selectionQty > selectedProduct.getProductQuantity());
+                
+                newQty = selectedProduct.getProductQuantity() - selectionQty;
                    // totalAmt = selectedProduct.getProductPrice() * selectionQty;             
-                    selectedProduct.setProductQuantity(newQty);
-                        
-                  
-                    }
-                }while(selectionQty <= selectedProduct.getProductQuantity());
+                    selectedProduct.setProductQuantity(newQty);                    
+                    totalAmt += selectedProduct.getProductPrice() * selectionQty;
+                    
+                    orderlist.add(new OrderList(orderList.get(orderList.size()-1),selectedProduct,selectionQty));
                 do{
-                            System.out.print("Do you want to added the new item (Y/N): ");
-                            selectionContinue = scc.nextLine();
+                            System.out.print("Do you want to add the new item (Y/N): ");
+                            selectionContinue = scc.next().charAt(0);
                             if(CheckAlphabetic(selectionContinue)){
-                                selectionContinue = selectionContinue.toUpperCase();
+                                switch(selectionContinue)
+                                {
+                                    case 'y' :selectionContinue ='Y';break;
+                                    case 'n' :selectionContinue ='N';break;
+                                }
                             }
-                        }while(!selectionContinue.equals("Y") && !selectionContinue.equals("N") );
+                        }while(selectionContinue !='Y' && selectionContinue !='N' );
 
-                        if(selectionContinue.equals("N")){
+                        if(selectionContinue == 'N'){
                             addon = false;   
-                        }else if(selectionContinue.equals("Y")){
+                        }else if(selectionContinue=='Y'){
                             addon = true;
                         }
             
         }
-    }while(selectedProduct.getProductQuantity() == 0 || addon == true);  
-   
+    }while(selectedProduct.getProductQuantity() == 0 || addon);  
+    indexno = paymentList.get(paymentList.size()-1).getPaymentID();
+    indexnum = Integer.parseInt(indexno.substring(1, 5)) +1;
+    Payment payment = new Payment("P"+indexnum,null,totalAmt,"Unpaid");
+    orderList.get(orderList.size()-1).setPayment(payment);
     System.out.println("======Select Delivery Mode===========");
     System.out.println("======1. Pick-up on date and time===========");
     System.out.println("======2. Delivery===========");
@@ -177,12 +194,24 @@ public class NewClass {
         System.out.print("Error");
     }
      System.out.println("Successful make an order.");
+     System.out.println("View details? ");
+     System.out.println("no. Product Name  Quantity");
+     System.out.println("*******************************");
+     
+     for(int i=0;i < orderlist.size() ;i++){
+         if(orderlist.get(i).getOrder().getOrderID().equals(orderList.get(orderList.size()-1).getOrderID())){
+             orderlist.get(i).setOrder(orderList.get(orderList.size()-1));
+             System.out.println(String.format("%d. %s \t %d", i+1, orderlist.get(i).getProduct().getProductName(), orderlist.get(i).getQuantity()));
+         }
+     }
+     System.out.println("********************************");
+     System.out.println("Total Amount :" + orderList.get(orderList.size()-1).getPayment().getTotalAmount());
     
 }
-    public static boolean CheckAlphabetic(String input) throws IOException{
+    public static boolean CheckAlphabetic(char input) throws IOException{
         boolean checkAlphabetic = false;
-        for(int r=0;r<input.length();r++){
-            if(Character.isAlphabetic(input.charAt(r))){
+     
+            if(Character.isAlphabetic(input)){
                 checkAlphabetic = true;
             }
             else{
@@ -191,9 +220,8 @@ public class NewClass {
                 System.in.read();
                 System.out.println();
                 checkAlphabetic = false;
-                break;
             }
-        }
+        
         return checkAlphabetic;
     }
 }
