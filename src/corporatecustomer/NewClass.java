@@ -193,9 +193,22 @@ public class NewClass {
     else{
         System.out.print("Error");
     }
+    
      System.out.println("Successful make an order.");
-     System.out.println("View details? ");
-     System.out.println("no. Product Name  Quantity");
+     
+     //System.out.println("\n\nView details? ");
+     do{
+            System.out.print("\n\nView Details (Y/N): ");
+            selectionContinue = scan.next().charAt(0);
+            if(CheckAlphabetic(selectionContinue)){
+                switch(selectionContinue)
+                {
+                    case 'y' :selectionContinue ='Y';break;
+                    case 'n' :selectionContinue ='N';break;
+                }
+            }
+        }while(selectionContinue !='Y' && selectionContinue !='N' );
+     System.out.println("\n\nno. Product Name  Quantity");
      System.out.println("*******************************");
      
      for(int i=0;i < orderlist.size() ;i++){
