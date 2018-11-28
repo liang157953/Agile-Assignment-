@@ -1,3 +1,4 @@
+package fioreflowershop;
 
 import fioreflowershop.ProductType;
 
