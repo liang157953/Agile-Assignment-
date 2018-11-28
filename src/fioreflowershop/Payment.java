@@ -12,13 +12,13 @@ package fioreflowershop;
 public class Payment {
     private String paymentID;
     private String paymentDate;
-    private String totalAmount;
+    private double totalAmount;
     private String paymentStatus;
 
     public Payment() {
     }
 
-    public Payment(String paymentID, String paymentDate, String totalAmount, String paymentStatus) {
+    public Payment(String paymentID, String paymentDate, double totalAmount, String paymentStatus) {
         this.paymentID = paymentID;
         this.paymentDate = paymentDate;
         this.totalAmount = totalAmount;
@@ -41,11 +41,11 @@ public class Payment {
         this.paymentDate = paymentDate;
     }
 
-    public String getTotalAmount() {
+    public double getTotalAmount() {
         return totalAmount;
     }
 
-    public void setTotalAmount(String totalAmount) {
+    public void setTotalAmount(double totalAmount) {
         this.totalAmount = totalAmount;
     }
 
