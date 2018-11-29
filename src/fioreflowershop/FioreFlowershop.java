@@ -4,7 +4,9 @@
  * and open the template in the editor.
  */
 package fioreflowershop;
+import catalogOrder.GenerateSalesOrder;
 import catalogOrder.catalogOrder;
+//import catalogOrder.generateSalesOrder;
 import java.util.ArrayList;
 import java.util.List;
 import java.io.IOException;
@@ -62,9 +64,9 @@ public class FioreFlowershop {
         
         //PickUp Data
         List<PickUp> pickupList = new ArrayList<PickUp>();
-        pickupList.add(new PickUp("PU1001","20/11/2018","1400","20-11-2018","1410","Standby",staffList.get(0),orderDataList.get(0)));
-        pickupList.add(new PickUp("PU1002","20/11/2018","1200","20-11-2018","1230","Standby",staffList.get(0),orderDataList.get(2)));
-        pickupList.add(new PickUp("PU1003","21/11/2018","1500","21-11-2018","1610","Standby",staffList.get(0),orderDataList.get(0)));
+        pickupList.add(new PickUp("PU1001","20/11/2018","1400","","","Standby",staffList.get(0),orderDataList.get(0)));
+        pickupList.add(new PickUp("PU1002","20/11/2018","1200","","","Standby",staffList.get(0),orderDataList.get(2)));
+        pickupList.add(new PickUp("PU1003","21/11/2018","1500","","","Standby",staffList.get(0),orderDataList.get(0)));
         
         //Style Data
         List<Style> styleList = new ArrayList<Style>();
@@ -95,7 +97,8 @@ public class FioreFlowershop {
         orderLL.add(new OrderList(orderDataList.get(0), prodList.get(2), 1));
         orderLL.add(new OrderList(orderDataList.get(2),prodList.get(1),2));
         //System.out.println("Main Program");
-       orderDataList = catalogOrder.CatalogOrderMenu(prodTypeList,prodList,orderDataList,customerList,staffList,paymentList);
+       //orderDataList = catalogOrder.CatalogOrderMenu(prodTypeList,prodList,orderDataList,customerList,staffList,paymentList);
+       orderLL = GenerateSalesOrder.GenerateReportMain(prodTypeList, prodList, orderDataList, orderLL);
     }
     
 }
