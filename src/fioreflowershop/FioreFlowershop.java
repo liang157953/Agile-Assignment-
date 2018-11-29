@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package fioreflowershop;
+import catalogOrder.catalogOrder;
 import java.util.ArrayList;
 import java.util.List;
 import java.io.IOException;
@@ -88,9 +89,13 @@ public class FioreFlowershop {
         deliveryList.add(new Delivery("T1101","25-20,PV16","Setapak","019-7132686","25 November 2018","1200","26 November 2018","1200","Processing",staffList.get(0),orderDataList.get(0),1));
         deliveryList.add(new Delivery("T1102","20,jalan barongan,taman berjaya","Johor","019-7788115","2 September 2018","1200","5 September 2018","1200","Processing",staffList.get(2),orderDataList.get(0),1));
         deliveryList.add(new Delivery("T1103","25-20,PV16","Setapak","019-7755115","10 November 2018","1200","11 November 2018","1200","Processing",staffList.get(1),orderDataList.get(0),1));
-
+        
+        List<OrderList> orderLL = new ArrayList<OrderList>();
+        orderLL.add(new OrderList(orderDataList.get(0),prodList.get(0),2));
+        orderLL.add(new OrderList(orderDataList.get(0), prodList.get(2), 1));
+        orderLL.add(new OrderList(orderDataList.get(2),prodList.get(1),2));
         //System.out.println("Main Program");
-       
+       orderDataList = catalogOrder.CatalogOrderMenu(prodTypeList,prodList,orderDataList,customerList,staffList,paymentList);
     }
     
 }
