@@ -25,13 +25,13 @@ public class GenerateSalesOrder {
        double totalAmount = 0;
        char selectionReport;
        int selectionProdType = 0;
-       Boolean test=false;String options="";
+       Boolean test=false;
+       //String options="";
 
        do{
        System.out.print("Do you want to generate report ? (Y/N) : ");
        selectionReport = scan.next().charAt(0);
-
-       
+      
             if(CheckAlphabetic(selectionReport)){
                 switch(selectionReport)
                 {
@@ -40,26 +40,22 @@ public class GenerateSalesOrder {
                 }
             }
         }while(selectionReport !='Y' && selectionReport !='N' );
-
-       do{
-            test=false;options="";
-            //do{
-        System.out.println("\n==========Product Type===========");
+       
+        do{
+        System.out.println("\n\n==========Product Type===========");
         for(int i=0; i<prodTypeList.size(); i++){
             System.out.println(String.format("%d. %s", i + 1, prodTypeList.get(i).getProductTypeName()));
        }
-        
-        
-        
+     
         System.out.print("Please enter product type : ");
-        selectionProdType = scan.nextInt(); 
-        if(Integer.parseInt(options)<=0 || Integer.parseInt(options)>prodTypeList.size()){
-                System.out.printf("Input Out of Range! Please Enter Again");
-                System.in.read();
-                test=false;
-            }else{
-                test=true;
+        selectionProdType = scan.nextInt();
+        
+        if(selectionProdType<=0 || selectionProdType>prodTypeList.size()){
+                System.out.println("Input Out of Range! Please Enter Again");
+
             }
+           }while(selectionProdType<=0 || selectionProdType>prodTypeList.size());
+
         
         ProductType productType = new ProductType();
         
@@ -77,14 +73,12 @@ public class GenerateSalesOrder {
                 sumQty += orderList.get(i).getQuantity();
             }
         }
-         //}while(!CheckDigit(options+1));
-      
+     
         System.out.println("\n========================================================================================================");
         System.out.println("\t\t\t\t\t\t\t\t\t\t    Total Quantity : " + sumQty);
         System.out.println("========================================================================================================");
         return orderList;
 
-    }while(!test);
     }
 
     public static boolean CheckAlphabetic(char input) throws IOException{
@@ -99,8 +93,8 @@ public class GenerateSalesOrder {
                 System.in.read();
                 System.out.println();
                 checkAlphabetic = false;
-            }
-        
+            }       
         return checkAlphabetic;
     }
+
 }
