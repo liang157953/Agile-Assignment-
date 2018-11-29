@@ -97,7 +97,7 @@ public class FioreFlowershop {
         orderLL.add(new OrderList(orderDataList.get(0), prodList.get(2), 1));
         orderLL.add(new OrderList(orderDataList.get(2),prodList.get(1),2));
         //System.out.println("Main Program");
-       //orderDataList = catalogOrder.CatalogOrderMenu(prodTypeList,prodList,orderDataList,customerList,staffList,paymentList);
+       orderDataList = catalogOrder.CatalogOrderMenu(prodTypeList,prodList,orderDataList,customerList,staffList,paymentList);
        orderLL = GenerateSalesOrder.GenerateReportMain(prodTypeList, prodList, orderDataList, orderLL);
     }
     

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package corporatecustomer;
+package catalogOrder;
 
 import fioreflowershop.Customer;
 import fioreflowershop.Order;
@@ -18,53 +18,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
-
-public class NewClass {
-
-    /**
-     * @param args the command line arguments
-     */
+import fioreflowershop.FioreFlowershop.*;
+public class catalogOrder {
+public static List<Order> CatalogOrderMenu(List<ProductType> listProdType, List<Product> listProduct,List<Order> orderDataList, List<Customer> customerList,List<Staff> staffList, List<Payment> paymentList) throws IOException{    
   
-
-    public static void main(String[] args) throws IOException {
-        List<ProductType> listProdType = new ArrayList<>();
-        
-        listProdType.add(new ProductType("PT101","Fresh Flower","Red"));
-        listProdType.add(new ProductType("PT102","Flower Bouquet","Yellow"));
-        listProdType.add(new ProductType("PT103","Flower Arrangement","Blue"));
-        
-        List<Product> listProduct = new ArrayList<Product>();
         List<OrderList> orderlist = new ArrayList<OrderList>();
-         listProduct.add(new Product("P1001","Flowers and Chocolates Gift","DESC...","Red",60.00,5,listProdType.get(0)));
-        listProduct.add(new Product("P1002","Ladies Gift Hamper","DESC...","Red",65.00,5,listProdType.get(1)));
-        listProduct.add(new Product("P1003","Christmas Treats Gift Box","DESC...","White",15.00,5,listProdType.get(1)));
-        listProduct.add(new Product("P1004","Honeybee","DESC...","Yellow",30.00,5,listProdType.get(0)));
-        listProduct.add(new Product("P1005","Starry Night","DESC...","Blue",45.00,5,listProdType.get(2)));
-//        listProduct.add(new Product("P1001","Rose", 20.00, 50, listProdType.get(0)));
-//        listProduct.add(new Product("P1002","SunFlower",10.00, 30, listProdType.get(2)));
-//        listProduct.add(new Product("P1003","Wax Flower",5.00, 40, listProdType.get(1)));
-//        listProduct.add(new Product("P1004","Lily", 12.00, 0, listProdType.get(0)));
-//        listProduct.add(new Product("P1005","Aster",12.00, 30, listProdType.get(1)));
-//        listProduct.add(new Product("P1006","Carnation",25.00, 40, listProdType.get(1)));
-//        listProduct.add(new Product("P1007","Dahlia",6.00, 10, listProdType.get(0)));
-        
-        List<Customer> customerList = new ArrayList<Customer>();
-        customerList.add(new Customer("C1001","Koh Liao Liao","pv16,jalan setapak","011-39958399"));
-        customerList.add(new Customer("C1002","Lew Hao Hap","pv16,jalan setapak","012-7878778"));
-        customerList.add(new Customer("C1003","Ong Jin Jin","pv16,jalan setapak","013-7799889"));
-        
-        List<Staff> staffList = new ArrayList<Staff>();
-        staffList.add(new Staff("S1001","Lim Yong Qi","019-7272566"));
-        staffList.add(new Staff("S1002","Jimmy Chew","012-3435617"));
-        staffList.add(new Staff("S1003","Cindy Lee","019-434580"));
-        
-        List<Payment> paymentList = new ArrayList<Payment>();
-        paymentList.add(new Payment("P1001","10-11-2018",100.0,"Paid"));
-        paymentList.add(new Payment("P1002","11-11-2018",200.0,"Unpaid"));
-        paymentList.add(new Payment("P1003","15-11-2018",100.0,"UnPaid"));
-        
-        List<Order> orderList = new ArrayList<Order>();
-        orderList.add(new Order("O1001","Give to my girlfriend ","11-11-2018","Process",customerList.get(0),paymentList.get(0),staffList.get(0)));
+        //orderList.add(new Order("O1001","Give to my girlfriend ","11-11-2018","Process",customerList.get(0),paymentList.get(0),staffList.get(0)));
         boolean addon = false;
         int selection;
         int selectionProd;
@@ -79,10 +38,10 @@ public class NewClass {
         Scanner scan = new Scanner(System.in);
         //Scanner scanString = new Scanner(System.in);
         Product selectedProduct= new Product();
-        String indexno = orderList.get(orderList.size()-1).getOrderID();
+        String indexno = orderDataList.get(orderDataList.size()-1).getOrderID();
         int indexnum = Integer.parseInt(indexno.substring(1, 5)) +1;
         String date = new SimpleDateFormat("dd-MM-yyyy").format(new Date());
-        orderList.add(new Order("O"+indexnum,"Description",date,"Received",customerList.get(0),null,staffList.get(0)));
+        orderDataList.add(new Order("O"+indexnum,"Description",date,"Received",customerList.get(0),null,staffList.get(0)));
         do{
         Scanner sc = new Scanner(System.in);
         Scanner scc = new Scanner(System.in);
@@ -97,12 +56,12 @@ public class NewClass {
             System.out.print("Please enter product type : ");
             selection = sc.nextInt(); 
             
-            if(selection <1 || selection >3)
+            if(selection <1 || selection >listProdType.size())
             {
-             System.out.println("\n\nInvalid input. Please enter correct input (1-3) !  \n\n");
+             System.out.println("\n\nInvalid input. Please enter correct input  !  \n\n");
             }
         
-        }while(selection  <1 || selection  >3);
+        }while(selection  <1 || selection  >listProdType.size());
         
         ProductType selectedProductType = new ProductType();
         
@@ -122,15 +81,15 @@ public class NewClass {
         System.out.print("Please enter product : ");
         selectionProd = sc.nextInt();
         
-        if(selectionProd <1 || selectionProd >7 )
+        if(selectionProd <1 || selectionProd >listProduct.size() )
         {
-            System.out.println("\n\nInvalid input. Please enter correct input!(1-7) \n\n");
+            System.out.println("\n\nInvalid input. Please enter correct input! \n\n");
         }
-        }while(selectionProd <1 || selectionProd >7);
+        }while(selectionProd <1 || selectionProd >listProduct.size());
   
         selectedProduct = listProduct.get(selectionProd-1); //listProduct.add(selectionProd-1, selectedProduct);
         if(selectedProduct.getProductQuantity()==0){
-            System.out.println("Out of Stock");
+            System.out.println("\n\nSorry...Out of Stock\n");
         }
         else{
             System.out.println("\n\n=============Display Product Detail====================");
@@ -154,8 +113,9 @@ public class NewClass {
                    // totalAmt = selectedProduct.getProductPrice() * selectionQty;             
                     selectedProduct.setProductQuantity(newQty);                    
                     totalAmt += selectedProduct.getProductPrice() * selectionQty;
-                    
-                    orderlist.add(new OrderList(orderList.get(orderList.size()-1),selectedProduct,selectionQty));
+                    orderlist.add(new OrderList(orderDataList.get(orderDataList.size()-1),selectedProduct,selectionQty));
+
+                    //orderlist.add(new OrderList(orderDataList.get(orderDataList.size()-1),selectedProduct,selectionQty));
                 do{
                             System.out.print("Do you want to add the new item (Y/N): ");
                             selectionContinue = scc.next().charAt(0);
@@ -177,9 +137,9 @@ public class NewClass {
         }
     }while(selectedProduct.getProductQuantity() == 0 || addon);  
     indexno = paymentList.get(paymentList.size()-1).getPaymentID();
-    indexnum = Integer.parseInt(indexno.substring(1, 5)) +1;
-    Payment payment = new Payment("P"+indexnum,null,totalAmt,"Unpaid");
-    orderList.get(orderList.size()-1).setPayment(payment);
+    indexnum = Integer.parseInt(indexno.substring(2, 6)) +1;
+    Payment payment = new Payment("PA"+indexnum,null,totalAmt,"Unpaid");
+    orderDataList.get(orderDataList.size()-1).setPayment(payment);
     System.out.println("======Select Delivery Mode===========");
     System.out.println("======1. Pick-up on date and time===========");
     System.out.println("======2. Delivery===========");
@@ -217,14 +177,14 @@ public class NewClass {
      System.out.println("*******************************");
      
      for(int i=0;i < orderlist.size() ;i++){
-         if(orderlist.get(i).getOrder().getOrderID().equals(orderList.get(orderList.size()-1).getOrderID())){
-             orderlist.get(i).setOrder(orderList.get(orderList.size()-1));
+         if(orderlist.get(i).getOrder().getOrderID().equals(orderDataList.get(orderDataList.size()-1).getOrderID())){
+             orderlist.get(i).setOrder(orderDataList.get(orderDataList.size()-1));
              System.out.println(String.format("%d. %s \t %d", i+1, orderlist.get(i).getProduct().getProductName(), orderlist.get(i).getQuantity()));
          }
      }
      System.out.println("********************************");
-     System.out.println("Total Amount :" + orderList.get(orderList.size()-1).getPayment().getTotalAmount());
-    
+     System.out.println("Total Amount :" + orderDataList.get(orderDataList.size()-1).getPayment().getTotalAmount());
+    return orderDataList;
 }
     public static boolean CheckAlphabetic(char input) throws IOException{
         boolean checkAlphabetic = false;
@@ -243,3 +203,5 @@ public class NewClass {
         return checkAlphabetic;
     }
 }
+
+   
