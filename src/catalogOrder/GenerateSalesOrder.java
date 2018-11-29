@@ -77,6 +77,8 @@ public class GenerateSalesOrder {
         System.out.println("\n========================================================================================================");
         System.out.println("\t\t\t\t\t\t\t\t\t\t    Total Quantity : " + sumQty);
         System.out.println("========================================================================================================");
+        System.out.println("\nSuccessful ...Generate report");
+
         return orderList;
 
     }
