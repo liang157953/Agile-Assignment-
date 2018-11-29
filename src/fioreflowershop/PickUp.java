@@ -7,6 +7,8 @@ package fioreflowershop;
 
 public class PickUp {
     private String pickupNo;
+    private String requirePickUpDate;
+    private String requirePickUpTime;
     private String pickupDate;
     private String pickupTime;
     private String pickupStatus;
@@ -16,13 +18,31 @@ public class PickUp {
     public PickUp() {
     }
 
-    public PickUp(String pickupNo, String pickupDate, String pickupTime, String pickupStatus, Staff staff, Order order) {
+    public PickUp(String pickupNo, String requirePickUpDate, String requirePickUpTime, String pickupDate, String pickupTime, String pickupStatus, Staff staff, Order order) {
         this.pickupNo = pickupNo;
+        this.requirePickUpDate = requirePickUpDate;
+        this.requirePickUpTime = requirePickUpTime;
         this.pickupDate = pickupDate;
         this.pickupTime = pickupTime;
         this.pickupStatus = pickupStatus;
         this.staff = staff;
         this.order = order;
+    }
+
+    public String getRequirePickUpDate() {
+        return requirePickUpDate;
+    }
+
+    public void setRequirePickUpDate(String requirePickUpDate) {
+        this.requirePickUpDate = requirePickUpDate;
+    }
+
+    public String getRequirePickUpTime() {
+        return requirePickUpTime;
+    }
+
+    public void setRequirePickUpTime(String requirePickUpTime) {
+        this.requirePickUpTime = requirePickUpTime;
     }
 
     public String getPickupNo() {
