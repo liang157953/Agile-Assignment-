@@ -37,12 +37,15 @@ public class GenerateSalesOrder {
         
         productType = prodTypeList.get(selectionProdType-1);
         
-        System.out.println("No. \t\t Product Name \t\t\t Quantity \t Total Amount \t");
+        System.out.println("=======================");
+        System.out.println("Generate Report");
+        System.out.println("=======================");
+        System.out.println("No. \t Product ID \t\t Product Name \t\t\t\tUnit Price \tQuantity \tTotal Amount \t");
         for(int i=0; i<orderList.size();i++){
             if(orderList.get(i).getProduct().getProductType().equals(productType))
             {
                 totalAmount = orderList.get(i).getProduct().getProductPrice()*orderList.get(i).getQuantity();
-                System.out.println(String.format("%d.  \t %s %s %.2f %d %.2f", i + 1,orderList.get(i).getProduct().getProductID(), orderList.get(i).getProduct().getProductName(), orderList.get(i).getProduct().getProductPrice(),orderList.get(i).getQuantity(), totalAmount ));
+                System.out.printf("%2d.%10s %40s %10.2f %10d %10.2f", i + 1,orderList.get(i).getProduct().getProductID(), orderList.get(i).getProduct().getProductName(), orderList.get(i).getProduct().getProductPrice(),orderList.get(i).getQuantity(), totalAmount );
                 sumQty += orderList.get(i).getQuantity();
             }
         }
