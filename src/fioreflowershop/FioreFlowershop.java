@@ -4,9 +4,14 @@
  * and open the template in the editor.
  */
 package fioreflowershop;
+import CatalogMaintenance.ProductMaintenance;
+import catalogOrder.*;
+import corporatecustomer.CorporateCustomerMaintenance;
+import customize.CustomizeOrder;
 import java.util.ArrayList;
 import java.util.List;
 import java.io.IOException;
+import order.*;
 
 /**
  *
@@ -39,7 +44,10 @@ public class FioreFlowershop {
         customerList.add(new Customer("C1003","Ong Jin Jin","pv16,jalan setapak","013-7799889"));
         
         //CorporateCustomer Data
-        CorporateCustomer corporatecust = new CorporateCustomer(1000.00,0.0,"Unclear","C1001","Koh Liao Liao","pv16,jalan setapak","011-39958399");
+        List<CorporateCustomer> corporateCustomerList = new ArrayList<CorporateCustomer>();
+        corporateCustomerList.add(new CorporateCustomer(1000.00,0.0,"Unclear","C1001","Lew Lew Lew","pv16,jalan setapak","011-39958399"));
+        corporateCustomerList.add(new CorporateCustomer(1000.00,0.0,"Unclear","C1002","Hao Hao Hao","pv16,jalan setapak","011-39958399"));
+        corporateCustomerList.add(new CorporateCustomer(1000.00,0.0,"Unclear","C1003","Wei Wei Wei","pv16,jalan setapak","011-39958399"));
         
         //Staff Data
         List<Staff> staffList = new ArrayList<Staff>();
@@ -93,8 +101,20 @@ public class FioreFlowershop {
         orderLL.add(new OrderList(orderDataList.get(0),prodList.get(0),2));
         orderLL.add(new OrderList(orderDataList.get(0), prodList.get(2), 1));
         orderLL.add(new OrderList(orderDataList.get(2),prodList.get(1),2));
+        
+        List<Customized> customizedList = new ArrayList<Customized>();
         //System.out.println("Main Program");
        
+        ProductMaintenance.CustomerViewProducts(prodList, prodTypeList);
+        ProductMaintenance.ProductOutOfStockNotification(prodList, prodTypeList);
+        
+        orderLL = GenerateSalesOrder.GenerateReportMain(prodTypeList, prodList, orderDataList, orderLL);
+        orderDataList = catalogOrder.CatalogOrderMenu(prodTypeList,prodList,orderDataList,customerList,staffList,paymentList);
+        
+        pickupList = PickedUpTimeStamp.TimeStamp(pickupList, orderDataList);
+        
+        CorporateCustomerMaintenance.Menu(corporateCustomerList, staffList.get(0), orderDataList, paymentList, customerList);
+        CustomizeOrder.Customize(customerList, staffList, customizedList, orderDataList, styleList, sizeList, prodList, accessoriesList, paymentList);
     }
     
 }
