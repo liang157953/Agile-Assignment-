@@ -57,6 +57,7 @@ public class CorporateCustomerMaintenance {
                 }
                }
             }
+            
             if(totaldebt == 0.00){
                 System.out.print("No Debt For This Customer");
                 continue;
