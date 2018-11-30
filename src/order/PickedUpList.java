@@ -175,7 +175,5 @@ public class PickedUpList {
 		String date = day + "/" + month + "/" + year;
 		return date;
 }
-   
-    
     
 }
