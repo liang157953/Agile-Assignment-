@@ -33,7 +33,7 @@ public class FioreFlowershop {
         List<Product> prodList = new ArrayList<Product>();
         prodList.add(new Product("P1001","Flowers and Chocolates Gift","DESC...","Red",60.00,5,prodTypeList.get(0)));
         prodList.add(new Product("P1002","Ladies Gift Hamper","DESC...","Red",65.00,5,prodTypeList.get(1)));
-        prodList.add(new Product("P1003","Christmas Treats Gift Box","DESC...","White",15.00,5,prodTypeList.get(1)));
+        prodList.add(new Product("P1003","Christmas Treats Gift Box","DESC...","White",15.00,3,prodTypeList.get(1)));
         prodList.add(new Product("P1004","Honeybee","DESC...","Yellow",30.00,5,prodTypeList.get(0)));
         prodList.add(new Product("P1005","Starry Night","DESC...","Blue",45.00,5,prodTypeList.get(2)));
         
@@ -104,17 +104,17 @@ public class FioreFlowershop {
         
         List<Customized> customizedList = new ArrayList<Customized>();
         //System.out.println("Main Program");
-       
-        ProductMaintenance.CustomerViewProducts(prodList, prodTypeList);
-        ProductMaintenance.ProductOutOfStockNotification(prodList, prodTypeList);
+       //ProductMaintenance.StaffMenu(prodList, prodTypeList);
+        //ProductMaintenance.CustomerViewProducts(prodList, prodTypeList);
+        //ProductMaintenance.ProductOutOfStockNotification(prodList, prodTypeList);
         
         orderLL = GenerateSalesOrder.GenerateReportMain(prodTypeList, prodList, orderDataList, orderLL);
         orderDataList = catalogOrder.CatalogOrderMenu(prodTypeList,prodList,orderDataList,customerList,staffList,paymentList);
-        
-        pickupList = PickedUpTimeStamp.TimeStamp(pickupList, orderDataList);
-        
-        CorporateCustomerMaintenance.Menu(corporateCustomerList, staffList.get(0), orderDataList, paymentList, customerList);
-        CustomizeOrder.Customize(customerList, staffList, customizedList, orderDataList, styleList, sizeList, prodList, accessoriesList, paymentList);
+//        
+//        pickupList = PickedUpTimeStamp.TimeStamp(pickupList, orderDataList);
+//        
+//        CorporateCustomerMaintenance.Menu(corporateCustomerList, staffList.get(0), orderDataList, paymentList, customerList);
+//        CustomizeOrder.Customize(customerList, staffList, customizedList, orderDataList, styleList, sizeList, prodList, accessoriesList, paymentList);
     }
     
 }
