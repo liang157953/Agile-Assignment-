@@ -18,7 +18,7 @@ import java.util.Scanner;
  */
 public class CorporateCustomerMaintenance {
     public static void Menu(List<CorporateCustomer> corporateList,Staff staff,List<Order> order, List<Payment> paymentList,List<Customer> customerList){
-        char resume = 'N';
+        char resume = 'n';
         do{
             int menuint = 0;
             int err = 0;
