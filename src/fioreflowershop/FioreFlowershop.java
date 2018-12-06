@@ -105,15 +105,15 @@ public class FioreFlowershop {
         List<Customized> customizedList = new ArrayList<Customized>();
         //System.out.println("Main Program");
        
-        ProductMaintenance.CustomerViewProducts(prodList, prodTypeList);
-        ProductMaintenance.ProductOutOfStockNotification(prodList, prodTypeList);
-        
-        orderLL = GenerateSalesOrder.GenerateReportMain(prodTypeList, prodList, orderDataList, orderLL);
-        orderDataList = catalogOrder.CatalogOrderMenu(prodTypeList,prodList,orderDataList,customerList,staffList,paymentList);
-        
-        pickupList = PickedUpTimeStamp.TimeStamp(pickupList, orderDataList);
-        
-        CorporateCustomerMaintenance.Menu(corporateCustomerList, staffList.get(0), orderDataList, paymentList, customerList);
+//        ProductMaintenance.CustomerViewProducts(prodList, prodTypeList);
+//        ProductMaintenance.ProductOutOfStockNotification(prodList, prodTypeList);
+//        
+//        orderLL = GenerateSalesOrder.GenerateReportMain(prodTypeList, prodList, orderDataList, orderLL);
+//        orderDataList = catalogOrder.CatalogOrderMenu(prodTypeList,prodList,orderDataList,customerList,staffList,paymentList);
+//        
+//        pickupList = PickedUpTimeStamp.TimeStamp(pickupList, orderDataList);
+//        
+//        CorporateCustomerMaintenance.Menu(corporateCustomerList, staffList.get(0), orderDataList, paymentList, customerList);
         CustomizeOrder.Customize(customerList, staffList, customizedList, orderDataList, styleList, sizeList, prodList, accessoriesList, paymentList);
     }
     
