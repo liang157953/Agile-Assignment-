@@ -5,9 +5,13 @@
  */
 package fioreflowershop;
 import CatalogMaintenance.ProductMaintenance;
+
+import corporatecustomer.CorporateCustomerMaintenance;
+
 import catalogOrder.*;
 import corporatecustomer.CorporateCustomerMaintenance;
 import customize.CustomizeOrder;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.io.IOException;
@@ -117,8 +121,13 @@ public class FioreFlowershop {
 //        
 //        pickupList = PickedUpTimeStamp.TimeStamp(pickupList, orderDataList);
 //        
+
+        CorporateCustomerMaintenance.Menu(corporateCustomerList, staffList.get(0), orderDataList, paymentList, customerList);
+//        CustomizeOrder.Customize(customerList, staffList, customizedList, orderDataList, styleList, sizeList, prodList, accessoriesList, paymentList);
+
 //        CorporateCustomerMaintenance.Menu(corporateCustomerList, staffList.get(0), orderDataList, paymentList, customerList);
        CustomizeOrder.Customize(customerList, customizedList, orderDataList, styleList, sizeList, prodList, accessoriesList, paymentList);
+
     }
     
 }
