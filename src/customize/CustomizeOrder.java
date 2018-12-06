@@ -105,13 +105,13 @@ public class CustomizeOrder {
         customizeList.get(customizeList.size()-1).setOrder(orderDataList.get(orderDataList.size()-1));
         System.out.println("You had place order successfully!");
         System.out.println("\nItemized Bill");
-        System.out.println("*******************************************");
+        System.out.println("**************************************************************************");
         System.out.format("1. %-10s \t - %-25s \t Price: RM %.2f \n","flower",customizeList.get(customizeList.size()-1).getProduct().getProductName(),customizeList.get(customizeList.size()-1).getProduct().getProductPrice());
         System.out.format("2. %-10s \t - %-25s \t Price: RM %.2f \n","size",customizeList.get(customizeList.size()-1).getSize().getSizeDesc(),customizeList.get(customizeList.size()-1).getSize().getSizePrice());
         System.out.format("3. %-10s \t - %-25s \t Price: RM %.2f \n","style",customizeList.get(customizeList.size()-1).getStyle().getStyleDesc(),customizeList.get(customizeList.size()-1).getStyle().getStylePrice());  
         System.out.format("4. %-10s \t - %-25s \t Price: RM %.2f \n","accessories",customizeList.get(customizeList.size()-1).getAccessories().getAccDesc(),customizeList.get(customizeList.size()-1).getAccessories().getAccPrice());
-        System.out.println("*******************************************");
-       System.out.println("Total :      RM" + totalPrice +"0");  
+        System.out.println("**************************************************************************");
+       System.out.println("Total : \t\t\t\t\t\tRM" + totalPrice +"0");  
     }
    
 }
