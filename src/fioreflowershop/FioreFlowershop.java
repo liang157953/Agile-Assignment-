@@ -7,6 +7,8 @@ package fioreflowershop;
 import java.util.ArrayList;
 import java.util.List;
 import java.io.IOException;
+import java.util.Scanner;
+import order.*;
 
 /**
  *
@@ -14,6 +16,7 @@ import java.io.IOException;
  */
 public class FioreFlowershop {
 
+    
     /**
      * @param args the command line arguments
      */
@@ -61,7 +64,7 @@ public class FioreFlowershop {
         
         //PickUp Data
         List<PickUp> pickupList = new ArrayList<PickUp>();
-        pickupList.add(new PickUp("PU1001","20/11/2018","1400","20-11-2018","1410","Standby",staffList.get(0),orderDataList.get(0)));
+        pickupList.add(new PickUp("PU1001","20/11/2018","1400","","","Standby",staffList.get(0),orderDataList.get(0)));
         pickupList.add(new PickUp("PU1002","20/11/2018","1200","20-11-2018","1230","Standby",staffList.get(0),orderDataList.get(2)));
         pickupList.add(new PickUp("PU1003","21/11/2018","1500","21-11-2018","1610","Standby",staffList.get(0),orderDataList.get(0)));
         
@@ -95,6 +98,9 @@ public class FioreFlowershop {
         orderLL.add(new OrderList(orderDataList.get(2),prodList.get(1),2));
         //System.out.println("Main Program");
        
+        PickedUpList.Menu(pickupList, orderDataList, orderLL);
+
+        
     }
     
 }
