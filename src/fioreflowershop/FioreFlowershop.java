@@ -63,9 +63,9 @@ public class FioreFlowershop {
         
         //Order Data
         List<Order> orderDataList = new ArrayList<Order>();
-        orderDataList.add(new Order("O1001","Give to my girlfriend ","11-11-2018","Process",customerList.get(0),paymentList.get(0),staffList.get(0)));
-        orderDataList.add(new Order("O1002","","15/11/2018","Process",customerList.get(1),paymentList.get(1),staffList.get(1)));
-        orderDataList.add(new Order("O1003","Please say happy birthday to the receiver","15-11-2018","Process",customerList.get(2),paymentList.get(2),staffList.get(2)));
+        orderDataList.add(new Order("O1001","Give to my girlfriend ","11-11-2018","Process",corporateCustomerList.get(0),paymentList.get(1),staffList.get(0)));
+        orderDataList.add(new Order("O1002","","15/11/2018","Process",corporateCustomerList.get(0),paymentList.get(2),staffList.get(1)));
+        orderDataList.add(new Order("O1003","Please say happy birthday to the receiver","15-11-2018","Process",corporateCustomerList.get(0),paymentList.get(0),staffList.get(2)));
         
         //PickUp Data
         List<PickUp> pickupList = new ArrayList<PickUp>();
@@ -113,8 +113,8 @@ public class FioreFlowershop {
 //        
 //        pickupList = PickedUpTimeStamp.TimeStamp(pickupList, orderDataList);
 //        
-//        CorporateCustomerMaintenance.Menu(corporateCustomerList, staffList.get(0), orderDataList, paymentList, customerList);
-        CustomizeOrder.Customize(customerList, staffList, customizedList, orderDataList, styleList, sizeList, prodList, accessoriesList, paymentList);
+        CorporateCustomerMaintenance.Menu(corporateCustomerList, staffList.get(0), orderDataList, paymentList, customerList);
+//        CustomizeOrder.Customize(customerList, staffList, customizedList, orderDataList, styleList, sizeList, prodList, accessoriesList, paymentList);
     }
     
 }
