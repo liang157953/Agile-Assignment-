@@ -102,7 +102,7 @@ public class CustomizeOrder {
         customizeList.get(customizeList.size()-1).setOrder(orderDataList.get(orderDataList.size()-1));
         System.out.println("You had place order successfully!");
 
-        System.out.format("\nItemized Bill \t\t\t\t\t Staff Name:%s\n", date);
+        System.out.format("\nItemized Bill \t\t\t\t\t Date:%s\n", date);
 
         System.out.println("**************************************************************************");
         System.out.format("1. %-10s \t - %-25s \t Price: RM %.2f \n","flower",customizeList.get(customizeList.size()-1).getProduct().getProductName(),customizeList.get(customizeList.size()-1).getProduct().getProductPrice());
