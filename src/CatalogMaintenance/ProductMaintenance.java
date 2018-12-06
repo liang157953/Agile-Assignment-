@@ -23,7 +23,6 @@ public class ProductMaintenance {
         String option="";
         String options="";
         
-        
         Boolean checkDigit=false;boolean test=false;
         do{
             do{
