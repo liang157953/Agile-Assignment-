@@ -29,7 +29,7 @@ public class CustomizeOrder {
         System.out.println("\nProduct Price List");
         System.out.println("***************************");
         for(int i = 0; i < productList.size();i++){
-            System.out.format("%d. %-10s %.2f \n",i+1,productList.get(i).getProductName(),productList.get(i).getProductPrice());
+            System.out.format("%d. %-20s %.2f \n",i+1,productList.get(i).getProductName(),productList.get(i).getProductPrice());
         }
         System.out.println("***************************");
         do{
@@ -44,7 +44,7 @@ public class CustomizeOrder {
         System.out.println("\nSize Price List");
         System.out.println("***************************");
         for(int i = 0; i < sizeList.size();i++){
-            System.out.format("%d. %-10s %.2f \n",i+1,sizeList.get(i).getSizeDesc(),sizeList.get(i).getSizePrice());
+            System.out.format("%d. %-20s %.2f \n",i+1,sizeList.get(i).getSizeDesc(),sizeList.get(i).getSizePrice());
 
         }
         do{
@@ -59,7 +59,7 @@ public class CustomizeOrder {
         System.out.println("\nStyle Price List");
         System.out.println("***************************");
         for(int i = 0; i < styleList.size();i++){
-            System.out.format("%d. %-10s %.2f \n",i+1,styleList.get(i).getStyleDesc(),styleList.get(i).getStylePrice());
+            System.out.format("%d. %-20s %.2f \n",i+1,styleList.get(i).getStyleDesc(),styleList.get(i).getStylePrice());
         }
         do{
         System.out.println("***************************");
