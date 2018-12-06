@@ -26,7 +26,7 @@ public class ProductMaintenance {
         Boolean checkDigit=false;boolean test=false;
         do{
             do{
-                System.out.println("*********************\n Product Maintenance \n*********************");
+                System.out.println("\n*********************\n Product Maintenance \n*********************");
                 System.out.println("1. Register New Product");
                 System.out.println("2. Display Current Product List"); 
                 System.out.println("3. Maintain Product Information"); // 
@@ -172,7 +172,6 @@ public class ProductMaintenance {
                 for(int r=0;r<prodTypeList.size();r++){              
                     System.out.println((r+1) + ". " + prodTypeList.get(r).getProductTypeName());
                 }  
-                System.out.println((prodTypeList.size()+1) + ". Return Product Maintenance Menu");
                 System.out.printf("\nSelect Product Type > ");
                 options = input.next();
             }while(!CheckDigit(options+1));
@@ -197,7 +196,7 @@ public class ProductMaintenance {
     public static void ProductOutOfStockNotification(List<Product> prodList, List<ProductType> prodTypeList) {
         for(int r=0;r<prodList.size();r++){
             if(prodList.get(r).getProductQuantity()<5){
-                JOptionPane.showMessageDialog(null, "Product ID: " + prodList.get(r).getProductID() + "\nProduct Name: " + prodList.get(r).getProductName() + "\nProduct Qty: " + prodList.get(r).getProductQuantity(), "InfoBox: " + "Product Out Of Stock Notification", JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Product Type  : " + prodList.get(r).getProductType().getProductTypeID()+ " " + prodList.get(r).getProductType().getProductTypeName()+ "\nProduct ID        : " + prodList.get(r).getProductID() + "\nProduct Name : " + prodList.get(r).getProductName() + "\nProduct Color  : " + prodList.get(r).getProductColor() + "\nIn-Stock Qty     : " + prodList.get(r).getProductQuantity(), "InfoBox: " + "Product Out Of Stock Notification", JOptionPane.WARNING_MESSAGE);
             }
         }
     }

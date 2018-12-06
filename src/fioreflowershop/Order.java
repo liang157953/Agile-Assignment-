@@ -15,10 +15,29 @@ public class Order {
     private String orderDate;
     private String orderStatus;
     private Customer customer;
+    private CorporateCustomer corporateCustomer;
     private Payment payment;
     private Staff staff;
 
     public Order() {
+    }
+
+    public CorporateCustomer getCorporateCustomer() {
+        return corporateCustomer;
+    }
+
+    public void setCorporateCustomer(CorporateCustomer corporateCustomer) {
+        this.corporateCustomer = corporateCustomer;
+    }
+
+    public Order(String orderID, String orderDesc, String orderDate, String orderStatus, CorporateCustomer corporateCustomer, Payment payment, Staff staff) {
+        this.orderID = orderID;
+        this.orderDesc = orderDesc;
+        this.orderDate = orderDate;
+        this.orderStatus = orderStatus;
+        this.corporateCustomer = corporateCustomer;
+        this.payment = payment;
+        this.staff = staff;
     }
 
     public Order(String orderID, String orderDesc, String orderDate, String orderStatus, Customer customer, Payment payment, Staff staff) {
