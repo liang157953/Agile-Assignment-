@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package fioreflowershop;
+import CatalogMaintenance.ProductMaintenance;
 import java.util.ArrayList;
 import java.util.List;
 import java.io.IOException;
@@ -26,7 +27,7 @@ public class FioreFlowershop {
         
         //Product Data
         List<Product> prodList = new ArrayList<Product>();
-        prodList.add(new Product("P1001","Flowers and Chocolates Gift","DESC...","Red",60.00,5,prodTypeList.get(0)));
+        prodList.add(new Product("P1001","Flowers and Chocolates Gift","DESC...","Red",60.00,2,prodTypeList.get(0)));
         prodList.add(new Product("P1002","Ladies Gift Hamper","DESC...","Red",65.00,5,prodTypeList.get(1)));
         prodList.add(new Product("P1003","Christmas Treats Gift Box","DESC...","White",15.00,5,prodTypeList.get(1)));
         prodList.add(new Product("P1004","Honeybee","DESC...","Yellow",30.00,5,prodTypeList.get(0)));
@@ -94,6 +95,10 @@ public class FioreFlowershop {
         orderLL.add(new OrderList(orderDataList.get(0), prodList.get(2), 1));
         orderLL.add(new OrderList(orderDataList.get(2),prodList.get(1),2));
         //System.out.println("Main Program");
+        
+        //ProductMaintenance.StaffMenu(prodList, prodTypeList);
+        //ProductMaintenance.CustomerViewProducts(prodList, prodTypeList);
+        ProductMaintenance.ProductOutOfStockNotification(prodList, prodTypeList);
        
     }
     
