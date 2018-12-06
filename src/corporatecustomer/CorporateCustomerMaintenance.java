@@ -165,7 +165,7 @@ public class CorporateCustomerMaintenance {
             }
             else{
                 System.out.println("Thank You!");
-                break;
+                 break;
             }
         }while(resume == 'y');
         
