@@ -18,6 +18,7 @@ public class Order {
     private CorporateCustomer corporateCustomer;
     private Payment payment;
     private Staff staff;
+    String orderCustType; // Customer / Corporate
 
     public Order() {
     }
@@ -30,7 +31,7 @@ public class Order {
         this.corporateCustomer = corporateCustomer;
     }
 
-    public Order(String orderID, String orderDesc, String orderDate, String orderStatus, CorporateCustomer corporateCustomer, Payment payment, Staff staff) {
+    public Order(String orderID, String orderDesc, String orderDate, String orderStatus, CorporateCustomer corporateCustomer, Payment payment, Staff staff, String orderCustType) {
         this.orderID = orderID;
         this.orderDesc = orderDesc;
         this.orderDate = orderDate;
@@ -38,9 +39,10 @@ public class Order {
         this.corporateCustomer = corporateCustomer;
         this.payment = payment;
         this.staff = staff;
+        this.orderCustType = orderCustType;
     }
 
-    public Order(String orderID, String orderDesc, String orderDate, String orderStatus, Customer customer, Payment payment, Staff staff) {
+    public Order(String orderID, String orderDesc, String orderDate, String orderStatus, Customer customer, Payment payment, Staff staff, String orderCustType) {
         this.orderID = orderID;
         this.orderDesc = orderDesc;
         this.orderDate = orderDate;
@@ -48,6 +50,15 @@ public class Order {
         this.customer = customer;
         this.payment = payment;
         this.staff = staff;
+        this.orderCustType = orderCustType;
+    }
+
+    public String getOrderType() {
+        return orderCustType;
+    }
+
+    public void setOrderType(String orderCustType) {
+        this.orderCustType = orderCustType;
     }
 
     public String getOrderID() {
