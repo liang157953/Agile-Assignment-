@@ -25,9 +25,10 @@ public class CorporateCustomerMaintenance {
                 
             Scanner menu = new Scanner(System.in);
             System.out.println("Menu");
-            System.out.println("******************");
-            System.out.println("1. XXXXXX");
-            System.out.println("2. Approve Application");
+            System.out.println("******************************************");
+            System.out.println("1. Check Debt and Make Payment");
+            System.out.println("2. Approve Corporate Customer Application");
+            System.out.println("******************************************");
             System.out.print("Enter Your Choice: ");
             menuint = menu.nextInt();
             }while(menuint<0 || menuint > 2);
@@ -45,7 +46,7 @@ public class CorporateCustomerMaintenance {
                         selectedcust = corporateList.get(i);
                     }
                 }
-                System.out.println("No.PaymentID \t Amount Status");
+                System.out.println("\nNo.PaymentID \t Amount Status");
                 System.out.println("******************************");
             for(int i =0; i <order.size();i++){
                 if(order.get(i).getCorporateCustomer() != null){
@@ -84,7 +85,7 @@ public class CorporateCustomerMaintenance {
 
             if(selection == 'y'){
                 String date = new SimpleDateFormat("dd-MM-yyyy").format(new Date());
-                System.out.println("Paid Successful");
+                System.out.println("**Paid Successful**");
                 System.out.println("No.PaymentID \t Paid Date \t Amount \t Status");
                 System.out.println("*********************************************************************");
              for(int i =0; i <order.size();i++){
