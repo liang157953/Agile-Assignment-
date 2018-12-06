@@ -25,6 +25,8 @@ public class PickedUpTimeStamp {
     
     public static List<PickUp> TimeStamp(List<PickUp> pul, List<Order> order) throws IOException{
         
+        boolean display = false;
+        
         do{
             System.out.print(" \nPlease enter the PickUp Number: ");
             String no = in.next();
@@ -38,35 +40,40 @@ public class PickedUpTimeStamp {
             {
                 if(no.matches(pul.get(i).getPickupNo()))
                 {
-                     System.out.println("Order ID: " + pul.get(i).getOrder().getOrderID()
-                                                   + "\nOder Description: " + pul.get(i).getOrder().getOrderDesc()
-                                                   + "\nCustomer Name: " +pul.get(i).getOrder().getCustomer().getCustName()
-                                                   + "\nRequired PickUp Date " +pul.get(i).getRequirePickUpDate()
-                                                   + "\nRequired PickUp Time " +pul.get(i).getRequirePickUpTime());
-                     
-                     String date = new SimpleDateFormat("dd/MM/yyyy").format(new Date());
-                     String time = new SimpleDateFormat("hhmm").format(new Date());
-                     
-                     System.out.print("\nDoes this order pick up NOW? (yes/no): ");
-                     char c = in.next().charAt(0); 
-                     
-                     if(c == 'y'|| c == 'Y')
-                     {
-                        System.out.println("\n-------------------------------------------------------");
-                        System.out.println("    Current time for customer pick up order");
-                        System.out.println("-------------------------------------------------------");
-                        System.out.println("Customer pick up date: " + date);
-                        System.out.println("Customer pick up time: " + time);     
-                        pul.get(i).setPickupDate(date);
-                        pul.get(i).setPickupTime(time);
+                    display = true;
+                    if(pul.get(i).getPickupDate().isEmpty())
+                    {
+                         System.out.println("Order ID: " + pul.get(i).getOrder().getOrderID()
+                                                       + "\nOder Description: " + pul.get(i).getOrder().getOrderDesc()
+                                                       + "\nCustomer Name: " +pul.get(i).getOrder().getCustomer().getCustName()
+                                                       + "\nRequired PickUp Date " +pul.get(i).getRequirePickUpDate()
+                                                       + "\nRequired PickUp Time " +pul.get(i).getRequirePickUpTime());
+
+                         String date = new SimpleDateFormat("dd/MM/yyyy").format(new Date());
+                         String time = new SimpleDateFormat("HHmm").format(new Date());
+
+                         System.out.print("\nDoes this order pick up NOW? (yes/no): ");
+                         char c = in.next().charAt(0); 
+
+                         if(c == 'y'|| c == 'Y')
+                         {
+                            System.out.println("\n-------------------------------------------------------");
+                            System.out.println("    Current time for customer pick up order");
+                            System.out.println("-------------------------------------------------------");
+                            System.out.println("Customer pick up date: " + date);
+                            System.out.println("Customer pick up time: " + time);     
+                            pul.get(i).setPickupDate(date);
+                            pul.get(i).setPickupTime(time);
+                            
+                            System.out.println("\n>>>>    This order have been updated !  <<<<");                    
+                         }
+                    }
+                    else{
+                        System.out.println("\nSorry, This order have been picked up !");
                         
-                        if(!pul.get(i).getPickupDate().isEmpty())
-                        {
-                            System.out.println("\n>>>>    This order have been updated !  <<<<");
-                            break;
-                        }                       
-                     }   
-                }else{
+                    }
+                       
+                }else if(display == false){
                     System.out.println("\nSorry, This PickUp number is invalid.");
                     break;
                 }
@@ -81,7 +88,7 @@ public class PickedUpTimeStamp {
          
             
             
-        System.out.println("\n\nPress any key to end...");
+        System.out.println("\n\nPress any key to back PickUp Menu...");
         System.in.read();
 
         return pul;
