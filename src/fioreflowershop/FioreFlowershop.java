@@ -31,7 +31,7 @@ public class FioreFlowershop {
         
         //Product Data
         List<Product> prodList = new ArrayList<Product>();
-        prodList.add(new Product("P1001","Flowers and Chocolates Gift","DESC...","Red",60.00,5,prodTypeList.get(0)));
+        prodList.add(new Product("P1001","Flowers and Chocolates Gift","DESC...","Red",60.00,2,prodTypeList.get(0)));
         prodList.add(new Product("P1002","Ladies Gift Hamper","DESC...","Red",65.00,5,prodTypeList.get(1)));
         prodList.add(new Product("P1003","Christmas Treats Gift Box","DESC...","White",15.00,5,prodTypeList.get(1)));
         prodList.add(new Product("P1004","Honeybee","DESC...","Yellow",30.00,5,prodTypeList.get(0)));
@@ -104,6 +104,10 @@ public class FioreFlowershop {
         
         List<Customized> customizedList = new ArrayList<Customized>();
         //System.out.println("Main Program");
+        
+        //ProductMaintenance.StaffMenu(prodList, prodTypeList);
+        //ProductMaintenance.CustomerViewProducts(prodList, prodTypeList);
+        ProductMaintenance.ProductOutOfStockNotification(prodList, prodTypeList);
        
 //        ProductMaintenance.CustomerViewProducts(prodList, prodTypeList);
 //        ProductMaintenance.ProductOutOfStockNotification(prodList, prodTypeList);
