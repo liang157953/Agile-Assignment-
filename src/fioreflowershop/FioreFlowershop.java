@@ -232,9 +232,6 @@ public class FioreFlowershop {
         CorporateCustomerMaintenance.Menu(corporateCustomerList, staffList.get(0), orderDataList, paymentList, customerList);
 //        CustomizeOrder.Customize(customerList, staffList, customizedList, orderDataList, styleList, sizeList, prodList, accessoriesList, paymentList);
 
-//        CorporateCustomerMaintenance.Menu(corporateCustomerList, staffList.get(0), orderDataList, paymentList, customerList);
-       CustomizeOrder.Customize(customerList, customizedList, orderDataList, styleList, sizeList, prodList, accessoriesList, paymentList);
-
     }
     
 }
