@@ -29,7 +29,7 @@ public class CustomizeOrder {
         System.out.println("\nProduct Price List");
         System.out.println("***************************");
         for(int i = 0; i < productList.size();i++){
-            System.out.format("%d. %-20s %.2f \n",i+1,productList.get(i).getProductName(),productList.get(i).getProductPrice());
+            System.out.format("%d. %-25s \t %.2f \n",i+1,productList.get(i).getProductName(),productList.get(i).getProductPrice());
         }
         System.out.println("***************************");
         do{
@@ -106,11 +106,11 @@ public class CustomizeOrder {
         System.out.println("You had place order successfully!");
         System.out.println("\nItemized Bill");
         System.out.println("*******************************************");
-        System.out.format("1. %-10s \t - %-10s \t Price: RM %.2f","flower",customizeList.get(customizeList.size()-1).getProduct().getProductName(),customizeList.get(customizeList.size()-1).getProduct().getProductPrice());
-        System.out.format("2. %-10s \t - %-10s \t Price: RM %.2f","size",customizeList.get(customizeList.size()-1).getSize().getSizeDesc(),customizeList.get(customizeList.size()-1).getSize().getSizePrice());
-        System.out.format("3. %-10s \t - %-10s \t Price: RM %.2f","style",customizeList.get(customizeList.size()-1).getStyle().getStyleDesc(),customizeList.get(customizeList.size()-1).getStyle().getStylePrice());  
-        System.out.format("4. %-10s \t - %-10s \t Price: RM %.2f","accessories",customizeList.get(customizeList.size()-1).getAccessories().getAccDesc(),customizeList.get(customizeList.size()-1).getAccessories().getAccPrice());
-        System.out.format("*******************************************");
+        System.out.format("1. %-10s \t - %-10s \t Price: RM %.2f \n","flower",customizeList.get(customizeList.size()-1).getProduct().getProductName(),customizeList.get(customizeList.size()-1).getProduct().getProductPrice());
+        System.out.format("2. %-10s \t - %-10s \t Price: RM %.2f \n","size",customizeList.get(customizeList.size()-1).getSize().getSizeDesc(),customizeList.get(customizeList.size()-1).getSize().getSizePrice());
+        System.out.format("3. %-10s \t - %-10s \t Price: RM %.2f \n","style",customizeList.get(customizeList.size()-1).getStyle().getStyleDesc(),customizeList.get(customizeList.size()-1).getStyle().getStylePrice());  
+        System.out.format("4. %-10s \t - %-10s \t Price: RM %.2f \n","accessories",customizeList.get(customizeList.size()-1).getAccessories().getAccDesc(),customizeList.get(customizeList.size()-1).getAccessories().getAccPrice());
+        System.out.println("*******************************************");
        System.out.println("Total :      RM" + totalPrice +"0");  
     }
    
