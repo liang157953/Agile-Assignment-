@@ -13,7 +13,7 @@ import java.util.*;
  * @author User
  */
 public class CustomizeOrder {
-    public static void Customize(List<Customer> customerList, List<Staff> staffList,List<Customized> customizeList,List<Order> orderDataList,List<Style> styleList,List<Size> sizeList, List<Product> productList, List<Accessories> accessoriesList,List<Payment> paymentList){
+    public static void Customize(List<Customer> customerList,List<Customized> customizeList,List<Order> orderDataList,List<Style> styleList,List<Size> sizeList, List<Product> productList, List<Accessories> accessoriesList,List<Payment> paymentList){
         int size;
         int style;
         int product;
@@ -92,19 +92,20 @@ public class CustomizeOrder {
        totalPrice += customizeList.get(customizeList.size()-1).getSize().getSizePrice();
        totalPrice += customizeList.get(customizeList.size()-1).getProduct().getProductPrice();
        totalPrice += customizeList.get(customizeList.size()-1).getAccessories().getAccPrice();
-       int newOID;
-       newOID = Integer.parseInt(orderDataList.get(orderDataList.size()-1).getOrderID().substring(1,5));
-       newOID += 1;
+
        int newPID;
        newPID = Integer.parseInt(paymentList.get(paymentList.size()-1).getPaymentID().substring(2,6));
        newPID += 1;
        paymentList.add(new Payment("PA"+newPID,null,totalPrice,"Paid"));
        String date = new SimpleDateFormat("dd-MM-yyyy").format(new Date());
-       // change this one (hard code)
-        orderDataList.add(new Order("O"+newOID,"Walk-In",date,"Processing",customerList.get(0),paymentList.get(paymentList.size()-1),staffList.get(0)));
+
         customizeList.get(customizeList.size()-1).setOrder(orderDataList.get(orderDataList.size()-1));
         System.out.println("You had place order successfully!");
+
+        System.out.format("\nItemized Bill \t\t\t\t\t Staff Name:%s\n", date);
+
         System.out.format("\nItemized Bill \t\t\t\t\t Staff Name:%s\n", staffList.get(0).getStaffName());
+
         System.out.println("**************************************************************************");
         System.out.format("1. %-10s \t - %-25s \t Price: RM %.2f \n","flower",customizeList.get(customizeList.size()-1).getProduct().getProductName(),customizeList.get(customizeList.size()-1).getProduct().getProductPrice());
         System.out.format("2. %-10s \t - %-25s \t Price: RM %.2f \n","size",customizeList.get(customizeList.size()-1).getSize().getSizeDesc(),customizeList.get(customizeList.size()-1).getSize().getSizePrice());
