@@ -41,7 +41,7 @@ public static List<Order> CatalogOrderMenu(List<ProductType> listProdType, List<
         String indexno = orderDataList.get(orderDataList.size()-1).getOrderID();
         int indexnum = Integer.parseInt(indexno.substring(1, 5)) +1;
         String date = new SimpleDateFormat("dd-MM-yyyy").format(new Date());
-        orderDataList.add(new Order("O"+indexnum,"Description",date,"Received",customerList.get(0),null,staffList.get(0)));
+        orderDataList.add(new Order("O"+indexnum,"Description",date,"Received",customerList.get(0),null,staffList.get(0),"Corporate")); //,corporate/customer
         do{
         Scanner sc = new Scanner(System.in);
         Scanner scc = new Scanner(System.in);
