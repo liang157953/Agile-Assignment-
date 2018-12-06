@@ -104,8 +104,6 @@ public class CustomizeOrder {
 
         System.out.format("\nItemized Bill \t\t\t\t\t Staff Name:%s\n", date);
 
-        System.out.format("\nItemized Bill \t\t\t\t\t Staff Name:%s\n", staffList.get(0).getStaffName());
-
         System.out.println("**************************************************************************");
         System.out.format("1. %-10s \t - %-25s \t Price: RM %.2f \n","flower",customizeList.get(customizeList.size()-1).getProduct().getProductName(),customizeList.get(customizeList.size()-1).getProduct().getProductPrice());
         System.out.format("2. %-10s \t - %-25s \t Price: RM %.2f \n","size",customizeList.get(customizeList.size()-1).getSize().getSizeDesc(),customizeList.get(customizeList.size()-1).getSize().getSizePrice());
