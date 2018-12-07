@@ -4,8 +4,6 @@
  * and open the template in the editor.
  */
 package fioreflowershop;
-import CatalogMaintenance.ProductMaintenance;
-import catalogOrder.*;
 import corporatecustomer.CorporateCustomerMaintenance;
 import customize.CustomizeOrder;
 import java.util.ArrayList;
