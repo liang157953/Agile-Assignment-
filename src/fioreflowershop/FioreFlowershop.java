@@ -31,9 +31,9 @@ public class FioreFlowershop {
         
         //Product Data
         List<Product> prodList = new ArrayList<Product>();
-        prodList.add(new Product("P1001","Flowers and Chocolates Gift","DESC...","Red",60.00,2,prodTypeList.get(0)));
+        prodList.add(new Product("P1001","Flowers and Chocolates Gift","DESC...","Red",60.00,5,prodTypeList.get(0)));
         prodList.add(new Product("P1002","Ladies Gift Hamper","DESC...","Red",65.00,5,prodTypeList.get(1)));
-        prodList.add(new Product("P1003","Christmas Treats Gift Box","DESC...","White",15.00,5,prodTypeList.get(1)));
+        prodList.add(new Product("P1003","Christmas Treats Gift Box","DESC...","White",15.00,3,prodTypeList.get(1)));
         prodList.add(new Product("P1004","Honeybee","DESC...","Yellow",30.00,5,prodTypeList.get(0)));
         prodList.add(new Product("P1005","Starry Night","DESC...","Blue",45.00,5,prodTypeList.get(2)));
         
@@ -45,9 +45,9 @@ public class FioreFlowershop {
         
         //CorporateCustomer Data
         List<CorporateCustomer> corporateCustomerList = new ArrayList<CorporateCustomer>();
-        corporateCustomerList.add(new CorporateCustomer(1000.00,0.0,"Unclear","C1001","Lew Lew Lew","pv16,jalan setapak","011-39958399"));
-        corporateCustomerList.add(new CorporateCustomer(1000.00,0.0,"Unclear","C1002","Hao Hao Hao","pv16,jalan setapak","011-39958399"));
-        corporateCustomerList.add(new CorporateCustomer(1000.00,0.0,"Unclear","C1003","Wei Wei Wei","pv16,jalan setapak","011-39958399"));
+        corporateCustomerList.add(new CorporateCustomer(1000.00,0.0,"Unclear","CO1001","Lew Lew Lew","pv16,jalan setapak","011-39958399"));
+        corporateCustomerList.add(new CorporateCustomer(1000.00,0.0,"Unclear","CO1002","Hao Hao Hao","pv16,jalan setapak","011-39958399"));
+        corporateCustomerList.add(new CorporateCustomer(1000.00,0.0,"Unclear","CO1003","Wei Wei Wei","pv16,jalan setapak","011-39958399"));
         
         //Staff Data
         List<Staff> staffList = new ArrayList<Staff>();
@@ -63,10 +63,14 @@ public class FioreFlowershop {
         
         //Order Data
         List<Order> orderDataList = new ArrayList<Order>();
-        orderDataList.add(new Order("O1001","Give to my girlfriend ","11-11-2018","Process",corporateCustomerList.get(0),paymentList.get(1),staffList.get(0)));
-        orderDataList.add(new Order("O1002","","15/11/2018","Process",corporateCustomerList.get(0),paymentList.get(2),staffList.get(1)));
-        orderDataList.add(new Order("O1003","Please say happy birthday to the receiver","15-11-2018","Process",corporateCustomerList.get(0),paymentList.get(0),staffList.get(2)));
-        
+        orderDataList.add(new Order("O1001","Give to my girlfriend ","11-11-2018","Process",customerList.get(0),paymentList.get(0),staffList.get(0),"Customer"));
+        orderDataList.add(new Order("O1002","","15/11/2018","Process",customerList.get(1),paymentList.get(1),staffList.get(1),"Customer"));
+        orderDataList.add(new Order("O1003","Please say happy to the receiver","15-11-2018","Process",customerList.get(2),paymentList.get(2),staffList.get(2),"Customer"));
+        orderDataList.add(new Order("O1004","Please say birthday to the receiver","15-11-2018","Process",corporateCustomerList.get(2),paymentList.get(2),staffList.get(2),"Corporate"));
+        orderDataList.add(new Order("O1005","Please say hi to the receiver","15-11-2018","Process",corporateCustomerList.get(1),paymentList.get(2),staffList.get(2),"Corporate"));
+        orderDataList.add(new Order("O1006","Please say gg to the receiver","15-11-2018","Process",corporateCustomerList.get(0),paymentList.get(2),staffList.get(2),"Corporate"));
+
+
         //PickUp Data
         List<PickUp> pickupList = new ArrayList<PickUp>();
         pickupList.add(new PickUp("PU1001","20/11/2018","1400","20-11-2018","1410","Standby",staffList.get(0),orderDataList.get(0)));
@@ -100,32 +104,33 @@ public class FioreFlowershop {
         List<OrderList> orderLL = new ArrayList<OrderList>();
         orderLL.add(new OrderList(orderDataList.get(0),prodList.get(0),2));
         orderLL.add(new OrderList(orderDataList.get(0), prodList.get(2), 1));
-        orderLL.add(new OrderList(orderDataList.get(2),prodList.get(1),2));
+        orderLL.add(new OrderList(orderDataList.get(0),prodList.get(0),3));
+        orderLL.add(new OrderList(orderDataList.get(1),prodList.get(4),4));
+        orderLL.add(new OrderList(orderDataList.get(3),prodList.get(2),3));
+        orderLL.add(new OrderList(orderDataList.get(2),prodList.get(1),5));
+        orderLL.add(new OrderList(orderDataList.get(1),prodList.get(3),3));
+        
         
         List<Customized> customizedList = new ArrayList<Customized>();
-        
-        List<Product> prodPromotionList = new ArrayList<Product>();
-        prodPromotionList.add(new Product("PM1001","Flowers and Chocolates Gift","DESC...","Red",60.00,2,prodTypeList.get(0),"JANUARY"));
-        prodPromotionList.add(new Product("PM1002","Ladies Gift Hamper","DESC...","Red",65.00,5,prodTypeList.get(1),"FEBRUARY"));
-        
-        //System.out.println("Main Program");
-        
+      
         ProductMaintenance.ProductMaintenanceMenu(prodList, prodTypeList);
         //ProductMaintenance.CustomerViewProducts(prodList, prodTypeList);
         //ProductMaintenance.ProductOutOfStockNotification(prodList, prodTypeList);
         ProductMaintenance.ProductOutOfStockNotification(prodPromotionList, prodTypeList);
         ProductMaintenance.PromotionProductMaintenanceMenu(prodPromotionList, prodTypeList);
-       
-//        ProductMaintenance.CustomerViewProducts(prodList, prodTypeList);
-//        ProductMaintenance.ProductOutOfStockNotification(prodList, prodTypeList);
-//        
-//        orderLL = GenerateSalesOrder.GenerateReportMain(prodTypeList, prodList, orderDataList, orderLL);
-//        orderDataList = catalogOrder.CatalogOrderMenu(prodTypeList,prodList,orderDataList,customerList,staffList,paymentList);
+        
+        //System.out.println("Main Program");
+        //ProductMaintenance.StaffMenu(prodList, prodTypeList);
+        orderLL = GenerateSalesOrder.CorporateCustGenerateReport(prodTypeList, prodList, orderDataList, orderLL, corporateCustomerList, customerList);
+        
+        //orderLL = GenerateSalesOrder.GenerateReportMain(prodTypeList, prodList, orderDataList, orderLL);
+        //orderDataList = catalogOrder.CatalogOrderMenu(prodTypeList,prodList,orderDataList,customerList,staffList,paymentList);
 //        
 //        pickupList = PickedUpTimeStamp.TimeStamp(pickupList, orderDataList);
 //        
 //        CorporateCustomerMaintenance.Menu(corporateCustomerList, staffList.get(0), orderDataList, paymentList, customerList);
-//       CustomizeOrder.Customize(customerList, customizedList, orderDataList, styleList, sizeList, prodList, accessoriesList, paymentList);
+//        CustomizeOrder.Customize(customerList, staffList, customizedList, orderDataList, styleList, sizeList, prodList, accessoriesList, paymentList);
     }
     
 }
+

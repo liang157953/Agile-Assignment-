@@ -18,19 +18,30 @@ import java.util.Scanner;
  */
 public class CorporateCustomerMaintenance {
     public static void Menu(List<CorporateCustomer> corporateList,Staff staff,List<Order> order, List<Payment> paymentList,List<Customer> customerList){
-        char resume = 'N';
+        char resume = 'n';
         do{
             int menuint = 0;
+            int err = 0;
             do{
+               if(err == 1)
+               {
+                       System.out.println("Pls enter between 1 to 3");
+               }
                 
             Scanner menu = new Scanner(System.in);
+            System.out.println("\n\n");
             System.out.println("Menu");
-            System.out.println("******************");
-            System.out.println("1. XXXXXX");
-            System.out.println("2. Approve Application");
+            System.out.println("******************************************");
+            System.out.println("1. Check Debt and Make Payment");
+            System.out.println("2. Approve Corporate Customer Application");
+            System.out.println("3. Exit");
+            System.out.println("******************************************");
             System.out.print("Enter Your Choice: ");
             menuint = menu.nextInt();
-            }while(menuint<0 || menuint > 2);
+            err++;
+            }while(menuint<0 || menuint > 3);
+            
+            
             if(menuint == 1){
             Scanner scan = new Scanner(System.in);
             CorporateCustomer selectedcust = new CorporateCustomer();
@@ -45,7 +56,7 @@ public class CorporateCustomerMaintenance {
                         selectedcust = corporateList.get(i);
                     }
                 }
-                System.out.println("No.PaymentID \t Amount Status");
+                System.out.println("\nNo.PaymentID \t Amount Status");
                 System.out.println("******************************");
             for(int i =0; i <order.size();i++){
                 if(order.get(i).getCorporateCustomer() != null){
@@ -84,7 +95,7 @@ public class CorporateCustomerMaintenance {
 
             if(selection == 'y'){
                 String date = new SimpleDateFormat("dd-MM-yyyy").format(new Date());
-                System.out.println("Paid Successful");
+                System.out.println("**Paid Successful**");
                 System.out.println("No.PaymentID \t Paid Date \t Amount \t Status");
                 System.out.println("*********************************************************************");
              for(int i =0; i <order.size();i++){
@@ -101,7 +112,7 @@ public class CorporateCustomerMaintenance {
              }  
              } System.out.println("\nOn The Way Back To Menu...");
 
-        }else{
+        }else if(menuint == 2){
                 Scanner selectcustomer = new Scanner(System.in);
                 Scanner limit = new Scanner(System.in);
                 int customerindex;
@@ -130,6 +141,7 @@ public class CorporateCustomerMaintenance {
                     System.out.println(i+1 + ". "+corporateList.get(i).getCustID() + "\t" + corporateList.get(i).getCustName() + "\t" + corporateList.get(i).getCreditLimit());
                 }      
             }
+            if(menuint != 3){
             do{
                 Scanner newscan = new Scanner(System.in);
                 System.out.print("Back To Menu? (y/n)");
@@ -149,6 +161,11 @@ public class CorporateCustomerMaintenance {
             if(resume == 'n'){
                 System.out.println("Thank You!");
                 break;
+            }
+            }
+            else{
+                System.out.println("Thank You!");
+                 break;
             }
         }while(resume == 'y');
         

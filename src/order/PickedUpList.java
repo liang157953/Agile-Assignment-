@@ -6,6 +6,7 @@
 package order;
 
 import fioreflowershop.*;
+import order.*;
 import java.io.IOException;
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -19,6 +20,43 @@ public class PickedUpList {
     private static Scanner in = new Scanner(System.in);
     public static char choice = 'n';
 
+    public static List<PickUp> Menu(List<PickUp> pickUpList, List<Order> orderDataList, List<OrderList> orderList)throws IOException {
+        
+        String option;
+        
+        do{      
+            do{
+                System.out.println("********************\n PickUp Menu \n********************");
+                System.out.println("1. Search pickup list ");
+                System.out.println("2. Customer pickup order"); 
+                System.out.println("3. Return Main Menu");      
+            
+                System.out.printf("\nOption > ");
+                
+                option = in.next();
+                    //Validation of User Input(Only can be digit)                
+              }while(!PickedUpList.checkDigit(option));
+
+            switch(Integer.parseInt(option)){
+                case 1: 
+                    ShowPickedUpList(pickUpList,orderList);
+                    break;
+                case 2: 
+                    PickedUpTimeStamp.TimeStamp(pickUpList, orderDataList);
+                    break;
+                case 3: 
+                    return pickUpList;  
+                default:
+                    System.out.printf("Invalid Option! Please Try Again\n");
+                    System.out.print("Please Enter Any Key to Proceed...");
+                    System.in.read();
+                    System.out.println();
+            }
+        }while(Integer.parseInt(option)!=3);
+        
+        return pickUpList;
+    }
+    
     public static void ShowPickedUpList(List<PickUp> pickUpList, List<OrderList> orderList) throws IOException{
         
         do
@@ -77,7 +115,7 @@ public class PickedUpList {
         
         
         
-        System.out.println("\n\nPress any key to end...");
+        System.out.println("\n\nPress any key to back to PickUp Menu...");
         System.in.read();
         
         
