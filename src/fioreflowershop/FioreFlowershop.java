@@ -103,11 +103,18 @@ public class FioreFlowershop {
         orderLL.add(new OrderList(orderDataList.get(2),prodList.get(1),2));
         
         List<Customized> customizedList = new ArrayList<Customized>();
+        
+        List<Product> prodPromotionList = new ArrayList<Product>();
+        prodPromotionList.add(new Product("PM1001","Flowers and Chocolates Gift","DESC...","Red",60.00,2,prodTypeList.get(0),"JANUARY"));
+        prodPromotionList.add(new Product("PM1002","Ladies Gift Hamper","DESC...","Red",65.00,5,prodTypeList.get(1),"FEBRUARY"));
+        
         //System.out.println("Main Program");
         
-        //ProductMaintenance.StaffMenu(prodList, prodTypeList);
+        ProductMaintenance.ProductMaintenanceMenu(prodList, prodTypeList);
         //ProductMaintenance.CustomerViewProducts(prodList, prodTypeList);
-        ProductMaintenance.ProductOutOfStockNotification(prodList, prodTypeList);
+        //ProductMaintenance.ProductOutOfStockNotification(prodList, prodTypeList);
+        ProductMaintenance.ProductOutOfStockNotification(prodPromotionList, prodTypeList);
+        ProductMaintenance.PromotionProductMaintenanceMenu(prodPromotionList, prodTypeList);
        
 //        ProductMaintenance.CustomerViewProducts(prodList, prodTypeList);
 //        ProductMaintenance.ProductOutOfStockNotification(prodList, prodTypeList);
@@ -118,7 +125,7 @@ public class FioreFlowershop {
 //        pickupList = PickedUpTimeStamp.TimeStamp(pickupList, orderDataList);
 //        
 //        CorporateCustomerMaintenance.Menu(corporateCustomerList, staffList.get(0), orderDataList, paymentList, customerList);
-       CustomizeOrder.Customize(customerList, customizedList, orderDataList, styleList, sizeList, prodList, accessoriesList, paymentList);
+//       CustomizeOrder.Customize(customerList, customizedList, orderDataList, styleList, sizeList, prodList, accessoriesList, paymentList);
     }
     
 }
