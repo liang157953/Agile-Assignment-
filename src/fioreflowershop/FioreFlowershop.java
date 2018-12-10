@@ -112,6 +112,7 @@ public class FioreFlowershop {
         
         
         List<Customized> customizedList = new ArrayList<Customized>();
+        List<Product> prodPromotionList = new ArrayList<Product>();
       
         ProductMaintenance.ProductMaintenanceMenu(prodList, prodTypeList);
         //ProductMaintenance.CustomerViewProducts(prodList, prodTypeList);
