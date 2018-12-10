@@ -116,12 +116,12 @@ public class FioreFlowershop {
         //ProductMaintenance.ProductMaintenanceMenu(prodList, prodTypeList);
         //ProductMaintenance.CustomerViewProducts(prodList, prodTypeList);
         //ProductMaintenance.ProductOutOfStockNotification(prodList, prodTypeList);
-        ProductMaintenance.ProductOutOfStockNotification(prodPromotionList, prodTypeList);
-        ProductMaintenance.PromotionProductMaintenanceMenu(prodPromotionList, prodTypeList);
+        //ProductMaintenance.ProductOutOfStockNotification(prodPromotionList, prodTypeList);
+        //ProductMaintenance.PromotionProductMaintenanceMenu(prodPromotionList, prodTypeList);
         
         //System.out.println("Main Program");
         //ProductMaintenance.StaffMenu(prodList, prodTypeList);
-        orderLL = GenerateSalesOrder.CorporateCustGenerateReport(prodTypeList, prodList, orderDataList, orderLL, corporateCustomerList, customerList);
+        //orderLL = GenerateSalesOrder.CorporateCustGenerateReport(prodTypeList, prodList, orderDataList, orderLL, corporateCustomerList, customerList);
         
         //orderLL = GenerateSalesOrder.GenerateReportMain(prodTypeList, prodList, orderDataList, orderLL);
         //orderDataList = catalogOrder.CatalogOrderMenu(prodTypeList,prodList,orderDataList,customerList,staffList,paymentList);
