@@ -110,11 +110,10 @@ public class FioreFlowershop {
         orderLL.add(new OrderList(orderDataList.get(2),prodList.get(1),5));
         orderLL.add(new OrderList(orderDataList.get(1),prodList.get(3),3));
         
-        
         List<Customized> customizedList = new ArrayList<Customized>();
         List<Product> prodPromotionList = new ArrayList<Product>();
       
-        ProductMaintenance.ProductMaintenanceMenu(prodList, prodTypeList);
+        //ProductMaintenance.ProductMaintenanceMenu(prodList, prodTypeList);
         //ProductMaintenance.CustomerViewProducts(prodList, prodTypeList);
         //ProductMaintenance.ProductOutOfStockNotification(prodList, prodTypeList);
         ProductMaintenance.ProductOutOfStockNotification(prodPromotionList, prodTypeList);
