@@ -21,7 +21,7 @@ public class CustomizeOrder {
         double totalPrice = 0;
         String customer;
         Customer selectedcustomer = new Customer();
-        int totaloption;
+         int totaloption;
         Scanner scan = new Scanner(System.in);
         Scanner scancust = new Scanner(System.in);
         System.out.println("Enter CutomerID: ");
