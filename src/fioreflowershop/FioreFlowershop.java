@@ -111,16 +111,10 @@ public class FioreFlowershop {
         orderLL.add(new OrderList(orderDataList.get(1),prodList.get(3),3));
         
         List<Customized> customizedList = new ArrayList<Customized>();
-        List<Product> prodPromotionList = new ArrayList<Product>();
-      
-        //ProductMaintenance.ProductMaintenanceMenu(prodList, prodTypeList);
+        //System.out.println("Main Program");
+       //ProductMaintenance.StaffMenu(prodList, prodTypeList);
         //ProductMaintenance.CustomerViewProducts(prodList, prodTypeList);
         //ProductMaintenance.ProductOutOfStockNotification(prodList, prodTypeList);
-        //ProductMaintenance.ProductOutOfStockNotification(prodPromotionList, prodTypeList);
-        //ProductMaintenance.PromotionProductMaintenanceMenu(prodPromotionList, prodTypeList);
-        
-        //System.out.println("Main Program");
-        //ProductMaintenance.StaffMenu(prodList, prodTypeList);
         //orderLL = GenerateSalesOrder.CorporateCustGenerateReport(prodTypeList, prodList, orderDataList, orderLL, corporateCustomerList, customerList);
         
         //orderLL = GenerateSalesOrder.GenerateReportMain(prodTypeList, prodList, orderDataList, orderLL);
@@ -129,7 +123,7 @@ public class FioreFlowershop {
 //        pickupList = PickedUpTimeStamp.TimeStamp(pickupList, orderDataList);
 //        
 //        CorporateCustomerMaintenance.Menu(corporateCustomerList, staffList.get(0), orderDataList, paymentList, customerList);
-//        CustomizeOrder.Customize(customerList, staffList, customizedList, orderDataList, styleList, sizeList, prodList, accessoriesList, paymentList);
+       CustomizeOrder.Customize(customerList,customizedList, orderDataList, styleList, sizeList, prodList, accessoriesList, paymentList,staffList.get(0));
     }
     
 }

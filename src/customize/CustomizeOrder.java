@@ -13,7 +13,7 @@ import java.util.*;
  * @author User
  */
 public class CustomizeOrder {
-    public static void Customize(List<Customer> customerList,List<Customized> customizeList,List<Order> orderDataList,List<Style> styleList,List<Size> sizeList, List<Product> productList, List<Accessories> accessoriesList,List<Payment> paymentList){
+    public static void Customize(List<Customer> customerList,List<Customized> customizeList,List<Order> orderDataList,List<Style> styleList,List<Size> sizeList, List<Product> productList, List<Accessories> accessoriesList,List<Payment> paymentList,Staff staff){
         int size;
         int style;
         int product;
