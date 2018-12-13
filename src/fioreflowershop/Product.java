@@ -10,8 +10,20 @@ public class Product {
     private double productPrice;
     private int productQuantity;
     private ProductType productType;
+    private String productPromotionMonth;
 
     public Product() {
+    }
+
+    public Product(String productID, String productName, String productDesc, String productColor, double productPrice, int productQuantity, ProductType productType, String productPromotionMonth) {
+        this.productID = productID;
+        this.productName = productName;
+        this.productDesc = productDesc;
+        this.productColor = productColor;
+        this.productPrice = productPrice;
+        this.productQuantity = productQuantity;
+        this.productType = productType;
+        this.productPromotionMonth = productPromotionMonth;
     }
 
     public Product(String productID, String productName, String productDesc, String productColor, double productPrice, int productQuantity, ProductType productType) {
@@ -22,6 +34,16 @@ public class Product {
         this.productPrice = productPrice;
         this.productQuantity = productQuantity;
         this.productType = productType;
+    }
+
+    
+
+    public String getProductPromotionMonth() {
+        return productPromotionMonth;
+    }
+
+    public void setProductPromotionMonth(String productPromotionMonth) {
+        this.productPromotionMonth = productPromotionMonth;
     }
 
     public String getProductDesc() {
@@ -82,6 +104,6 @@ public class Product {
 
     @Override
     public String toString() {
-        return "Product{" + "productID=" + productID + ", productName=" + productName + ", productDesc=" + productDesc + ", productColor=" + productColor + ", productPrice=" + productPrice + ", productQuantity=" + productQuantity + ", productType=" + productType + '}';
+        return "Product{" + "productID=" + productID + ", productName=" + productName + ", productDesc=" + productDesc + ", productColor=" + productColor + ", productPrice=" + productPrice + ", productQuantity=" + productQuantity + ", productType=" + productType + ", productPromotionMonth=" + productPromotionMonth + '}';
     }
 }
