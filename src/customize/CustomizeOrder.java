@@ -154,7 +154,7 @@ public class CustomizeOrder {
            break;
        }
         
-        System.out.println("**************************************************************************");
+       System.out.println("**************************************************************************");
        System.out.println("Total : \t\t\t\t\t\t\tRM" + totalPrice +"0");  
     }
    
