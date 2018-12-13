@@ -65,8 +65,7 @@ public class FioreFlowershop {
         paymentList.add(new Payment("PA1002","11/11/2018",200.0,"UnPaid"));
         paymentList.add(new Payment("PA1003","15/11/2018",100.0,"UnPaid"));
 
-
-
+        
         paymentList.add(new Payment("PA1001","10-11-2018",100.0,"Paid"));
         paymentList.add(new Payment("PA1002","11-11-2018",200.0,"UnPaid"));
         paymentList.add(new Payment("PA1003","15-11-2018",100.0,"UnPaid"));
