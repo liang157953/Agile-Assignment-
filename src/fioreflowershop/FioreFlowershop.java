@@ -44,6 +44,7 @@ public class FioreFlowershop {
         customerList.add(new Customer("C1002","Lew Hao Hap","pv16,jalan setapak","012-7878778"));
         customerList.add(new Customer("C1003","Ong Jin Jin","pv16,jalan setapak","013-7799889"));
         
+        
         //CorporateCustomer Data
         List<CorporateCustomer> corporateCustomerList = new ArrayList<CorporateCustomer>();
         corporateCustomerList.add(new CorporateCustomer(1000.00,0.0,"Unclear","CO1001","Lew Lew Lew","pv16,jalan setapak","011-39958399"));
