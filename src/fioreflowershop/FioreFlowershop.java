@@ -115,6 +115,7 @@ public class FioreFlowershop {
         pickupList.add(new PickUp("PU1002","20/11/2018","1200","20/11/2018","1230","Standby",staffList.get(0),orderDataList.get(2)));
         pickupList.add(new PickUp("PU1003","21/11/2018","1500","21/11/2018","1610","Standby",staffList.get(0),orderDataList.get(0)));
 
+        
 
         //Style Data
         List<Style> styleList = new ArrayList<Style>();
