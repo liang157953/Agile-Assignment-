@@ -218,10 +218,9 @@ public class GenerateSalesOrder {
                 break;
                 
             case "2":
+                System.out.println("\n\n==========Coporate Customer ===========");
                 for(int i=0;i<orderDataList.size();i++){
                     if(orderDataList.get(i).getOrderType().equals("Corporate")){
-                        System.out.println("\n\n==========Coporate Customer ===========");
-            
                         System.out.println(String.format("%d. %s  %s", num , orderDataList.get(i).getCorporateCustomer().getCustID(), orderDataList.get(i).getCorporateCustomer().getCustName()));
                         num++;
                         found=true;
@@ -233,8 +232,8 @@ public class GenerateSalesOrder {
                         System.out.print("Enter Corporate Customer ID > ");
                         option2 = scn.next();
                         for(int i=0;i<orderDataList.size();i++){
-                                if(orderDataList.get(i).getOrderType().equals("Customer")){
-                                    if(orderDataList.get(i).getCustomer().getCustID().equals(option2)){
+                                if(orderDataList.get(i).getOrderType().equals("Corporate")){
+                                    if(orderDataList.get(i).getCorporateCustomer().getCustID().equals(option2)){
                                         checkid=true;
                                     }
                                 }
