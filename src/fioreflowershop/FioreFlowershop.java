@@ -11,6 +11,7 @@ import customize.CustomizeOrder;
 import java.util.ArrayList;
 import java.util.List;
 import java.io.IOException;
+import java.text.ParseException;
 import order.*;
 
 /**
@@ -22,7 +23,7 @@ public class FioreFlowershop {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, ParseException {
         //Product Type Data
         List<ProductType> prodTypeList = new ArrayList<ProductType>();
         prodTypeList.add(new ProductType("PT1001","Fresh Flowers","The flowers that will be wither..."));
@@ -57,26 +58,31 @@ public class FioreFlowershop {
         
         //Payment Data
         List<Payment> paymentList = new ArrayList<Payment>();
-        paymentList.add(new Payment("PA1001","10-11-2018",100.0,"Paid"));
-        paymentList.add(new Payment("PA1002","11-11-2018",200.0,"Unpaid"));
-        paymentList.add(new Payment("PA1003","15-11-2018",100.0,"UnPaid"));
+
+        paymentList.add(new Payment("PA1001","10/11/2018",100.0,"Paid"));
+        paymentList.add(new Payment("PA1002","11/11/2018",200.0,"UnPaid"));
+        paymentList.add(new Payment("PA1003","15/11/2018",100.0,"UnPaid"));
+
         
         //Order Data
         List<Order> orderDataList = new ArrayList<Order>();
-        orderDataList.add(new Order("O1001","Give to my girlfriend ","11-11-2018","Process",customerList.get(0),paymentList.get(0),staffList.get(0),"Customer"));
+        orderDataList.add(new Order("O1001","Give to my girlfriend ","11/11/2018","Process",customerList.get(0),paymentList.get(0),staffList.get(0),"Customer"));
+
         orderDataList.add(new Order("O1002","","15/11/2018","Process",customerList.get(1),paymentList.get(1),staffList.get(1),"Customer"));
-        orderDataList.add(new Order("O1003","Please say happy to the receiver","15-11-2018","Process",customerList.get(2),paymentList.get(2),staffList.get(2),"Customer"));
-        orderDataList.add(new Order("O1004","Please say birthday to the receiver","15-11-2018","Process",corporateCustomerList.get(2),paymentList.get(2),staffList.get(2),"Corporate"));
-        orderDataList.add(new Order("O1005","Please say hi to the receiver","15-11-2018","Process",corporateCustomerList.get(1),paymentList.get(2),staffList.get(2),"Corporate"));
-        orderDataList.add(new Order("O1006","Please say gg to the receiver","15-11-2018","Process",corporateCustomerList.get(0),paymentList.get(2),staffList.get(2),"Corporate"));
+        orderDataList.add(new Order("O1003","Please say happy to the receiver","15/11/2018","Process",customerList.get(2),paymentList.get(2),staffList.get(2),"Customer"));
+        orderDataList.add(new Order("O1004","Please say birthday to the receiver","15/11/2018","Process",corporateCustomerList.get(2),paymentList.get(2),staffList.get(2),"Corporate"));
+        orderDataList.add(new Order("O1005","Please say hi to the receiver","15/11/2018","Process",corporateCustomerList.get(1),paymentList.get(2),staffList.get(2),"Corporate"));
+        orderDataList.add(new Order("O1006","Please say gg to the receiver","15/11/2018","Process",corporateCustomerList.get(0),paymentList.get(2),staffList.get(2),"Corporate"));
 
 
         //PickUp Data
         List<PickUp> pickupList = new ArrayList<PickUp>();
-        pickupList.add(new PickUp("PU1001","20/11/2018","1400","20-11-2018","1410","Standby",staffList.get(0),orderDataList.get(0)));
-        pickupList.add(new PickUp("PU1002","20/11/2018","1200","20-11-2018","1230","Standby",staffList.get(0),orderDataList.get(2)));
-        pickupList.add(new PickUp("PU1003","21/11/2018","1500","21-11-2018","1610","Standby",staffList.get(0),orderDataList.get(0)));
-        
+
+        pickupList.add(new PickUp("PU1001","20/11/2018","1400","20/11/2018","1410","Standby",staffList.get(0),orderDataList.get(0)));
+        pickupList.add(new PickUp("PU1002","20/11/2018","1200","20/11/2018","1230","Standby",staffList.get(0),orderDataList.get(2)));
+        pickupList.add(new PickUp("PU1003","21/11/2018","1500","21/11/2018","1610","Standby",staffList.get(0),orderDataList.get(0)));
+
+
         //Style Data
         List<Style> styleList = new ArrayList<Style>();
         styleList.add(new Style("ST1001","Standard",1.00));
@@ -96,11 +102,14 @@ public class FioreFlowershop {
         accessoriesList.add(new Accessories("A1002","Ribbon",10.00));
         accessoriesList.add(new Accessories("A1003","Pokemon",20.00));
         
-        List<Delivery> deliveryList = new ArrayList<Delivery>();
-        deliveryList.add(new Delivery("T1101","25-20,PV16","Setapak","019-7132686","25 November 2018","1200","26 November 2018","1200","Processing",staffList.get(0),orderDataList.get(0),1));
-        deliveryList.add(new Delivery("T1102","20,jalan barongan,taman berjaya","Johor","019-7788115","2 September 2018","1200","5 September 2018","1200","Processing",staffList.get(2),orderDataList.get(0),1));
-        deliveryList.add(new Delivery("T1103","25-20,PV16","Setapak","019-7755115","10 November 2018","1200","11 November 2018","1200","Processing",staffList.get(1),orderDataList.get(0),1));
         
+        List<Delivery> deliveryList = new ArrayList<Delivery>();
+
+        deliveryList.add(new Delivery("T1101","25-20,PV16","Setapak","019-7132686","20/11/2018","1200","26/11/2018","1200","Processing",staffList.get(0),orderDataList.get(0),1));
+        deliveryList.add(new Delivery("T1102","20,jalan barongan,taman berjaya","Johor","019-7788115","2/11/2018","1200","5/11/2018","1200","Processing",staffList.get(2),orderDataList.get(0),1));
+        deliveryList.add(new Delivery("T1103","25-20,PV16","Setapak","019-7755115","20/11/2018","1200","11/12/2018","1200","Processing",staffList.get(1),orderDataList.get(0),1));
+
+
         List<OrderList> orderLL = new ArrayList<OrderList>();
         orderLL.add(new OrderList(orderDataList.get(0),prodList.get(0),2));
         orderLL.add(new OrderList(orderDataList.get(0), prodList.get(2), 1));
@@ -122,9 +131,24 @@ public class FioreFlowershop {
         //orderDataList = catalogOrder.CatalogOrderMenu(prodTypeList,prodList,orderDataList,customerList,staffList,paymentList);
 //        
 //        pickupList = PickedUpTimeStamp.TimeStamp(pickupList, orderDataList);
+
+          //DeliveryList.ShowDeliveryList(deliveryList, orderLL);
+          
+          //paymentList = CustomerPayment.MakePayment(paymentList);
+          
+
+//        CorporateCustomerMaintenance.Menu(corporateCustomerList, staffList.get(0), orderDataList, paymentList, customerList);
+       //CustomizeOrder.Customize(customerList,customizedList, orderDataList, styleList, sizeList, prodList, accessoriesList, paymentList,staffList.get(0));
+
 //        
+
+       CorporateCustomerMaintenance.Menu(corporateCustomerList, staffList.get(0), orderDataList, paymentList, customerList);
+//        CustomizeOrder.Customize(customerList, staffList, customizedList, orderDataList, styleList, sizeList, prodList, accessoriesList, paymentList);
+
 //        CorporateCustomerMaintenance.Menu(corporateCustomerList, staffList.get(0), orderDataList, paymentList, customerList);
        CustomizeOrder.Customize(customerList,customizedList, orderDataList, styleList, sizeList, prodList, accessoriesList, paymentList,staffList.get(0));
+
+
     }
     
 }
