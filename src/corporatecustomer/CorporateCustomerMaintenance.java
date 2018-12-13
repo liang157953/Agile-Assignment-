@@ -6,9 +6,12 @@
 package corporatecustomer;
 
 import fioreflowershop.*;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Scanner;
 
@@ -17,7 +20,7 @@ import java.util.Scanner;
  * @author User
  */
 public class CorporateCustomerMaintenance {
-    public static void Menu(List<CorporateCustomer> corporateList,Staff staff,List<Order> order, List<Payment> paymentList,List<Customer> customerList){
+    public static void Menu(List<CorporateCustomer> corporateList,Staff staff,List<Order> order, List<Payment> paymentList,List<Customer> customerList) throws ParseException{
         char resume = 'n';
         do{
             int menuint = 0;
@@ -25,7 +28,7 @@ public class CorporateCustomerMaintenance {
             do{
                if(err == 1)
                {
-                       System.out.println("Pls enter between 1 to 3");
+                       System.out.println("Please enter between 1 to 3");
                }
                 
             Scanner menu = new Scanner(System.in);
@@ -34,7 +37,7 @@ public class CorporateCustomerMaintenance {
             System.out.println("******************************************");
             System.out.println("1. Check Debt and Make Payment");
             System.out.println("2. Approve Corporate Customer Application");
-            System.out.println("3. Make Payment");
+            System.out.println("3. Corporate Customer That haven't make payment");
             System.out.println("4. Exit");
             System.out.println("******************************************");
             System.out.print("Enter Your Choice: ");
@@ -117,7 +120,7 @@ public class CorporateCustomerMaintenance {
                 }while(selection != 'y' &&selection !='n');
 
             if(selection == 'y'){
-                String date = new SimpleDateFormat("dd-MM-yyyy").format(new Date());
+                String date = new SimpleDateFormat("dd/MM/yyyy").format(new Date());
                 System.out.println("**Paid Successful**");
                 System.out.println("No.PaymentID \t Paid Date \t Amount \t Status");
                 System.out.println("*********************************************************************");
@@ -153,10 +156,13 @@ public class CorporateCustomerMaintenance {
                     System.out.println("Invalid Input, Please Try Again!");
                 }
                 }while(customerindex<0||customerindex > customerList.size());
+                int newCorID;
+                newCorID = Integer.parseInt(corporateList.get(corporateList.size()-1).getCustID().substring(2,6));
+                newCorID += 1;
                 
                 System.out.print("Please Enter Monthly Limit:" );
                 limitAmount = limit.nextDouble();              
-                corporateList.add(new CorporateCustomer(limitAmount,0.00,"Available",customerList.get(customerindex-1).getCustID(),customerList.get(customerindex-1).getCustName(),customerList.get(customerindex-1).getCustAddress(),customerList.get(customerindex-1).getCustContactNo()));
+                corporateList.add(new CorporateCustomer(limitAmount,0.00,"Available","CO" + newCorID,customerList.get(customerindex-1).getCustName(),customerList.get(customerindex-1).getCustAddress(),customerList.get(customerindex-1).getCustContactNo()));
                 customerList.remove(customerindex-1);
                 System.out.println("\n\n Updated Corporate Customer List");
                 System.out.println("**************************************");
@@ -164,8 +170,42 @@ public class CorporateCustomerMaintenance {
                     System.out.println(i+1 + ". "+corporateList.get(i).getCustID() + "\t" + corporateList.get(i).getCustName() + "\t" + corporateList.get(i).getCreditLimit());
                 }      
             }
-            if(menuint != 3){
+            if(menuint == 3){
             do{
+                String date = new SimpleDateFormat("dd/MM/yyyy").format(new Date());
+                Date date1 =new SimpleDateFormat("dd/MM/yyyy").parse(date);  
+                String newdate = "07" + date.substring(2,10);
+                Date date2 =new SimpleDateFormat("dd/MM/yyyy").parse(newdate);     
+                int numberrecord =0;
+               System.out.println("no.\t custID \t orderID \t orderDate \t Total Amount");
+               System.out.println("********************************************************************");
+                if(date1.after(date2)){
+                    int j =1;
+                    for(int i =0;i < order.size();i++){
+                        if(order.get(i).getCorporateCustomer() != null){
+                        if(new SimpleDateFormat("dd/MM/yyyy").parse(order.get(i).getOrderDate()).after(date2) &&order.get(i).getPayment().getPaymentStatus().equals("UnPaid")){
+                            System.out.format("%d \t %-8s \t  %-13s %-12s \t RM %-6.2f \n",j,order.get(i).getCorporateCustomer().getCustID(),order.get(i).getOrderID(),order.get(i).getOrderDate(),order.get(i).getPayment().getTotalAmount());
+                            j++;
+                            numberrecord++;
+                        }
+                        }
+                    }
+                }else{ 
+                    int j =1;
+                    for(int i =0;i < order.size();i++){
+                         if(order.get(i).getCorporateCustomer() != null){
+                        if(new SimpleDateFormat("dd/MM/yyyy").parse(order.get(i).getOrderDate()).before(date2) &&order.get(i).getPayment().getPaymentStatus().equals("UnPaid")){
+                            System.out.format("%d \t %-8s \t  %-13s %-12s \t RM %-6.2f \n",j,order.get(i).getCorporateCustomer().getCustID(),order.get(i).getOrderID(),order.get(i).getOrderDate(),order.get(i).getPayment().getTotalAmount());
+                            j++;
+                            numberrecord++;
+                        }
+                    }
+                    }
+                }
+                if(numberrecord == 0){
+                    System.out.print("Record Not Found!\n\n");
+                }
+                
                 Scanner newscan = new Scanner(System.in);
                 System.out.print("Back To Menu? (y/n): ");
                 resume = (newscan.next().charAt(0));
