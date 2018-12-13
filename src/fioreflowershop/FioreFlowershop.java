@@ -38,6 +38,7 @@ public class FioreFlowershop {
         prodList.add(new Product("P1004","Honeybee","DESC...","Yellow",30.00,5,prodTypeList.get(0)));
         prodList.add(new Product("P1005","Starry Night","DESC...","Blue",45.00,5,prodTypeList.get(2)));
         
+        
         //Customer Data
         List<Customer> customerList = new ArrayList<Customer>();
         customerList.add(new Customer("C1001","Koh Liao Liao","pv16,jalan setapak","011-39958399"));
