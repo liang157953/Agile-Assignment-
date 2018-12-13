@@ -66,7 +66,7 @@ public class FioreFlowershop {
         paymentList.add(new Payment("PA1003","15/11/2018",100.0,"UnPaid"));
 
 
-=======
+
         paymentList.add(new Payment("PA1001","10-11-2018",100.0,"Paid"));
         paymentList.add(new Payment("PA1002","11-11-2018",200.0,"UnPaid"));
         paymentList.add(new Payment("PA1003","15-11-2018",100.0,"UnPaid"));
@@ -80,7 +80,7 @@ public class FioreFlowershop {
         orderDataList.add(new Order("O1002","","15/11/2018","Process",customerList.get(1),paymentList.get(1),staffList.get(1),"Customer"));
         orderDataList.add(new Order("O1003","Please say happy to the receiver","15/11/2018","Process",customerList.get(2),paymentList.get(2),staffList.get(2),"Customer"));
         orderDataList.add(new Order("O1004","Please say birthday to the receiver","15/11/2018","Process",corporateCustomerList.get(2),paymentList.get(2),staffList.get(2),"Corporate"));
-=======
+
         orderDataList.add(new Order("O1002","","15/11/2018","Process",customerList.get(1),paymentList.get(1),staffList.get(1),"Customer"));
         orderDataList.add(new Order("O1003","Please say happy to the receiver","15/11/2018","Process",customerList.get(2),paymentList.get(2),staffList.get(2),"Customer"));
         orderDataList.add(new Order("O1004","Please say birthday to the receiver","15/11/2018","Process",corporateCustomerList.get(2),paymentList.get(2),staffList.get(2),"Corporate"));
@@ -106,7 +106,6 @@ public class FioreFlowershop {
         pickupList.add(new PickUp("PU1003","21/11/2018","1500","21/11/2018","1610","Standby",staffList.get(0),orderDataList.get(0)));
 
 
-=======
         pickupList.add(new PickUp("PU1001","20-11-2018","1400","20/11/2018","1410","Standby",staffList.get(0),orderDataList.get(0)));
         pickupList.add(new PickUp("PU1002","20-11-2018","1200","20/11/2018","1230","Standby",staffList.get(0),orderDataList.get(2)));
         pickupList.add(new PickUp("PU1003","21-11-2018","1500","21/11/2018","1610","Standby",staffList.get(0),orderDataList.get(0)));
@@ -137,7 +136,6 @@ public class FioreFlowershop {
         accessoriesList.add(new Accessories("A1003","Pokemon",20.00));
         
 
-=======
         
         List<Delivery> deliveryList = new ArrayList<Delivery>();
 
@@ -146,21 +144,7 @@ public class FioreFlowershop {
         deliveryList.add(new Delivery("T1103","25-20,PV16","Setapak","019-7755115","20/11/2018","1200","11/12/2018","1200","Processing",staffList.get(1),orderDataList.get(0),1));
 
 
-        deliveryList.add(new Delivery("T1101","25-20,PV16","Setapak","019-7132686","25 November 2018","1200","26/11/2018","1200","Processing",staffList.get(0),orderDataList.get(0),1));
-        deliveryList.add(new Delivery("T1102","20,jalan barongan,taman berjaya","Johor","019-7788115","2/11/2018","1200","5 September 2018","1200","Processing",staffList.get(2),orderDataList.get(0),1));
-        deliveryList.add(new Delivery("T1103","25-20,PV16","Setapak","019-7755115","10 November 2018","1200","11/11/2018","1200","Processing",staffList.get(1),orderDataList.get(0),1));
-
-        deliveryList.add(new Delivery("T1101","25-20,PV16","Setapak","019-7132686","20/11/2018","1200","26/11/2018","1200","Processing",staffList.get(0),orderDataList.get(0),1));
-        deliveryList.add(new Delivery("T1102","20,jalan barongan,taman berjaya","Johor","019-7788115","2/11/2018","1200","5/11/2018","1200","Processing",staffList.get(2),orderDataList.get(0),1));
-        deliveryList.add(new Delivery("T1103","25-20,PV16","Setapak","019-7755115","20/11/2018","1200","11/12/2018","1200","Processing",staffList.get(1),orderDataList.get(0),1));
-
-        
-        List<Delivery> deliveryList = new ArrayList<Delivery>();
-
-        deliveryList.add(new Delivery("T1101","25-20,PV16","Setapak","019-7132686","20/11/2018","1200","26/11/2018","1200","Processing",staffList.get(0),orderDataList.get(0),1));
-        deliveryList.add(new Delivery("T1102","20,jalan barongan,taman berjaya","Johor","019-7788115","2/11/2018","1200","5/11/2018","1200","Processing",staffList.get(2),orderDataList.get(0),1));
-        deliveryList.add(new Delivery("T1103","25-20,PV16","Setapak","019-7755115","20/11/2018","1200","11/12/2018","1200","Processing",staffList.get(1),orderDataList.get(0),1));
-
+       
 
         List<OrderList> orderLL = new ArrayList<OrderList>();
         orderLL.add(new OrderList(orderDataList.get(0),prodList.get(0),2));
@@ -188,7 +172,7 @@ public class FioreFlowershop {
           
 
           //paymentList = CustomerPayment.MakePayment(paymentList);
-=======
+
           paymentList = CustomerPayment.MakePayment(paymentList);
 
           
