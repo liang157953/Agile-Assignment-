@@ -395,7 +395,7 @@ public class ProductMaintenance {
                     checkMonth=true;
                     do{
                         System.out.print("Enter Promotion Month (eg. 1 = Jan): ");
-                        promoMonth = input.next();
+                        promoMonth = input.nextLine();
                     }while(!CheckDigit(promoMonth));
 
                     switch(Integer.parseInt(promoMonth)){
@@ -420,14 +420,14 @@ public class ProductMaintenance {
             System.out.println("Product Type ID: " + ConsoleColors.BLUE + newProdID + ConsoleColors.RESET);
 
             System.out.print("Product Name: ");
-            prodName = input.next();
+            prodName = input.nextLine();
 
             System.out.print("Product Description: ");
-            prodDesc = input.next();
+            prodDesc = input.nextLine();
             
             do{
                 System.out.print("Product Color: ");
-                prodColor = input.next();
+                prodColor = input.nextLine();
             }while(!CheckAlphabetic(prodColor));
             
             prodPrice = "" + ProductMaintenance.askInputDouble("Product Price: RM ");      
@@ -689,8 +689,8 @@ public class ProductMaintenance {
                 checkDigit = true;
             }
             else{
-                System.err.printf("Input Must be in Digit! Please Try Again\n");
-                System.out.print("Please Enter Any Key to Proceed...");
+                System.err.printf("Input Must be in Digit! Please Try Again");
+                System.out.println("Please Enter Any Key to Proceed...");
                 System.in.read();
                 checkDigit = false;
                 break;
@@ -707,7 +707,7 @@ public class ProductMaintenance {
             }
             else{
                 System.err.printf("Input Must be in Alphabet! Please Try Again\n");
-                System.out.print("Please Enter Any Key to Proceed...");
+                System.out.print("\nPlease Enter Any Key to Proceed...");
                 System.in.read();
                 System.out.println();
                 checkAlphabetic = false;

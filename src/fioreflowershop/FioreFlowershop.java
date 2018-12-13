@@ -117,7 +117,7 @@ public class FioreFlowershop {
         //ProductMaintenance.CustomerViewProducts(prodList, prodTypeList);
         //ProductMaintenance.ProductOutOfStockNotification(prodList, prodTypeList);
         //ProductMaintenance.ProductOutOfStockNotification(prodPromotionList, prodTypeList);
-        //ProductMaintenance.PromotionProductMaintenanceMenu(prodPromotionList, prodTypeList);
+        ProductMaintenance.PromotionProductMaintenanceMenu(prodPromotionList, prodTypeList);
         
         //System.out.println("Main Program");
         //ProductMaintenance.StaffMenu(prodList, prodTypeList);
