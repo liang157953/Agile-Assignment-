@@ -21,7 +21,6 @@ public class CustomizeOrder {
         double totalPrice = 0;
         String customer;
         Customer selectedcustomer = new Customer();
-         int totaloption;
         Scanner scan = new Scanner(System.in);
         Scanner scancust = new Scanner(System.in);
         System.out.println("Enter CutomerID: ");
@@ -29,11 +28,10 @@ public class CustomizeOrder {
           for(int i=0; i< customerList.size();i++){
               if(customer.equals(customerList.get(i).getCustID()))
                    selectedcustomer = customerList.get(i);
-                }
-        
+                }     
         System.out.println("Customize Product");
         System.out.println("***************************");
-        totaloption =0;
+    
         
         System.out.println("\nProduct Price List");
         System.out.println("***************************");
