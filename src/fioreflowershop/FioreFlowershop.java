@@ -115,7 +115,7 @@ public class FioreFlowershop {
        //ProductMaintenance.StaffMenu(prodList, prodTypeList);
         //ProductMaintenance.CustomerViewProducts(prodList, prodTypeList);
         //ProductMaintenance.ProductOutOfStockNotification(prodList, prodTypeList);
-        orderLL = GenerateSalesOrder.CorporateCustGenerateReport(prodTypeList, prodList, orderDataList, orderLL, corporateCustomerList, customerList);
+        //orderLL = GenerateSalesOrder.CorporateCustGenerateReport(prodTypeList, prodList, orderDataList, orderLL, corporateCustomerList, customerList);
         
         //orderLL = GenerateSalesOrder.GenerateReportMain(prodTypeList, prodList, orderDataList, orderLL);
         //orderDataList = catalogOrder.CatalogOrderMenu(prodTypeList,prodList,orderDataList,customerList,staffList,paymentList);
@@ -123,7 +123,7 @@ public class FioreFlowershop {
 //        pickupList = PickedUpTimeStamp.TimeStamp(pickupList, orderDataList);
 //        
 //        CorporateCustomerMaintenance.Menu(corporateCustomerList, staffList.get(0), orderDataList, paymentList, customerList);
-//        CustomizeOrder.Customize(customerList, staffList, customizedList, orderDataList, styleList, sizeList, prodList, accessoriesList, paymentList);
+       CustomizeOrder.Customize(customerList,customizedList, orderDataList, styleList, sizeList, prodList, accessoriesList, paymentList,staffList.get(0));
     }
     
 }
