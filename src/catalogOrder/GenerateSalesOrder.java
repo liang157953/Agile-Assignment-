@@ -205,7 +205,6 @@ public class GenerateSalesOrder {
                         if(orderProdList.get(r).getProductQuantity()>0){
                             System.out.println(orderProdList.get(r).getProductType().getProductTypeName());    
                             System.out.print(String.format("%29s\t\t%-30s %3d \t\t %-5.2f \t\t %-5.2f\n",orderProdList.get(r).getProductID(),orderProdList.get(r).getProductName(),orderProdList.get(r).getProductQuantity(),orderProdList.get(r).getProductPrice(),totalPrice));
-                            //System.out.println("\t\t\t" + orderProdList.get(r).getProductID() +"\t\t"+ orderProdList.get(r).getProductName() + "\t\t\t"+ orderProdList.get(r).getProductQuantity());                 
                             totalAmt += totalPrice;
                         }
                     }
