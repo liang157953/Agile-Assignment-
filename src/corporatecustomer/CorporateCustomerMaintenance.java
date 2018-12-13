@@ -177,14 +177,14 @@ public class CorporateCustomerMaintenance {
                 String newdate = "07" + date.substring(2,10);
                 Date date2 =new SimpleDateFormat("dd/MM/yyyy").parse(newdate);     
                 int numberrecord =0;
-               System.out.println("no.\t custID \t orderID \t orderDate \t Total Amount");
-               System.out.println("********************************************************************");
+               System.out.println("no.\t custID \t orderID \t orderDate \t Total Amount \t Telno.");
+               System.out.println("****************************************************************************************");
                 if(date1.after(date2)){
                     int j =1;
                     for(int i =0;i < order.size();i++){
                         if(order.get(i).getCorporateCustomer() != null){
                         if(new SimpleDateFormat("dd/MM/yyyy").parse(order.get(i).getOrderDate()).after(date2) &&order.get(i).getPayment().getPaymentStatus().equals("UnPaid")){
-                            System.out.format("%d \t %-8s \t  %-13s %-12s \t RM %-6.2f \n",j,order.get(i).getCorporateCustomer().getCustID(),order.get(i).getOrderID(),order.get(i).getOrderDate(),order.get(i).getPayment().getTotalAmount());
+                            System.out.format("%d \t %-8s \t  %-13s %-12s \t RM %-6.2f \t %-12s\n",j,order.get(i).getCorporateCustomer().getCustID(),order.get(i).getOrderID(),order.get(i).getOrderDate(),order.get(i).getPayment().getTotalAmount(),order.get(i).getCorporateCustomer().getCustContactNo());
                             j++;
                             numberrecord++;
                         }
@@ -195,7 +195,7 @@ public class CorporateCustomerMaintenance {
                     for(int i =0;i < order.size();i++){
                          if(order.get(i).getCorporateCustomer() != null){
                         if(new SimpleDateFormat("dd/MM/yyyy").parse(order.get(i).getOrderDate()).before(date2) &&order.get(i).getPayment().getPaymentStatus().equals("UnPaid")){
-                            System.out.format("%d \t %-8s \t  %-13s %-12s \t RM %-6.2f \n",j,order.get(i).getCorporateCustomer().getCustID(),order.get(i).getOrderID(),order.get(i).getOrderDate(),order.get(i).getPayment().getTotalAmount());
+                            System.out.format("%d \t %-8s \t  %-13s %-12s \t RM %-6.2f %-12s\n",j,order.get(i).getCorporateCustomer().getCustID(),order.get(i).getOrderID(),order.get(i).getOrderDate(),order.get(i).getPayment().getTotalAmount(),order.get(i).getCorporateCustomer().getCustContactNo());
                             j++;
                             numberrecord++;
                         }
