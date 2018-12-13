@@ -110,6 +110,7 @@ public class FioreFlowershop {
         orderLL.add(new OrderList(orderDataList.get(2),prodList.get(1),5));
         orderLL.add(new OrderList(orderDataList.get(1),prodList.get(3),3));
         
+        
         List<Customized> customizedList = new ArrayList<Customized>();
         //System.out.println("Main Program");
        //ProductMaintenance.StaffMenu(prodList, prodTypeList);
