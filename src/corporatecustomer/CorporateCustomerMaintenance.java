@@ -34,7 +34,8 @@ public class CorporateCustomerMaintenance {
             System.out.println("******************************************");
             System.out.println("1. Check Debt and Make Payment");
             System.out.println("2. Approve Corporate Customer Application");
-            System.out.println("3. Exit");
+            System.out.println("3. Make Payment");
+            System.out.println("4. Exit");
             System.out.println("******************************************");
             System.out.print("Enter Your Choice: ");
             menuint = menu.nextInt();
@@ -70,8 +71,30 @@ public class CorporateCustomerMaintenance {
             }
             
             if(totaldebt == 0.00){
-                System.out.print("No Debt For This Customer");
-                continue;
+                System.out.print("**No Debt For This Customer**");
+               
+             do{
+                Scanner newscan = new Scanner(System.in);
+                System.out.print("\nBack To Menu? (y/n): ");
+                resume = (newscan.next().charAt(0));
+                switch(resume){
+                    case 'Y':
+                        resume = 'y';
+                        break;
+                    case 'N':
+                        resume = 'n';
+                        break;
+                }
+                if(resume != 'y' &&resume !='n'){
+                    System.out.println("Please Enter y/n only");
+                }    
+                }while(resume != 'y' &&resume !='n');   
+             
+             if(resume == 'n'){
+                System.out.println("Thank You!");
+                break;
+            }
+              continue;
             }
                 System.out.println("******************************************");
                 System.out.println("Total Debt Amount :RM " + totaldebt + "0");
@@ -110,21 +133,21 @@ public class CorporateCustomerMaintenance {
                 }
                }
              }  
-             } System.out.println("\nOn The Way Back To Menu...");
+             } //System.out.println("\nOn The Way Back To Menu...");
 
         }else if(menuint == 2){
                 Scanner selectcustomer = new Scanner(System.in);
                 Scanner limit = new Scanner(System.in);
                 int customerindex;
                 double limitAmount;
-                System.out.println("List of Customer Want to become Corporate Customer");
+                System.out.println("\nList of Customer Want to become Corporate Customer");
                 System.out.println("***************************************************");
                 for(int i=0; i< customerList.size();i++){
                     System.out.println(i+1 + ". " + customerList.get(i).getCustID() + "\t"+ customerList.get(i).getCustName());
                 }
                 System.out.println("****************************************************");
                 do{
-                System.out.print("Which customer application you want to approve ?" );
+                System.out.print("Which customer application you want to approve ?\nEnter Your Choice: " );
                 customerindex = selectcustomer.nextInt();
                 if(customerindex > customerList.size()){
                     System.out.println("Invalid Input, Please Try Again!");
@@ -144,7 +167,7 @@ public class CorporateCustomerMaintenance {
             if(menuint != 3){
             do{
                 Scanner newscan = new Scanner(System.in);
-                System.out.print("Back To Menu? (y/n)");
+                System.out.print("Back To Menu? (y/n): ");
                 resume = (newscan.next().charAt(0));
                 switch(resume){
                     case 'Y':
