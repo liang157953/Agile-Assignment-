@@ -95,6 +95,6 @@ public class PickUp {
 
     @Override
     public String toString() {
-        return "PickUp{" + "pickupNo=" + pickupNo + ", pickupDate=" + pickupDate + ", pickupTime=" + pickupTime + ", pickupStatus=" + pickupStatus + ", staff=" + staff + ", order=" + order + '}';
+        return "PickUp{" + "pickupNo=" + pickupNo + ", requirePickUpDate=" + requirePickUpDate + ", requirePickUpTime=" + requirePickUpTime + ", pickupDate=" + pickupDate + ", pickupTime=" + pickupTime + ", pickupStatus=" + pickupStatus + ", staff=" + staff + ", order=" + order + '}';
     }
 }
