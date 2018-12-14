@@ -102,9 +102,7 @@ public class FioreFlowershop {
         accessoriesList.add(new Accessories("A1001","Bear",5.00));
         accessoriesList.add(new Accessories("A1002","Ribbon",10.00));
         accessoriesList.add(new Accessories("A1003","Pokemon",20.00));
-        
-
-        
+  
         List<Delivery> deliveryList = new ArrayList<Delivery>();
 
         deliveryList.add(new Delivery("T1101","25-20,PV16","Setapak","019-7132686","20/11/2018","1200","26/11/2018","1200","Processing",staffList.get(0),orderDataList.get(0),1));
@@ -120,7 +118,6 @@ public class FioreFlowershop {
         orderLL.add(new OrderList(orderDataList.get(2),prodList.get(1),5));
         orderLL.add(new OrderList(orderDataList.get(1),prodList.get(3),3));
         
-        
         List<Customized> customizedList = new ArrayList<Customized>();
         //System.out.println("Main Program");
        //ProductMaintenance.StaffMenu(prodList, prodTypeList);
@@ -134,8 +131,8 @@ public class FioreFlowershop {
 //        pickupList = PickedUpTimeStamp.TimeStamp(pickupList, orderDataList);
 
           //DeliveryList.ShowDeliveryList(deliveryList, orderLL);
-          String options="1";
-          CatalogMaintenance.ProductMaintenance.CustomerViewProducts(prodList, prodTypeList, options);
+          //String options="1";
+          //CatalogMaintenance.ProductMaintenance.CustomerViewProducts(prodList, prodTypeList, options);
           //paymentList = CustomerPayment.MakePayment(paymentList);
 
          // paymentList = CustomerPayment.MakePayment(paymentList);
