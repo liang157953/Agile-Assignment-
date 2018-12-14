@@ -29,6 +29,15 @@ public class Customized {
     public Customized() {
     }
 
+    public Customized(String customizedID, Product product, Size size, Style style, Accessories accessories, Order order) {
+        this.customizedID = customizedID;
+        this.product = product;
+        this.size = size;
+        this.style = style;
+        this.accessories = accessories;
+        this.order = order;
+    }
+
     public Customized(String customizedID, Product product, Size size, Style style, Accessories accessories,int priority, Order order) {
         this.customizedID = customizedID;
         this.product = product;
