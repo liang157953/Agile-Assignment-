@@ -86,6 +86,7 @@ public class ProductMaintenance {
                         }
                     }  
                     
+                    
                     if(found){
                         System.out.print("\n********************************\n Current Promotion Product List \n********************************\n");
                         for(int r=0;r<newProdList.size();r++){    
