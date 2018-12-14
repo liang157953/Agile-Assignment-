@@ -345,19 +345,20 @@ public class ProductMaintenance {
         return prodPromotionList;
     }
     
-    public static void CustomerViewProducts(List<Product> newProdList, List<ProductType> prodTypeList) throws IOException{
+    public static boolean CustomerViewProducts(List<Product> newProdList, List<ProductType> prodTypeList,String options) throws IOException{
         Scanner input = new Scanner(System.in);
-        Boolean test=false;String options="";
-        do{
-            test=false;options="";
-            do{
+        Boolean test=false;//String options="";
+        Boolean check=false;
+        //do{
+            test=false;//options="";
+            //do{
                 System.out.print("\n***************************\n Current Product Type List \n***************************\n");
                 for(int r=0;r<prodTypeList.size();r++){              
                     System.out.println((r+1) + ". " + prodTypeList.get(r).getProductTypeName());
                 }  
                 System.out.printf("\nSelect Product Type > ");
-                options = input.next();
-            }while(!CheckDigit(options+1));
+                //options = input.next();
+            //}while(!CheckDigit(options+1));
             if(Integer.parseInt(options)<=0 || Integer.parseInt(options)>prodTypeList.size()){
                 System.err.printf("Input Out of Range! Please Enter Again");
                 System.in.read();
@@ -365,15 +366,22 @@ public class ProductMaintenance {
             }else{
                 test=true;
             }
-        }while(!test);
-
-        System.out.print("\n***********************\n Current Product List \n***********************\n");
-        int no=0;
-        for(int r=0;r<newProdList.size();r++){    
-            if(newProdList.get(r).getProductType().equals(prodTypeList.get(Integer.parseInt(options)-1))){
-                System.out.println((++no) + ". " + newProdList.get(r).toString());
-            }
-        }  
+        //}while(!test);
+        
+        if(test){
+            System.out.print("\n***********************\n Current Product List \n***********************\n");
+            int no=0;
+            for(int r=0;r<newProdList.size();r++){    
+                if(newProdList.get(r).getProductType().equals(prodTypeList.get(Integer.parseInt(options)-1))){
+                    System.out.println((++no) + ". " + newProdList.get(r).toString());
+                    check=true;
+                }
+            }  
+        }else{
+            System.out.println("Invalid Options!");
+        }
+        
+        return check;
     }
     
     public static void ProductOutOfStockNotification(List<Product> prodList, List<ProductType> prodTypeList) {
