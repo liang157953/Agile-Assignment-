@@ -119,6 +119,11 @@ public class FioreFlowershop {
         orderLL.add(new OrderList(orderDataList.get(1),prodList.get(3),3));
         
         List<Customized> customizedList = new ArrayList<Customized>();
+        List<Product> prodPromotionList = new ArrayList<Product>();
+        prodPromotionList.add(new Product("PM1001","Flowers and Chocolates Gift","DESC...","Red",60.00,5,prodTypeList.get(0),"FEBRUARY"));
+        
+        
+        //ProductMaintenance.PromotionProductMaintenanceMenu(prodPromotionList, prodTypeList);
         //System.out.println("Main Program");
        //ProductMaintenance.StaffMenu(prodList, prodTypeList);
         //ProductMaintenance.CustomerViewProducts(prodList, prodTypeList);
