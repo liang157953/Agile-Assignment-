@@ -118,7 +118,7 @@ public class FioreFlowershop {
         //orderLL = GenerateSalesOrder.CorporateCustGenerateReport(prodTypeList, prodList, orderDataList, orderLL, corporateCustomerList, customerList);
         //orderDataList = Catalog_Order.CatalogOrderM(prodTypeList, prodList, orderDataList, customerList, staffList, paymentList, corporateCustomerList);
         //orderLL = GenerateSalesOrder.GenerateReportMain(prodTypeList, prodList, orderDataList, orderLL);
-        //orderDataList = catalogOrder.CatalogOrderMenu(prodTypeList,prodList,orderDataList,customerList,staffList,paymentList);
+        //orderDataList = catalogOrder.CatalogOrderMenu(prodTypeList,prodList,orderDataList,customerList,staffList,paymentList);    
 //        
 //        pickupList = PickedUpTimeStamp.TimeStamp(pickupList, orderDataList);
 //        
