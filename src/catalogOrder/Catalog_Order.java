@@ -212,7 +212,7 @@ public class Catalog_Order {
             orderProductList.clear(); 
             validCredit=false;
         }
-
+        
      if(validCredit && allow){
          System.out.println(orderProductList.size());
         for(int j=0; j<listProduct.size(); j++){
