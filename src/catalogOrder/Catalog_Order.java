@@ -50,10 +50,12 @@ public class Catalog_Order {
         String enterDate;
         String enterTime;
         String delivery;
+        String storeCust = "";
+        double balanceCreditLimit = 0;
         CorporateCustomer cc = new CorporateCustomer();
         char orderAgain;
         List<Product> orderProductList = new ArrayList<Product>();
-        
+
         if(optionsType.equals("1")){
             indexno = customerList.get(customerList.size()-1).getCustID();
             indexnum = Integer.parseInt(indexno.substring(1, 5)) + 1;
@@ -70,6 +72,7 @@ public class Catalog_Order {
                 option2 = scan.next();
                 for(int r=0;r< corporateCustList.size();r++){
                     if(corporateCustList.get(r).getCustID().equals(option2)){
+
                         checkid=true;
                         cc = corporateCustList.get(r);
                         if(corporateCustList.get(r).getStatus().equals("Unclear")){            
@@ -130,8 +133,7 @@ public class Catalog_Order {
                                         do{
                                         System.out.print("\nPlease enter quantity : ");
                                         selectionQty = scan.nextInt();
-                                        if(selectionQty > listProduct.get(j).getProductQuantity())
-                                        {
+                                        if(selectionQty > listProduct.get(j).getProductQuantity()){
                                             System.out.println("Enter quantity is less than " + listProduct.get(j).getProductQuantity());
                                         }
                                         }while(selectionQty > listProduct.get(j).getProductQuantity());
@@ -156,6 +158,7 @@ public class Catalog_Order {
                                             orderProductList.get(orderProductList.size()-1).setProductQuantity(selectionQty);
                                         }
                                         totalAmt += listProduct.get(j).getProductPrice() * selectionQty;
+                                        balanceCreditLimit = cc.getCreditLimit() - totalAmt;
                                         do{
                                             System.out.print("Do you want to add the new item (Y/N): ");
                                             selectionContinue = scan.next().charAt(0);
@@ -201,6 +204,8 @@ public class Catalog_Order {
         
         Boolean validCredit=true;
         if(totalAmt > cc.getCreditLimit()){
+            System.out.print(cc.getCustID());
+            System.out.println(cc.getCustName());
             System.out.println("\n\nPlease Reduce the Order Amount. You have exceed your credit limit.");
             System.out.printf("Your Credit Limit: RM %.2f\n",cc.getCreditLimit());
             System.out.printf("Your Order Amount: RM %.2f\n\n",totalAmt);
@@ -231,6 +236,7 @@ public class Catalog_Order {
         if(selectionDeliveryMode == 1){
             System.out.printf("Enter date : ");
             enterDate = scan.next();
+            
             System.out.printf("Enter time : ");
             enterTime = scan.next();
         }
@@ -256,28 +262,32 @@ public class Catalog_Order {
                 }
             }while(selectionContinue !='Y' && selectionContinue !='N' );
 
-            System.out.println(orderlist.size());
-            System.out.println("\n\nno.\tProduct Name \t\t\tQuantity");
-            System.out.println("*******************************");
+            //System.out.println(orderlist.size());
+
+            System.out.print("Corporate Customer ID/ Name : " + cc.getCustID() + "\t\t");
+            System.out.println(cc.getCustName());
+            System.out.println("No.\tProduct Name \t\t\tQuantity \tUnit Price ");
+            System.out.println("********************************************************************");
             
             for(int i=0;i < orderlist.size() ;i++){
                 double totalPrice = orderlist.get(i).getProduct().getProductQuantity()*orderlist.get(i).getProduct().getProductPrice();
                 if(orderlist.get(i).getOrder().getOrderID().equals(orderDataList.get(orderDataList.size()-1).getOrderID())){
                     orderlist.get(i).setOrder(orderDataList.get(orderDataList.size()-1));
-                    System.out.println(String.format("%d \t%-30s %2d", i+1, orderlist.get(i).getProduct().getProductName(), orderlist.get(i).getQuantity()));
+                    System.out.println(String.format("%d \t%-30s %2d\t\t%.2f", i+1, orderlist.get(i).getProduct().getProductName(), orderlist.get(i).getQuantity(),orderlist.get(i).getProduct().getProductPrice()));
                 }
             }
-            System.out.println("********************************");
+            System.out.println("********************************************************************");
             System.out.printf("Total Amount : RM %.2f\n",totalAmt);
+            System.out.printf("Total Credit Limit : RM %.2f\n", cc.getCreditLimit());
+            System.out.printf("Balance Credit Limit : RM %.2f\n", balanceCreditLimit);
             orderAgain='N';
             //System.out.println("Total Amount :" + orderDataList.get(orderDataList.size()-1).getPayment().getTotalAmount());
        }else{
          do{
-           System.out.print("\nOrder Again? (Y/N): ");
+            System.out.print("\nOrder Again? (Y/N): ");
            orderAgain = Character.toUpperCase(scan.next().charAt(0));
          }while(orderAgain !='Y' && orderAgain !='N' );
-       }
-     
+       }    
     }while(orderAgain=='Y');
     return orderDataList; 
 }   
