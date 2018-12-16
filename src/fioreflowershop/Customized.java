@@ -15,7 +15,16 @@ public class Customized {
     private Size size;
     private Style style;
     private Accessories accessories;
+    private int priority;
     private Order order;
+
+    public void setPriority(int priority) {
+        this.priority = priority;
+    }
+
+    public int getPriority() {
+        return priority;
+    }
 
     public Customized() {
     }
@@ -26,6 +35,16 @@ public class Customized {
         this.size = size;
         this.style = style;
         this.accessories = accessories;
+        this.order = order;
+    }
+
+    public Customized(String customizedID, Product product, Size size, Style style, Accessories accessories,int priority, Order order) {
+        this.customizedID = customizedID;
+        this.product = product;
+        this.size = size;
+        this.style = style;
+        this.accessories = accessories;
+        this.priority = priority;
         this.order = order;
     }
 
