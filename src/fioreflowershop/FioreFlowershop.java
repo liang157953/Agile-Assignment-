@@ -130,7 +130,7 @@ public class FioreFlowershop {
         //ProductMaintenance.ProductOutOfStockNotification(prodList, prodTypeList);
         //orderLL = GenerateSalesOrder.CorporateCustGenerateReport(prodTypeList, prodList, orderDataList, orderLL, corporateCustomerList, customerList);
 
-        orderDataList = Catalog_Order.CatalogOrderM(prodTypeList, prodList, orderDataList, customerList, staffList, paymentList, corporateCustomerList)
+        orderDataList = Catalog_Order.CatalogOrderM(prodTypeList, prodList, orderDataList, customerList, staffList, paymentList, corporateCustomerList);
 
         //orderLL = GenerateSalesOrder.GenerateReportMain(prodTypeList, prodList, orderDataList, orderLL);
         //orderDataList = catalogOrder.CatalogOrderMenu(prodTypeList,prodList,orderDataList,customerList,staffList,paymentList);
@@ -143,34 +143,5 @@ public class FioreFlowershop {
     }    
 }
 
-          //DeliveryList.ShowDeliveryList(deliveryList, orderLL);
-          //String options="1";
-          //CatalogMaintenance.ProductMaintenance.CustomerViewProducts(prodList, prodTypeList, options);
-          //paymentList = CustomerPayment.MakePayment(paymentList);
-
-         // paymentList = CustomerPayment.MakePayment(paymentList);
-//          char selection='Y';String id="PA1002";
-//          CustomerPayment.MakePayment(paymentList,selection,id);
-          
-          //String option="Setapak";char reenter='n'; char choice='n';
-          //DeliveryList.ShowDeliveryList(deliveryList, orderLL, option, reenter, choice);
-
-          
-
-//        CorporateCustomerMaintenance.Menu(corporateCustomerList, staffList.get(0), orderDataList, paymentList, customerList);
-       //CustomizeOrder.Customize(customerList,customizedList, orderDataList, styleList, sizeList, prodList, accessoriesList, paymentList,staffList.get(0));
-
-//        
-
-       //CorporateCustomerMaintenance.Menu(corporateCustomerList, staffList.get(0), orderDataList, paymentList, customerList);
-//        CustomizeOrder.Customize(customerList, staffList, customizedList, orderDataList, styleList, sizeList, prodList, accessoriesList, paymentList);
-
-//        CorporateCustomerMaintenance.Menu(corporateCustomerList, staffList.get(0), orderDataList, paymentList, customerList);
-       //CustomizeOrder.Customize(customerList,customizedList, orderDataList, styleList, sizeList, prodList, accessoriesList, paymentList,staffList.get(0));
-
-
-    }
-    
-}
 
 
