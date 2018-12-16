@@ -189,7 +189,7 @@ public class CustomizeOrder {
         System.out.println("***************************");
         System.out.println("1. Normal   RM  8.00");
         System.out.println("2. Express  RM 20.00");
-        do{ 
+        do{  
         System.out.println("***************************");
         System.out.print("Please select the priority level: ");
         priority = scan.nextInt();
