@@ -23,8 +23,6 @@ public class DeliveryList {
       
         String option;
 
-        Boolean displayed=false;
-
         
         do
         {
