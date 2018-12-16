@@ -57,7 +57,7 @@ public class FioreFlowershop {
         staffList.add(new Staff("S1001","Lim Yong Qi","019-7272566"));
         staffList.add(new Staff("S1002","Jimmy Chew","012-3435617"));
         staffList.add(new Staff("S1003","Cindy Lee","019-434580"));
-        
+ 
         //Payment Data
         List<Payment> paymentList = new ArrayList<Payment>();
 
@@ -129,11 +129,19 @@ public class FioreFlowershop {
         //ProductMaintenance.CustomerViewProducts(prodList, prodTypeList);
         //ProductMaintenance.ProductOutOfStockNotification(prodList, prodTypeList);
         //orderLL = GenerateSalesOrder.CorporateCustGenerateReport(prodTypeList, prodList, orderDataList, orderLL, corporateCustomerList, customerList);
-        
+
+        orderDataList = Catalog_Order.CatalogOrderM(prodTypeList, prodList, orderDataList, customerList, staffList, paymentList, corporateCustomerList)
+
         //orderLL = GenerateSalesOrder.GenerateReportMain(prodTypeList, prodList, orderDataList, orderLL);
         //orderDataList = catalogOrder.CatalogOrderMenu(prodTypeList,prodList,orderDataList,customerList,staffList,paymentList);
 //        
 //        pickupList = PickedUpTimeStamp.TimeStamp(pickupList, orderDataList);
+
+//        
+//        CorporateCustomerMaintenance.Menu(corporateCustomerList, staffList.get(0), orderDataList, paymentList, customerList);
+//        CustomizeOrder.Customize(customerList, staffList, customizedList, orderDataList, styleList, sizeList, prodList, accessoriesList, paymentList);
+    }    
+}
 
           //DeliveryList.ShowDeliveryList(deliveryList, orderLL);
           //String options="1";
