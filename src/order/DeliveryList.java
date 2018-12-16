@@ -18,14 +18,17 @@ public class DeliveryList {
     private static Scanner in = new Scanner(System.in);
     public static char choice = 'n';
     public static char reenter = 'n';
-    
-    public static boolean ShowDeliveryList(List<Delivery> deliveryList, List<OrderList> orderList,String option,char reenter, char choice) throws IOException{
-        
-        //String option;
+
+    public static void ShowDeliveryList(List<Delivery> deliveryList, List<OrderList> orderList) throws IOException{
+      
+        String option;
+
         Boolean displayed=false;
+
+        
         do
-        { 
-            String indate = Date("12","12","2018");
+        {
+            String indate = Date();
             System.out.println("\n");
             do{
                 System.out.println("********************\n Delivery State \n********************");
@@ -33,15 +36,15 @@ public class DeliveryList {
                 System.out.println("2. Kuala Lumpur"); 
                 System.out.println("3. Selangor");      
             
-                System.out.printf("\nPlease enter your option in full text: " + option);
+                System.out.printf("\nPlease enter your option in full text: ");
                 
-                //option = in.next();
+                option = in.next();
                     //Validation of User Input(Only can be digit)                
               
 
                 System.out.println("\n");
                 System.out.println("***************************************");
-                System.out.println("    Delivery List On Date: " + indate);
+                System.out.println("    Delivery List On Date: "+ indate);
                 System.out.println("***************************************");
 
                 boolean check = false;
@@ -50,10 +53,9 @@ public class DeliveryList {
                 {
                     if(indate.matches(deliveryList.get(i).getRequireDeliveryDate()))
                     {
-                        
+
                         if(option.equals(deliveryList.get(i).getState()) )
                         {
-                            displayed=true;
                             System.out.println("\n");
                             System.out.println("***************************************");
                             System.out.println("     " + deliveryList.get(i).getState());
@@ -64,6 +66,8 @@ public class DeliveryList {
                             + "\nRequired Delivery Time: " + deliveryList.get(i).getRequireDeliveryTime() 
                             + "\nDelivery Address: " +deliveryList.get(i).getDeliveryAddress()
                             + "\nDelivery Contact Number: " +deliveryList.get(i).getDeliveryContactNo()
+                            + "\nDelivery Status: " +deliveryList.get(i).getDeliveryStatus()
+                            + "\nIncharge Staff Name: " +deliveryList.get(i).getStaff().getStaffName()
                             + "\n-----------------------------------------------------------------"
                             + "\n|       Order No: " +deliveryList.get(i).getOrder().getOrderID() +"\t\t\t\t\t\t|"
                             + "\n|       Order Description: " +deliveryList.get(i).getOrder().getOrderDesc()+"\t\t|") ;
@@ -87,22 +91,23 @@ public class DeliveryList {
                     System.out.println("\nSorry, Today do not have any order need to deliver to this state.\n"); 
                 }
 
-                System.out.print("Do you want to search other state? (yes/no): " + reenter); 
-                //reenter = in.next().charAt(0);
+                System.out.print("Do you want to search other state? (yes/no): " ); 
+                System.out.print("Do you want to search other state? (yes/no): "); 
+                reenter = in.next().charAt(0);
             
             }while(reenter == 'y'|| reenter == 'Y');
 
 
-            System.out.print("Do you want to search another day? (yes/no): " + choice); 
-            //choice = in.next().charAt(0);
+            System.out.print("Do you want to search another day? (yes/no): " ); 
+            System.out.print("Do you want to search another day? (yes/no): "); 
+            choice = in.next().charAt(0);
         }while(choice == 'y'|| choice == 'Y');
         
         
         
         System.out.println("\n\nPress any key to exit...");
         System.in.read();
-        
-        return displayed;
+
     }
     //Check validation of date
     public static boolean ValidDate(int day,int month,int year){
@@ -131,7 +136,7 @@ public class DeliveryList {
 			}
 		}
 		return valid;
-	}
+    }
     
     public static boolean checkDigit(String input){
             boolean checkDigit = false;
@@ -147,36 +152,36 @@ public class DeliveryList {
             return checkDigit;
 	}
 
-	public static String Date(String d, String m, String y){
+	public static String Date(){
 	    
 		boolean validDate = false;
 		int day = 0;
 		int month = 0;
 		int year = 0;
-		//String d="";
-		//String m="";
-		//String y="";
+		String d="";
+		String m="";
+		String y="";
 		do{
 			boolean checkD = false;
 			boolean checkM = false;
 			boolean checkY = false;
 			do{
 				System.out.print("Enter Date(DD MM YYYY): ");
-				//d = in.next();
-				//m = in.next();
-				//y = in.next();
+				d = in.next();
+				m = in.next();
+				y = in.next();
 
 				//Validation of day(Only can be digit)
-				//checkD = checkDigit(d);
+				checkD = checkDigit(d);
 
 				if(checkD == true){
 					//Validation of month(Only can be digit)
-					//checkM = checkDigit(m);
+					checkM = checkDigit(m);
 				}
 
 			    if(checkM == true){
 			    	//Validation of year(Only can be digit)
-					//checkY = checkDigit(y);
+					checkY = checkDigit(y);
 				}
 
 				if(!checkY){
