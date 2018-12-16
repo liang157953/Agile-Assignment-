@@ -133,7 +133,7 @@ public class CustomizeOrder {
             System.out.format("%d. %-20s RM %.2f \n",i+1,sizeList.get(i).getSizeDesc(),sizeList.get(i).getSizePrice());
 
         }
-        do{
+        do{ 
         System.out.println("***************************");
         System.out.print("Please select the size: ");
         size = scan.nextInt();
