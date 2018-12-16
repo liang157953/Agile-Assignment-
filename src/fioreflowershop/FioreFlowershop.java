@@ -54,7 +54,7 @@ public class FioreFlowershop {
         staffList.add(new Staff("S1001","Lim Yong Qi","019-7272566"));
         staffList.add(new Staff("S1002","Jimmy Chew","012-3435617"));
         staffList.add(new Staff("S1003","Cindy Lee","019-434580"));
-        
+ 
         //Payment Data
         List<Payment> paymentList = new ArrayList<Payment>();
         paymentList.add(new Payment("PA1001","10-11-2018",100.0,"Paid"));
