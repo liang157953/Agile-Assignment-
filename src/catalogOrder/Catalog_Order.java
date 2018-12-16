@@ -291,6 +291,7 @@ public class Catalog_Order {
     }while(orderAgain=='Y');
     return orderDataList; 
 }   
+    
     public static boolean CheckAlphabetic(char input) throws IOException{
         boolean checkAlphabetic = false;
      
