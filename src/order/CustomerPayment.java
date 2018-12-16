@@ -22,7 +22,7 @@ public class CustomerPayment {
     public static char choice = 'n';
     
     
-    public static List<Payment> MakePayment(List<Payment> paylist) throws IOException{
+    public static Boolean MakePayment(List<Payment> paylist,char selection,String ID) throws IOException{
         
         System.out.println("***************************************");
         System.out.println("     UnPaid Payment List" );
@@ -41,11 +41,11 @@ public class CustomerPayment {
                                    +paylist.get(i).getPaymentStatus());
             }
         }
-        char selection;
-        String ID ="";
+        
+        //String ID ="";
         do{
             System.out.print("\nDo You want to make a payment? (y/n) : ");
-            selection = (scan.next().charAt(0));
+            //selection = (scan.next().charAt(0));
             switch(selection){
                 case 'Y':
                     selection = 'y';
@@ -58,11 +58,12 @@ public class CustomerPayment {
                 System.out.println("Please Enter y/n only");
             }    
         }while(selection != 'y' &&selection !='n');
-
-    if(selection == 'y'){;
+        Boolean check=false;
+    if(selection == 'y'){
         System.out.print("Please enter the Payment ID you want to pay : ");
-        ID = scan.next();
+        //ID = scan.next();
         String date = new SimpleDateFormat("dd-MM-yyyy").format(new Date());
+        
         System.out.println("\n\t*Paid Successful*");
         System.out.println("***************************************");
         System.out.println("     Updated Payment List" );
@@ -73,6 +74,7 @@ public class CustomerPayment {
      for(int i =0; i <paylist.size();i++){
         if(paylist.get(i).getPaymentID().equals(ID)){
                 if(paylist.get(i).getPaymentStatus().equals("UnPaid")){
+                    check = true;
                     paylist.get(i).setPaymentStatus("Paid");
                     paylist.get(i).setPaymentDate(date);
                     System.out.println(i+". " + paylist.get(i).getPaymentID() + "\t "+paylist.get(i).getPaymentDate() + "\t " + paylist.get(i).getTotalAmount() + "0 \t " + paylist.get(i).getPaymentStatus());
@@ -80,7 +82,7 @@ public class CustomerPayment {
             }
         }
      }
-    return paylist;
+    return check;
     }
              
 }

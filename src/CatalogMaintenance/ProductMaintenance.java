@@ -71,7 +71,7 @@ public class ProductMaintenance {
                         }
                         
                           if(Integer.parseInt(options)<=0 || Integer.parseInt(options)>prodTypeList.size()){
-                            System.err.printf("Input Out of Range! Please Enter Again");
+                            System.out.println(ConsoleColors.RED + "Input Out of Range! Please Enter Again" + ConsoleColors.RESET);
                             System.in.read();
                             test=false;
                            }else{
@@ -87,16 +87,20 @@ public class ProductMaintenance {
                     }  
                     
                     if(found){
-                        System.out.print("\n********************************\n Current Promotion Product List \n********************************\n");
+                        System.out.print("\n**********************\n Current Product List \n**********************\n");
+                        System.out.println(ConsoleColors.BLUE + "Product ID\tName\t\t\t\tDescription\t\tColor\t\tPrice\t\tQuantity\tType Name" + ConsoleColors.RESET);
                         for(int r=0;r<newProdList.size();r++){    
                             if(newProdList.get(r).getProductType().equals(prodTypeList.get(Integer.parseInt(options)-1))){
-                                System.out.println(newProdList.get(r).toString());
+                                System.out.printf("%-10s\t%-30s\t%-20s\t%-10s\tRM %.2f\t%4d\t\t%-20s\n",
+                                        newProdList.get(r).getProductID(),newProdList.get(r).getProductName(),newProdList.get(r).getProductDesc(),
+                                        newProdList.get(r).getProductColor(),newProdList.get(r).getProductPrice(),newProdList.get(r).getProductQuantity(),
+                                        newProdList.get(r).getProductType().getProductTypeName());
                             }
                         }
                     }else{
                         System.err.println("No Current Product List\n");
                     }
-                    System.out.print("Enter Any Key Return to Product Menu...");
+                    System.out.print("\nEnter Any Key Return to Product Menu...");
                     System.in.read();
                     break;
                 case 3: 
@@ -117,7 +121,7 @@ public class ProductMaintenance {
                         }
                         
                           if(Integer.parseInt(options)<=0 || Integer.parseInt(options)>prodTypeList.size()){
-                            System.err.printf("Input Out of Range! Please Enter Again");
+                            System.out.println(ConsoleColors.RED + "Input Out of Range! Please Enter Again" + ConsoleColors.RESET);
                             System.in.read();
                             test=false;
                            }else{
@@ -127,7 +131,7 @@ public class ProductMaintenance {
                     
                     Boolean check = false; int num=0;test=false;
                     int[] position = new int[100]; int index=0;String optionss="";
-                    //problem
+                    
                     do{
                         index=0;num=0;test=false;
                         do{
@@ -148,7 +152,7 @@ public class ProductMaintenance {
                             break;
                         }
                         if(Integer.parseInt(optionss)<=0 || Integer.parseInt(optionss)>index){
-                            System.err.printf("Input Out of Range! Please Enter Again");
+                            System.out.println(ConsoleColors.RED + "Input Out of Range! Please Enter Again" + ConsoleColors.RESET);
                             System.in.read();
                             test=false;
                            }else{
@@ -164,7 +168,7 @@ public class ProductMaintenance {
                 case 4: 
                     return newProdList;  
                 default:
-                    System.err.printf("Invalid Option! Please Try Again\n");
+                    System.out.println(ConsoleColors.RED + "Invalid Option! Please Try Again" + ConsoleColors.RESET);
                     System.out.print("Please Enter Any Key to Proceed...");
                     System.in.read();
                     System.out.println();
@@ -247,16 +251,21 @@ public class ProductMaintenance {
                     
                     if(found){
                         System.out.print("\n********************************\n Current Promotion Product List \n********************************\n");
+
+                        System.out.println(ConsoleColors.BLUE + "Product ID\tName\t\t\t\tDescription\t\tColor\t\tPrice\t\tQuantity\tType Name" + ConsoleColors.RESET);
                         for(int r=0;r<prodPromotionList.size();r++){    
                             if(prodPromotionList.get(r).getProductPromotionMonth().equals(selectPromoMonth)){
-                                System.out.println(prodPromotionList.get(r).toString());
+                                System.out.printf("%-10s\t%-30s\t%-20s\t%-10s\tRM %.2f\t%4d\t\t%-20s\n",
+                                        prodPromotionList.get(r).getProductID(),prodPromotionList.get(r).getProductName(),prodPromotionList.get(r).getProductDesc(),
+                                        prodPromotionList.get(r).getProductColor(),prodPromotionList.get(r).getProductPrice(),prodPromotionList.get(r).getProductQuantity(),
+                                        prodPromotionList.get(r).getProductType().getProductTypeName());
                             }
                         }
                     }else{
-                        System.err.println("No Current Promotion Product List\n");
+                        System.out.println(ConsoleColors.RED + "No Current Promotion Product List\n" + ConsoleColors.RESET);
                     }
                     
-                    System.out.print("Enter Any Key Return to Product Menu...");
+                    System.out.print("\nEnter Any Key Return to Product Menu...");
                     System.in.read();
                     break;
                 case 3: 
@@ -299,7 +308,7 @@ public class ProductMaintenance {
                         
                     Boolean check = false; int num=0;test=false;
                     int[] position = new int[100]; int index=0;String optionss="";
-                    //problem
+                    
                     do{
                         index=0;num=0;test=false;
                         do{
@@ -320,7 +329,7 @@ public class ProductMaintenance {
                             break;
                         }
                         if(Integer.parseInt(optionss)<=0 || Integer.parseInt(optionss)>index){
-                            System.err.printf("Input Out of Range! Please Enter Again");
+                            System.out.println(ConsoleColors.RED + "Input Out of Range! Please Enter Again" + ConsoleColors.RESET);
                             System.in.read();
                             test=false;
                            }else{
@@ -336,7 +345,7 @@ public class ProductMaintenance {
                 case 4: 
                     return prodPromotionList;
                 default:
-                    System.err.printf("Invalid Option! Please Try Again\n");
+                    System.out.println(ConsoleColors.RED + "Invalid Option! Please Try Again" + ConsoleColors.RESET);
                     System.out.print("Please Enter Any Key to Proceed...");
                     System.in.read();
                     System.out.println();
@@ -345,11 +354,12 @@ public class ProductMaintenance {
         return prodPromotionList;
     }
     
-    public static void CustomerViewProducts(List<Product> newProdList, List<ProductType> prodTypeList) throws IOException{
+    public static boolean CustomerViewProducts(List<Product> newProdList, List<ProductType> prodTypeList) throws IOException{
         Scanner input = new Scanner(System.in);
         Boolean test=false;String options="";
+        Boolean check=false;
         do{
-            test=false;options="";
+            test=false;
             do{
                 System.out.print("\n***************************\n Current Product Type List \n***************************\n");
                 for(int r=0;r<prodTypeList.size();r++){              
@@ -366,14 +376,25 @@ public class ProductMaintenance {
                 test=true;
             }
         }while(!test);
-
-        System.out.print("\n***********************\n Current Product List \n***********************\n");
-        int no=0;
-        for(int r=0;r<newProdList.size();r++){    
-            if(newProdList.get(r).getProductType().equals(prodTypeList.get(Integer.parseInt(options)-1))){
-                System.out.println((++no) + ". " + newProdList.get(r).toString());
-            }
-        }  
+        
+        if(test){
+            System.out.print("\n***********************\n Current Product List \n***********************\n");
+            int no=0;
+            System.out.println(ConsoleColors.BLUE + "Product ID\tName\t\t\t\tDescription\t\tColor\t\tPrice\t\tQuantity\tType Name" + ConsoleColors.RESET);
+            for(int r=0;r<newProdList.size();r++){    
+                if(newProdList.get(r).getProductType().equals(prodTypeList.get(Integer.parseInt(options)-1))){
+                    System.out.printf("%-10s\t%-30s\t%-20s\t%-10s\tRM %.2f\t%4d\t\t%-20s\n",
+                                        newProdList.get(r).getProductID(),newProdList.get(r).getProductName(),newProdList.get(r).getProductDesc(),
+                                        newProdList.get(r).getProductColor(),newProdList.get(r).getProductPrice(),newProdList.get(r).getProductQuantity(),
+                                        newProdList.get(r).getProductType().getProductTypeName());
+                    check=true;
+                }
+            }  
+        }else{
+            System.out.println(ConsoleColors.RED + "\"Invalid Option! Please Try Again" + ConsoleColors.RESET);
+        }
+        
+        return check;
     }
     
     public static void ProductOutOfStockNotification(List<Product> prodList, List<ProductType> prodTypeList) {
@@ -395,7 +416,7 @@ public class ProductMaintenance {
                     checkMonth=true;
                     do{
                         System.out.print("Enter Promotion Month (eg. 1 = Jan): ");
-                        promoMonth = input.next();
+                        promoMonth = input.nextLine();
                     }while(!CheckDigit(promoMonth));
 
                     switch(Integer.parseInt(promoMonth)){
@@ -420,14 +441,14 @@ public class ProductMaintenance {
             System.out.println("Product Type ID: " + ConsoleColors.BLUE + newProdID + ConsoleColors.RESET);
 
             System.out.print("Product Name: ");
-            prodName = input.next();
+            prodName = input.nextLine();
 
             System.out.print("Product Description: ");
-            prodDesc = input.next();
+            prodDesc = input.nextLine();
             
             do{
                 System.out.print("Product Color: ");
-                prodColor = input.next();
+                prodColor = input.nextLine();
             }while(!CheckAlphabetic(prodColor));
             
             prodPrice = "" + ProductMaintenance.askInputDouble("Product Price: RM ");      
@@ -448,7 +469,7 @@ public class ProductMaintenance {
                     options = input.next();
                 }while(!CheckDigit(options));
                   if(Integer.parseInt(options)<=0 || Integer.parseInt(options)>prodTypeList.size()){
-                        System.err.println("Input Out of Range! Please Enter Again");
+                      System.out.println(ConsoleColors.RED + "Input Out of Range! Please Enter Again" + ConsoleColors.RESET);
                         System.in.read();
                         test=false;
                     }else{
@@ -456,8 +477,8 @@ public class ProductMaintenance {
                   }
             }while(!test);
    
-            if(prodName.equals("")||prodDesc.equals("")||prodDesc.equals("")||prodColor.equals("")||prodPrice.equals("")||prodQty.equals("")){
-                System.err.println("\nSystem Notification: All fields must be filled in!");
+            if(prodName.equals("")||prodDesc.equals("")||prodDesc.equals("")||prodColor.equals("")||prodPrice.equals("")||prodQty.equals("")||promoMonth.equals("")){
+                System.out.println(ConsoleColors.RED + "\nSystem Notification: All fields must be filled in!" + ConsoleColors.RESET);
                 System.out.println("Enter Any Key Return to Register Form");
                 System.in.read();
                 status=false;
@@ -643,7 +664,7 @@ public class ProductMaintenance {
                         }
                         
                           if(Integer.parseInt(option)<=0 || Integer.parseInt(option)>prodTypeList.size()){
-                            System.err.printf("Input Out of Range! Please Enter Again");
+                            System.out.println(ConsoleColors.RED + "Input Out of Range! Please Enter Again" + ConsoleColors.RESET);
                             System.in.read();
                             test=false;
                            }else{
@@ -672,7 +693,7 @@ public class ProductMaintenance {
                 case 7: 
                     break;
                 default:
-                    System.err.printf("Invalid Option! Please Try Again\n");
+                    System.out.print(ConsoleColors.RED + "Invalid Option! Please Try Again\n" + ConsoleColors.RESET);
                     System.out.printf("Please Enter Any Key to Proceed...");
                     System.in.read();
                     System.out.println();
@@ -689,8 +710,8 @@ public class ProductMaintenance {
                 checkDigit = true;
             }
             else{
-                System.err.printf("Input Must be in Digit! Please Try Again\n");
-                System.out.print("Please Enter Any Key to Proceed...");
+                System.out.print(ConsoleColors.RED + "Input Must be in Digit! Please Try Again\n" + ConsoleColors.RESET);
+                System.out.println("Please Enter Any Key to Proceed...");
                 System.in.read();
                 checkDigit = false;
                 break;
@@ -706,8 +727,8 @@ public class ProductMaintenance {
                 checkAlphabetic = true;
             }
             else{
-                System.err.printf("Input Must be in Alphabet! Please Try Again\n");
-                System.out.print("Please Enter Any Key to Proceed...");
+                System.out.println(ConsoleColors.RED + "Input Must be in Alphabet! Please Try Again\n" + ConsoleColors.RESET);
+                System.out.print("\nPlease Enter Any Key to Proceed...");
                 System.in.read();
                 System.out.println();
                 checkAlphabetic = false;
@@ -726,7 +747,7 @@ public class ProductMaintenance {
             System.out.print(informationText);
             userInp = input.nextLine();
             if (!ProductMaintenance.isDouble(userInp, "double")) {
-                System.err.println("Error: must be a Double.");
+                System.out.println(ConsoleColors.RED + "Error: must be a Double." + ConsoleColors.RESET);
                 error = true;
             } else {
                 error = false;
