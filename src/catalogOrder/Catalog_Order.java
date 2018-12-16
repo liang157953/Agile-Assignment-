@@ -235,8 +235,7 @@ public class Catalog_Order {
         selectionDeliveryMode = scan.nextInt();
         if(selectionDeliveryMode == 1){
             System.out.printf("Enter date : ");
-            enterDate = scan.next();
-            
+            enterDate = scan.next();            
             System.out.printf("Enter time : ");
             enterTime = scan.next();
         }
