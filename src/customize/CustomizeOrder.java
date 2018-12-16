@@ -48,7 +48,8 @@ public class CustomizeOrder {
     }
     
    public static void ItemizedBill(int priority, List<Customized> customizeList, String date,double totalPrice){
-             System.out.format("\nItemized Bill \t\t\t\t\t Date:%s\n", date);
+             System.out.format(" \t\t\t\t\t\t     %-6s : %-10s",customizeList.get(customizeList.size()-1).getOrder().getStaff().getStaffID(),customizeList.get(customizeList.size()-1).getOrder().getStaff().getStaffName());
+             System.out.format("\nItemized Bill \t\t\t\t\t\t Date:%s\n", date);
 
         System.out.println("**************************************************************************");
         System.out.format("1. %-15s :\t  %-25s \t Price: RM %.2f \n","Flower",customizeList.get(customizeList.size()-1).getProduct().getProductName(),customizeList.get(customizeList.size()-1).getProduct().getProductPrice());
@@ -56,9 +57,9 @@ public class CustomizeOrder {
         System.out.format("3. %-15s :\t  %-25s \t Price: RM %.2f \n","Style",customizeList.get(customizeList.size()-1).getStyle().getStyleDesc(),customizeList.get(customizeList.size()-1).getStyle().getStylePrice());  
         System.out.format("4. %-15s :\t  %-25s \t Price: RM %.2f \n","Accessories",customizeList.get(customizeList.size()-1).getAccessories().getAccDesc(),customizeList.get(customizeList.size()-1).getAccessories().getAccPrice());
         switch(priority){
-           case 1 : System.out.format("5.  %-15s :\t  %-25s \t Price: RM %.2f \n","Priority Level","Normal",8.00);
+           case 1 : System.out.format("5. %-15s :\t  %-25s \t Price: RM %.2f \n","Priority Level","Normal",8.00);
            break;
-           case 2: System.out.format("5.  %-15s :\t  %-25s \t Price: RM %.2f \n","Priority Level","Express",20.00);
+           case 2: System.out.format("5. %-15s :\t  %-25s \t Price: RM %.2f \n","Priority Level","Express",20.00);
            break;
        }
         System.out.println("**************************************************************************");
@@ -70,7 +71,7 @@ public class CustomizeOrder {
         Customer selectedcustomer = new Customer();
     
         Scanner scancust = new Scanner(System.in);
-       System.out.println("Enter CutomerID: ");
+       System.out.print("Enter CutomerID: ");
         customer = scancust.next();
           for(int i=0; i< customerList.size();i++){
               if(customer.equals(customerList.get(i).getCustID()))
