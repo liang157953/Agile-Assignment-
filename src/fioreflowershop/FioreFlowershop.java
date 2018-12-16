@@ -161,9 +161,9 @@ public class FioreFlowershop {
 //        
 //        pickupList = PickedUpTimeStamp.TimeStamp(pickupList, orderDataList);
 
-          //DeliveryList.ShowDeliveryList(deliveryList, orderLL);
+          DeliveryList.ShowDeliveryList(deliveryList, orderLL);
           
-          paymentList = CustomerPayment.MakePayment(paymentList);
+          //paymentList = CustomerPayment.MakePayment(paymentList);
           
 
 //        CorporateCustomerMaintenance.Menu(corporateCustomerList, staffList.get(0), orderDataList, paymentList, customerList);
@@ -171,11 +171,11 @@ public class FioreFlowershop {
 
 //        
 
-       CorporateCustomerMaintenance.Menu(corporateCustomerList, staffList.get(0), orderDataList, paymentList, customerList);
+       //CorporateCustomerMaintenance.Menu(corporateCustomerList, staffList.get(0), orderDataList, paymentList, customerList);
 //        CustomizeOrder.Customize(customerList, staffList, customizedList, orderDataList, styleList, sizeList, prodList, accessoriesList, paymentList);
 
 //        CorporateCustomerMaintenance.Menu(corporateCustomerList, staffList.get(0), orderDataList, paymentList, customerList);
-       CustomizeOrder.Customize(customerList,customizedList, orderDataList, styleList, sizeList, prodList, accessoriesList, paymentList,staffList.get(0));
+       //CustomizeOrder.Customize(customerList,customizedList, orderDataList, styleList, sizeList, prodList, accessoriesList, paymentList,staffList.get(0));
 
 
     }
