@@ -143,7 +143,7 @@ public class CustomizeOrder {
         }while(size < 0 || size > sizeList.size());
         return size;
    }
-   
+    
    public static int SelectStyle(List<Style> styleList){
        Scanner scan = new Scanner(System.in);
        int style =0;
