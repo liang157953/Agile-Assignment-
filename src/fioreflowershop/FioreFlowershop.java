@@ -156,27 +156,27 @@ public class FioreFlowershop {
         //orderDataList = Catalog_Order.CatalogOrderM(prodTypeList, prodList, orderDataList, customerList, staffList, paymentList, corporateCustomerList);
         Catalog_Order.CatalogOrderM(prodTypeList, prodList, orderDataList, customerList, staffList.get(0), paymentList, corporateCustomerList, orderLL);
 
-        System.out.println("Product ID\tName\t\t\t\tDescription\t\tColor\t\tPrice\t\tQuantity\tType");
-        for(int r=0;r<prodList.size();r++){    
-            System.out.printf("%-10s\t%-30s\t%-20s\t%-10s\tRM %.2f\t   %-10d\t%20s\n",
-                prodList.get(r).getProductID(),prodList.get(r).getProductName(),prodList.get(r).getProductDesc(),
-                prodList.get(r).getProductColor(),prodList.get(r).getProductPrice(),prodList.get(r).getProductQuantity(),
-                prodList.get(r).getProductType().getProductTypeName());
-        }
-        
-        for(int r=0;r<orderLL.size();r++){
-            System.out.println(orderLL.get(r).toString());
-        }
-        
-        System.out.println("\n**********************************************************");
-        for(int r=0;r<orderDataList.size();r++){
-            System.out.println(orderDataList.get(r).toString());
-        }
-        
-        System.out.println("\n**********************************************************");
-        for(int r=0;r<paymentList.size();r++){
-            System.out.println(paymentList.get(r).toString());
-        }
+//        System.out.println("Product ID\tName\t\t\t\tDescription\t\tColor\t\tPrice\t\tQuantity\tType");
+//        for(int r=0;r<prodList.size();r++){    
+//            System.out.printf("%-10s\t%-30s\t%-20s\t%-10s\tRM %.2f\t   %-10d\t%20s\n",
+//                prodList.get(r).getProductID(),prodList.get(r).getProductName(),prodList.get(r).getProductDesc(),
+//                prodList.get(r).getProductColor(),prodList.get(r).getProductPrice(),prodList.get(r).getProductQuantity(),
+//                prodList.get(r).getProductType().getProductTypeName());
+//        }
+//        
+//        for(int r=0;r<orderLL.size();r++){
+//            System.out.println(orderLL.get(r).toString());
+//        }
+//        
+//        System.out.println("\n**********************************************************");
+//        for(int r=0;r<orderDataList.size();r++){
+//            System.out.println(orderDataList.get(r).toString());
+//        }
+//        
+//        System.out.println("\n**********************************************************");
+//        for(int r=0;r<paymentList.size();r++){
+//            System.out.println(paymentList.get(r).toString());
+//        }
         
 
        // orderDataList = Catalog_Order.CatalogOrderM(prodTypeList, prodList, orderDataList, customerList, staffList, paymentList, corporateCustomerList);
