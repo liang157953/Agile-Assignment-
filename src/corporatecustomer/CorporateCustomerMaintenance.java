@@ -5,6 +5,7 @@
  */
 package corporatecustomer;
 
+import ADT.LinkedList;
 import fioreflowershop.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -12,7 +13,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
-import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -20,7 +20,7 @@ import java.util.Scanner;
  * @author User
  */
 public class CorporateCustomerMaintenance {
-    public static void Menu(List<CorporateCustomer> corporateList,Staff staff,List<Order> order, List<Payment> paymentList,List<Customer> customerList) throws ParseException{
+    public static void Menu(LinkedList<CorporateCustomer> corporateList,Staff staff,LinkedList<Order> order, LinkedList<Payment> paymentList,LinkedList<Customer> customerList) throws ParseException{
         char resume = 'n';
         do{
             int menuint = 0;

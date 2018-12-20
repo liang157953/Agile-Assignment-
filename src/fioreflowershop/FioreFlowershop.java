@@ -148,7 +148,7 @@ public class FioreFlowershop {
         //orderLL = GenerateSalesOrder.CorporateCustGenerateReport(prodTypeList, prodList, orderDataList, orderLL, corporateCustomerList, customerList);
 
 
-          DeliveryList.ShowDeliveryList(deliveryList, orderLL);
+//          DeliveryList.ShowDeliveryList(deliveryList, orderLL);
           
           //paymentList = CustomerPayment.MakePayment(paymentList);
           
@@ -157,7 +157,7 @@ public class FioreFlowershop {
 
 
 
-        orderDataList = Catalog_Order.CatalogOrderM(prodTypeList, prodList, orderDataList, customerList, staffList, paymentList, corporateCustomerList);
+//        orderDataList = Catalog_Order.CatalogOrderM(prodTypeList, prodList, orderDataList, customerList, staffList, paymentList, corporateCustomerList);
 
 
        //CorporateCustomerMaintenance.Menu(corporateCustomerList, staffList.get(0), orderDataList, paymentList, customerList);
