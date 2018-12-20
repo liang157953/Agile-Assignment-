@@ -50,7 +50,7 @@ public class FioreFlowershop {
         ListInterface<CorporateCustomer> corporateCustomerList = new LinkedList<CorporateCustomer>();
         corporateCustomerList.add(new CorporateCustomer(1000.00,0.0,"Unclear","CO1001","Lew Lew Lew","pv16,jalan setapak","011-39958399"));
         corporateCustomerList.add(new CorporateCustomer(1000.00,0.0,"Unclear","CO1002","Hao Hao Hao","pv16,jalan setapak","011-39958399"));
-        corporateCustomerList.add(new CorporateCustomer(1000.00,0.0,"Unclear","CO1003","Wei Wei Wei","pv16,jalan setapak","011-39958399"));
+        corporateCustomerList.add(new CorporateCustomer(1000.00,0.0,"Clear","CO1003","Wei Wei Wei","pv16,jalan setapak","011-39958399"));
         
         //Staff Data
         ListInterface<Staff> staffList = new LinkedList<Staff>();
@@ -148,16 +148,46 @@ public class FioreFlowershop {
         //orderLL = GenerateSalesOrder.CorporateCustGenerateReport(prodTypeList, prodList, orderDataList, orderLL, corporateCustomerList, customerList);
 
 
+
+          //DeliveryList.ShowDeliveryList(deliveryList, orderLL);
+
 //          DeliveryList.ShowDeliveryList(deliveryList, orderLL);
+
           
           //paymentList = CustomerPayment.MakePayment(paymentList);
           
 
         //orderDataList = Catalog_Order.CatalogOrderM(prodTypeList, prodList, orderDataList, customerList, staffList, paymentList, corporateCustomerList);
+        Catalog_Order.CatalogOrderM(prodTypeList, prodList, orderDataList, customerList, staffList.get(0), paymentList, corporateCustomerList, orderLL);
+
+//        System.out.println("Product ID\tName\t\t\t\tDescription\t\tColor\t\tPrice\t\tQuantity\tType");
+//        for(int r=0;r<prodList.size();r++){    
+//            System.out.printf("%-10s\t%-30s\t%-20s\t%-10s\tRM %.2f\t   %-10d\t%20s\n",
+//                prodList.get(r).getProductID(),prodList.get(r).getProductName(),prodList.get(r).getProductDesc(),
+//                prodList.get(r).getProductColor(),prodList.get(r).getProductPrice(),prodList.get(r).getProductQuantity(),
+//                prodList.get(r).getProductType().getProductTypeName());
+//        }
+//        
+//        for(int r=0;r<orderLL.size();r++){
+//            System.out.println(orderLL.get(r).toString());
+//        }
+//        
+//        System.out.println("\n**********************************************************");
+//        for(int r=0;r<orderDataList.size();r++){
+//            System.out.println(orderDataList.get(r).toString());
+//        }
+//        
+//        System.out.println("\n**********************************************************");
+//        for(int r=0;r<paymentList.size();r++){
+//            System.out.println(paymentList.get(r).toString());
+//        }
+        
 
 
+       // orderDataList = Catalog_Order.CatalogOrderM(prodTypeList, prodList, orderDataList, customerList, staffList, paymentList, corporateCustomerList);
 
 //        orderDataList = Catalog_Order.CatalogOrderM(prodTypeList, prodList, orderDataList, customerList, staffList, paymentList, corporateCustomerList);
+
 
 
        //CorporateCustomerMaintenance.Menu(corporateCustomerList, staffList.get(0), orderDataList, paymentList, customerList);

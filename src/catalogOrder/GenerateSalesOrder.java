@@ -5,6 +5,7 @@
  */
 package catalogOrder;
 
+import ADT.*;
 import static catalogOrder.catalogOrder.CheckAlphabetic;
 import fioreflowershop.*;
 //import fioreflowershop.OrderList;
@@ -20,7 +21,7 @@ import java.util.Scanner;
  * @author User
  */
 public class GenerateSalesOrder {
-    public static List<OrderList> GenerateReportMain(List<ProductType> prodTypeList, List<Product> prodList, List<Order> orderDataList, List <OrderList> orderList ) throws IOException{    
+    public static ListInterface<OrderList> GenerateReportMain(ListInterface<ProductType> prodTypeList, ListInterface<Product> prodList, ListInterface<Order> orderDataList, ListInterface <OrderList> orderList ) throws IOException{    
        Scanner scan = new Scanner(System.in); 
        int sumQty = 0;
        double totalAmount = 0;
