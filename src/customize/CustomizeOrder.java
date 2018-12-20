@@ -15,7 +15,7 @@ import java.util.Scanner;
  * @author User
  */
 public class CustomizeOrder {
-    public static void Customize(LinkedList<Customer> customerList,LinkedList<Customized> customizeList,LinkedList<Order> orderDataList,LinkedList<Style> styleList,LinkedList<Size> sizeList, LinkedList<Product> productList, LinkedList<Accessories> accessoriesList,LinkedList<Payment> paymentList,Staff staff){
+    public static void Customize(ListInterface<Customer> customerList,ListInterface<Customized> customizeList,ListInterface<Order> orderDataList,ListInterface<Style> styleList,ListInterface<Size> sizeList, ListInterface<Product> productList, ListInterface<Accessories> accessoriesList,ListInterface<Payment> paymentList,Staff staff){
         int size,style,product,accessories,priority;
         double totalPrice = 0;
         
@@ -33,7 +33,7 @@ public class CustomizeOrder {
        CreateCustomizedOrder(customizeList,styleList,style,sizeList,size,productList,product,accessoriesList,accessories,priority);
        totalPrice = CalculatePrice(customizeList,priority);
        
-       String date = new SimpleDateFormat("dd-MM-yyyy").format(new Date());
+       String date = new SimpleDateFormat("dd/MM/yyyy").format(new Date());
        int newOrder;
        newOrder = Integer.parseInt(orderDataList.get(orderDataList.size()-1).getOrderID().substring(1,5));
        newOrder += 1;
@@ -49,7 +49,7 @@ public class CustomizeOrder {
         ItemizedBill(priority,customizeList,date,totalPrice);
     }
     
-   public static void ItemizedBill(int priority, LinkedList<Customized> customizeList, String date,double totalPrice){
+   public static void ItemizedBill(int priority, ListInterface<Customized> customizeList, String date,double totalPrice){
              System.out.format(" \t\t\t\t\t\t     %-6s : %-10s",customizeList.get(customizeList.size()-1).getOrder().getStaff().getStaffID(),customizeList.get(customizeList.size()-1).getOrder().getStaff().getStaffName());
              System.out.format("\nItemized Bill \t\t\t\t\t\t Date:%s\n", date);
 
@@ -68,7 +68,7 @@ public class CustomizeOrder {
        System.out.println("Total : \t\t\t\t\t\t\tRM" + totalPrice +"0");  
         }
    
-   public static Customer SelectCustomer(LinkedList<Customer> customerList){
+   public static Customer SelectCustomer(ListInterface<Customer> customerList){
         String customer;
         Customer selectedcustomer = new Customer();
     
@@ -82,7 +82,7 @@ public class CustomizeOrder {
           return selectedcustomer;
    }
    
-   public static void CreateCustomizedOrder(LinkedList<Customized> customizeList,LinkedList<Style> styleList,int style,LinkedList<Size> sizeList,int size,LinkedList<Product> productList,int product,LinkedList<Accessories> accessoriesList,int accessories,int priority){
+   public static void CreateCustomizedOrder(ListInterface<Customized> customizeList,ListInterface<Style> styleList,int style,ListInterface<Size> sizeList,int size,ListInterface<Product> productList,int product,ListInterface<Accessories> accessoriesList,int accessories,int priority){
        customizeList.add(new Customized());
        customizeList.get(customizeList.size()-1).setStyle(styleList.get(style-1));
         customizeList.get(customizeList.size()-1).setSize(sizeList.get(size-1));
@@ -91,7 +91,7 @@ public class CustomizeOrder {
         customizeList.get(customizeList.size()-1).setPriority(priority);
    }
    
-   public static double CalculatePrice(LinkedList<Customized> customizeList,int priority){
+   public static double CalculatePrice(ListInterface<Customized> customizeList,int priority){
        double totalPrice = 0.0;
        totalPrice += customizeList.get(customizeList.size()-1).getStyle().getStylePrice();
        totalPrice += customizeList.get(customizeList.size()-1).getSize().getSizePrice();
@@ -106,7 +106,7 @@ public class CustomizeOrder {
        return totalPrice;
    }
    
-   public static int SelectProduct(LinkedList<Product> productList){
+   public static int SelectProduct(ListInterface<Product> productList){
       Scanner scan = new Scanner(System.in);
        int product = 0;
         System.out.println("\nProduct Price List");
@@ -126,7 +126,7 @@ public class CustomizeOrder {
         return product;
    }
    
-   public static int SelectSize(LinkedList<Size> sizeList){
+   public static int SelectSize(ListInterface<Size> sizeList){
        Scanner scan = new Scanner(System.in);
        int size =0;
         System.out.println("\nSize Price List");
@@ -146,7 +146,7 @@ public class CustomizeOrder {
         return size;
    }
     
-   public static int SelectStyle(LinkedList<Style> styleList){
+   public static int SelectStyle(ListInterface<Style> styleList){
        Scanner scan = new Scanner(System.in);
        int style =0;
        System.out.println("\nStyle Price List");
@@ -165,7 +165,7 @@ public class CustomizeOrder {
         return style;
    }
    
-   public static int SelectAccessories(LinkedList<Accessories> accessoriesList){
+   public static int SelectAccessories(ListInterface<Accessories> accessoriesList){
         Scanner scan = new Scanner(System.in);
         int accessories  = 0;
        System.out.println("\nAccessories Price List");
