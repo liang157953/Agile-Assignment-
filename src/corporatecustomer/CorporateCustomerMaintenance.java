@@ -5,6 +5,7 @@
  */
 package corporatecustomer;
 
+import ADT.*;
 import fioreflowershop.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -12,7 +13,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
-import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -20,7 +20,7 @@ import java.util.Scanner;
  * @author User
  */
 public class CorporateCustomerMaintenance {
-    public static void Menu(List<CorporateCustomer> corporateList,Staff staff,List<Order> order, List<Payment> paymentList,List<Customer> customerList) throws ParseException{
+    public static void Menu(ListInterface<CorporateCustomer> corporateList,Staff staff,ListInterface<Order> order, ListInterface<Payment> paymentList,ListInterface<Customer> customerList) throws ParseException{
         char resume = 'n';
         do{
             int menuint = 0;
@@ -60,13 +60,13 @@ public class CorporateCustomerMaintenance {
                         selectedcust = corporateList.get(i);
                     }
                 }
-                System.out.println("\nNo.PaymentID \t Amount Status");
+                System.out.println("PaymentID \t Amount Status");
                 System.out.println("******************************");
             for(int i =0; i <order.size();i++){
                 if(order.get(i).getCorporateCustomer() != null){
                 if(order.get(i).getCorporateCustomer().equals(selectedcust)){
                     if(order.get(i).getPayment().getPaymentStatus().equals("UnPaid")){
-                    System.out.println(i+1 +". " + order.get(i).getPayment().getPaymentID() + "\t " + order.get(i).getPayment().getTotalAmount() + "0" + "\t " + order.get(i).getPayment().getPaymentStatus());
+                    System.out.println( order.get(i).getPayment().getPaymentID() + "\t\t " + order.get(i).getPayment().getTotalAmount() + "0" + "\t " + order.get(i).getPayment().getPaymentStatus());
                     totaldebt += order.get(i).getPayment().getTotalAmount();
                     }
                 }
@@ -75,8 +75,7 @@ public class CorporateCustomerMaintenance {
             
             if(totaldebt == 0.00){
                 System.out.print("**No Debt For This Customer**");
-               
-             do{
+                 do{
                 Scanner newscan = new Scanner(System.in);
                 System.out.print("\nBack To Menu? (y/n): ");
                 resume = (newscan.next().charAt(0));
@@ -98,6 +97,7 @@ public class CorporateCustomerMaintenance {
                 break;
             }
               continue;
+                
             }
                 System.out.println("******************************************");
                 System.out.println("Total Debt Amount :RM " + totaldebt + "0");
@@ -117,12 +117,12 @@ public class CorporateCustomerMaintenance {
                 if(selection != 'y' &&selection !='n'){
                     System.out.println("Please Enter y/n only");
                 }    
-                }while(selection != 'y' &&selection !='n');
+                }while(selection != 'y' && selection !='n');
 
             if(selection == 'y'){
                 String date = new SimpleDateFormat("dd/MM/yyyy").format(new Date());
                 System.out.println("**Paid Successful**");
-                System.out.println("No.PaymentID \t Paid Date \t Amount \t Status");
+                System.out.println("PaymentID \t Paid Date \t Amount \t Status");
                 System.out.println("*********************************************************************");
              for(int i =0; i <order.size();i++){
                   if(order.get(i).getCorporateCustomer() != null){
@@ -130,32 +130,63 @@ public class CorporateCustomerMaintenance {
                     if(order.get(i).getPayment().getPaymentStatus().equals("UnPaid")){
                         order.get(i).getPayment().setPaymentStatus("Paid");
                          order.get(i).getPayment().setPaymentDate(date);
-                    System.out.println(i+1+". " + order.get(i).getPayment().getPaymentID() + "\t "+order.get(i).getPayment().getPaymentDate() + "\t " + order.get(i).getPayment().getTotalAmount() + "0 \t " + order.get(i).getPayment().getPaymentStatus());
+                    System.out.println(order.get(i).getPayment().getPaymentID() + "\t\t "+order.get(i).getPayment().getPaymentDate() + "\t " + order.get(i).getPayment().getTotalAmount() + "0 \t " + order.get(i).getPayment().getPaymentStatus());
                     totaldebt += order.get(i).getPayment().getTotalAmount();
                     }
                 }
                }
              }  
+              do{
+                Scanner newscan = new Scanner(System.in);
+                System.out.print("\nBack To Menu? (y/n): ");
+                resume = (newscan.next().charAt(0));
+                switch(resume){
+                    case 'Y':
+                        resume = 'y';
+                        break;
+                    case 'N':
+                        resume = 'n';
+                        break;
+                }
+                if(resume != 'y' &&resume !='n'){
+                    System.out.println("Please Enter y/n only");
+                }    
+                }while(resume != 'y' &&resume !='n');   
+             
+             if(resume == 'n'){
+                System.out.println("Thank You!");
+                break;
+            }
+              continue;
              } //System.out.println("\nOn The Way Back To Menu...");
 
         }else if(menuint == 2){
                 Scanner selectcustomer = new Scanner(System.in);
                 Scanner limit = new Scanner(System.in);
-                int customerindex;
+                String customerID;
+                int customerindex = 0;
                 double limitAmount;
+                int found = 0;
                 System.out.println("\nList of Customer Want to become Corporate Customer");
                 System.out.println("***************************************************");
                 for(int i=0; i< customerList.size();i++){
-                    System.out.println(i+1 + ". " + customerList.get(i).getCustID() + "\t"+ customerList.get(i).getCustName());
+                    System.out.println(customerList.get(i).getCustID() + "\t"+ customerList.get(i).getCustName());
                 }
                 System.out.println("****************************************************");
                 do{
-                System.out.print("Which customer application you want to approve ?\nEnter Your Choice: " );
-                customerindex = selectcustomer.nextInt();
-                if(customerindex > customerList.size()){
-                    System.out.println("Invalid Input, Please Try Again!");
+                System.out.print("Which customer application you want to approve ?\nEnter Customer ID: " );
+                customerID = selectcustomer.next();
+                for(int i = 0; i < customerList.size(); i ++){
+                    if(customerList.get(i).getCustID().equals(customerID)){
+                        customerindex = i+1;
+                        found = 1;
+                        break;
+                    }
                 }
-                }while(customerindex<0||customerindex > customerList.size());
+                if(found == 0){
+                    System.out.println("Invalid Customer ID , Please Enter Again!");
+                }
+                }while(found == 0);
                 int newCorID;
                 newCorID = Integer.parseInt(corporateList.get(corporateList.size()-1).getCustID().substring(2,6));
                 newCorID += 1;
