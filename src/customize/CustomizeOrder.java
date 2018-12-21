@@ -201,4 +201,27 @@ public class CustomizeOrder {
         }while(priority < 0 || priority > 3);
         return priority;
    }
+   
+   public static boolean addNewCustomer(ListInterface<Customer> customerList){
+    String custID;
+    String custName;
+    String custAddress;
+    String custContactNo;
+    Scanner scan = new Scanner(System.in);
+    System.out.println("= = = = = = = = = = = = = = = = = = = ");
+    System.out.println("Regiter New Customer");
+    System.out.println("= = = = = = = = = = = = = = = = = = = ");
+    
+    System.out.print("Customer ID:");
+    custID = scan.nextLine();
+    System.out.print("Customer Name:");
+    custName = scan.nextLine();
+    System.out.print("Customer Address:");
+    custAddress = scan.nextLine();
+    System.out.print("Customer Contact No:");
+    custContactNo = scan.nextLine();
+    
+    return customerList.add(new Customer(custID,custName,custAddress,custContactNo));
+    
+   }
 }
