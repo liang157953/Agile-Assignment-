@@ -155,7 +155,7 @@ public class FioreFlowershop {
 
           
           //paymentList = CustomerPayment.MakePayment(paymentList);
-          
+         
         //orderDataList = Catalog_Order.CatalogOrderM(prodTypeList, prodList, orderDataList, customerList, staffList, paymentList, corporateCustomerList);
         Catalog_Order.CatalogOrderM(prodTypeList, prodList, orderDataList, customerList, staffList.get(0), paymentList, corporateCustomerList, orderLL);
         GenerateSalesOrder.CorporateCustGenerateReport(prodTypeList, prodList, orderDataList, orderLL, corporateCustomerList, customerList);
