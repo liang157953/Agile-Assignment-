@@ -21,7 +21,7 @@ import java.util.Scanner;
  * @author User
  */
 public class GenerateSalesOrder {
-    public static void GenerateReportMain(ListInterface<ProductType> prodTypeList, ListInterface<Product> prodList, ListInterface<Order> orderDataList, ListInterface <OrderList> orderList,ListInterface<Customer> customerList ) throws IOException{    
+    public static void GenerateReportMain(ListInterface<ProductType> prodTypeList, ListInterface<Product> prodList, ListInterface<Order> orderDataList, ListInterface <OrderList> orderList) throws IOException{    
        Scanner scan = new Scanner(System.in); 
        int sumQty = 0;
        double totalAmount = 0;
