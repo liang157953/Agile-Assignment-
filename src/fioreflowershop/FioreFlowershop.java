@@ -104,10 +104,10 @@ public class FioreFlowershop {
         accessoriesList.add(new Accessories("A1003","Pokemon",20.00));
   
         ListInterface<Delivery> deliveryList = new LinkedList<Delivery>();
-
         deliveryList.add(new Delivery("T1101","25-20,PV16","Setapak","019-7132686","20/11/2018","1200","26/11/2018","1200","Processing",staffList.get(0),orderDataList.get(0),1));
         deliveryList.add(new Delivery("T1102","20,jalan barongan,taman berjaya","Johor","019-7788115","2/11/2018","1200","5/11/2018","1200","Processing",staffList.get(2),orderDataList.get(0),1));
         deliveryList.add(new Delivery("T1103","25-20,PV16","Setapak","019-7755115","20/11/2018","1200","11/12/2018","1200","Processing",staffList.get(1),orderDataList.get(0),1));
+
 
         ListInterface<OrderList> orderLL = new LinkedList<OrderList>();
         orderLL.add(new OrderList(orderDataList.get(0),prodList.get(0),2));
@@ -172,7 +172,7 @@ public class FioreFlowershop {
 //        
 //        CorporateCustomerMaintenance.Menu(corporateCustomerList, staffList.get(0), orderDataList, paymentList, customerList);
 
-          CustomizeOrder.Customize(customerList,customizedList, orderDataList, styleList, sizeList, prodList, accessoriesList, paymentList,staffList.get(0));
+          CustomizeOrder.Customize(customerList,customizedList, orderDataList, styleList, sizeList, prodList, accessoriesList, paymentList,staffList.get(0),pickupList);
 
     }    
 }

@@ -15,7 +15,7 @@ import java.util.Scanner;
  * @author User
  */
 public class CustomizeOrder {
-    public static void Customize(ListInterface<Customer> customerList,ListInterface<Customized> customizeList,ListInterface<Order> orderDataList,ListInterface<Style> styleList,ListInterface<Size> sizeList, ListInterface<Product> productList, ListInterface<Accessories> accessoriesList,ListInterface<Payment> paymentList,Staff staff){
+    public static void Customize(ListInterface<Customer> customerList,ListInterface<Customized> customizeList,ListInterface<Order> orderDataList,ListInterface<Style> styleList,ListInterface<Size> sizeList, ListInterface<Product> productList, ListInterface<Accessories> accessoriesList,ListInterface<Payment> paymentList,Staff staff,ListInterface<PickUp> pickupList){
         int size,style,product,accessories,priority;
         double totalPrice = 0;
         
@@ -46,10 +46,10 @@ public class CustomizeOrder {
         orderDataList.add(new Order("O"+ newOrder,"customized",date,"Pending",selectedcustomer,paymentList.get(paymentList.size()-1),staff,"Customer"));
         customizeList.get(customizeList.size()-1).setOrder(orderDataList.get(orderDataList.size()-1));
         System.out.println("You had place order successfully!");
-        ItemizedBill(priority,customizeList,date,totalPrice);
+        ItemizedBill(priority,customizeList,date,totalPrice,orderDataList,pickupList);
     }
     
-   public static void ItemizedBill(int priority, ListInterface<Customized> customizeList, String date,double totalPrice){
+   public static void ItemizedBill(int priority, ListInterface<Customized> customizeList, String date,double totalPrice,ListInterface<Order> orderDataList,ListInterface<PickUp> pickupList){
              System.out.format(" \t\t\t\t\t\t     %-6s : %-10s",customizeList.get(customizeList.size()-1).getOrder().getStaff().getStaffID(),customizeList.get(customizeList.size()-1).getOrder().getStaff().getStaffName());
              System.out.format("\nItemized Bill \t\t\t\t\t\t Date:%s\n", date);
 
@@ -66,20 +66,30 @@ public class CustomizeOrder {
        }
         System.out.println("**************************************************************************");
        System.out.println("Total : \t\t\t\t\t\t\tRM" + totalPrice +"0");  
+       SelectPickUp(orderDataList,pickupList);
         }
    
    public static Customer SelectCustomer(ListInterface<Customer> customerList){
         String customer;
+        char newcust = 'n';
         Customer selectedcustomer = new Customer();
     
         Scanner scancust = new Scanner(System.in);
+       System.out.print("Are you the new customer? (y/n) :");
+       newcust = scancust.next().charAt(0);
+       if(newcust == 'Y' || newcust == 'y'){
+           addNewCustomer(customerList);
+           selectedcustomer = customerList.get(customerList.size()-1);
+       }
+       else{
        System.out.print("Enter CutomerID: ");
         customer = scancust.next();
           for(int i=0; i< customerList.size();i++){
               if(customer.equals(customerList.get(i).getCustID()))
                    selectedcustomer = customerList.get(i);
                 }
-          return selectedcustomer;
+         }
+       return selectedcustomer;
    }
    
    public static void CreateCustomizedOrder(ListInterface<Customized> customizeList,ListInterface<Style> styleList,int style,ListInterface<Size> sizeList,int size,ListInterface<Product> productList,int product,ListInterface<Accessories> accessoriesList,int accessories,int priority){
@@ -202,7 +212,17 @@ public class CustomizeOrder {
         return priority;
    }
    
-   public static boolean addNewCustomer(ListInterface<Customer> customerList){
+   public static void SelectPickUp(ListInterface<Order> orderDataList,ListInterface<PickUp> PickupList){
+       Scanner scan = new Scanner(System.in);
+       
+   }
+   
+   public static QueueInterface<PickUp> GenerateQueue(ListInterface<PickUp> PickupList, String date){
+       QueueInterface<PickUp> pickupqueue = new LinkedQueue<>();
+       return pickupqueue;
+   }
+   
+   public static void addNewCustomer(ListInterface<Customer> customerList){
     String custID;
     String custName;
     String custAddress;
@@ -212,16 +232,18 @@ public class CustomizeOrder {
     System.out.println("Regiter New Customer");
     System.out.println("= = = = = = = = = = = = = = = = = = = ");
     
-    System.out.print("Customer ID:");
-    custID = scan.nextLine();
+        int newCID;
+       newCID = Integer.parseInt(customerList.get(customerList.size()-1).getCustID().substring(1,5));
+       newCID += 1;
+       custID = "C"+newCID;
     System.out.print("Customer Name:");
     custName = scan.nextLine();
     System.out.print("Customer Address:");
     custAddress = scan.nextLine();
     System.out.print("Customer Contact No:");
     custContactNo = scan.nextLine();
-    
-    return customerList.add(new Customer(custID,custName,custAddress,custContactNo));
+    System.out.print("\n\n\n");
+    customerList.add(new Customer(custID,custName,custAddress,custContactNo));
     
    }
 }
