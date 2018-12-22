@@ -124,25 +124,16 @@ public class FioreFlowershop {
         
         //ProductMaintenance.PromotionProductMaintenanceMenu(prodPromotionList, prodTypeList);
         
-//        System.out.print("\n**********************\n Before Current Product List \n**********************\n");
-//        System.out.println("Product ID\tName\t\t\t\tDescription\t\tColor\t\tPrice\t\tQuantity\tType");
-//        for(int r=0;r<prodList.size();r++){    
-//            System.out.printf("%-10s\t%-30s\t%-20s\t%-10s\tRM %.2f\t   %-10d\t%20s\n",
-//                prodList.get(r).getProductID(),prodList.get(r).getProductName(),prodList.get(r).getProductDesc(),
-//                prodList.get(r).getProductColor(),prodList.get(r).getProductPrice(),prodList.get(r).getProductQuantity(),
-//                prodList.get(r).getProductType().getProductTypeName());
-//            
-//        }
-        
         //Product OK
         //ProductMaintenance.ProductMaintenanceMenu(prodList, prodTypeList);
         
+        //System.out.println("Return to Main Program");
         //Prmotion Product OK
         //ProductMaintenance.PromotionProductMaintenanceMenu(prodPromotionList, prodTypeList);
         
        
         //System.out.println("Main Program");
-       //ProductMaintenance.StaffMenu(prodList, prodTypeList);
+        //ProductMaintenance.StaffMenu(prodList, prodTypeList);
         //ProductMaintenance.CustomerViewProducts(prodList, prodTypeList);
         //ProductMaintenance.ProductOutOfStockNotification(prodList, prodTypeList);
         //orderLL = GenerateSalesOrder.CorporateCustGenerateReport(prodTypeList, prodList, orderDataList, orderLL, corporateCustomerList, customerList);

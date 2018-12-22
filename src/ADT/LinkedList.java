@@ -1,20 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ADT;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
- *
- * @author Edwin
- */
 import java.util.NoSuchElementException;
 
 public class LinkedList<T> implements ListInterface<T> {
@@ -41,54 +26,6 @@ public class LinkedList<T> implements ListInterface<T> {
         }
 
         lastNode = newNode;
-        count++;
-        return true;
-    }
-
-    @Override
-    public boolean add(int givenPosition, T newEntry) {
-        Node tempNode;
-
-        if (givenPosition > count || givenPosition < 0) {
-            throw new NoSuchElementException("No such things!!!");
-        }
-
-        Node newNode = new Node(newEntry);
-        if (!isEmpty()) {
-
-            tempNode = firstNode;
-            int i = givenPosition;
-            while (i != 0) {
-                tempNode = tempNode.next;
-                i--;
-            }
-
-            if (givenPosition == 0) {
-                tempNode = firstNode;
-
-                firstNode = newNode;
-                newNode.prev = firstNode;
-                newNode.next = tempNode;
-                tempNode.prev = newNode;
-
-            } else if (givenPosition == count) {
-                tempNode = lastNode;
-
-                lastNode = newNode;
-                newNode.next = lastNode;
-                newNode.prev = tempNode;
-                tempNode.next = newNode;
-            } else {
-                newNode.prev = tempNode.prev;
-                newNode.next = tempNode;
-
-                tempNode.prev.next = newNode;
-                tempNode.prev = newNode;
-            }
-        } else {
-            firstNode = newNode;
-            lastNode = newNode;
-        }
         count++;
         return true;
     }
@@ -127,13 +64,6 @@ public class LinkedList<T> implements ListInterface<T> {
         } else {
             tempNode.prev.next = tempNode.next;
             tempNode.next.prev = tempNode.prev;
-            // Above code is equal to:
-//        tempNode1 = tempNode.prev;
-//        tempNode2 = tempNode.next;
-//        
-//        tempNode1.next = tempNode2;
-//        tempNode2.prev = tempNode1;
-            /////////////////////////////
         }
 
         count--;
@@ -153,8 +83,7 @@ public class LinkedList<T> implements ListInterface<T> {
     if ((givenPosition >= 1) && (givenPosition <= count)) {
       Node currentNode = firstNode;
       for (int i = 0; i < givenPosition - 1; ++i) {
-        // System.out.println("Trace| currentNode.data = " + currentNode.data + "\t, i = " + i);
-        currentNode = currentNode.next;		// advance currentNode to next node
+        currentNode = currentNode.next;		
       }
       currentNode.data = newEntry;	// currentNode is pointing to the node at givenPosition
     } else {
@@ -208,68 +137,6 @@ public class LinkedList<T> implements ListInterface<T> {
 
         return str;
     }
-
-    @Override
-    public boolean addToLast(T newEntry) {
-        Node newNode = new Node(newEntry);
-
-        if (!isEmpty()) {  // if the list got data
-            lastNode.next = newNode; 
-            newNode.prev = lastNode;
-
-            lastNode = newNode;
-            newNode.next = lastNode;
-            count++;
-        } else {
-            add(newEntry);
-        }
-        return true;
-    }
-
-    @Override
-    public boolean addToFirst(T newEntry) {
-        Node newNode = new Node(newEntry);
-        Node tempNode;
-        if (!isEmpty()) {
-
-            tempNode = firstNode;
-
-            firstNode = newNode;
-            newNode.prev = firstNode;
-            newNode.next = tempNode;
-            tempNode.prev = newNode;
-            count++;
-        } else {
-            add(newEntry);
-        }
-        return true;
-    }
-
-    @Override
-    public T removeFront() {
-        T element;
-        Node tempNode;
-        tempNode = firstNode;
-        tempNode = tempNode.next;
-        element = tempNode.data;
-        firstNode = firstNode.next;
-        firstNode.prev = null;
-        count--;
-        return element;
-    }
-
-    @Override
-    public T removeBack() {
-        T element;
-        Node tempNode;
-        tempNode = firstNode;    // 
-        tempNode = tempNode.next; // 
-        element = tempNode.data; // 
-        lastNode = lastNode.prev;
-        lastNode.next = null;
-        count--;
-        return element;
-    } // remove the last 
 
     // inner class node
     class Node {
