@@ -1,30 +1,29 @@
 package ADT;
 
 public interface ListInterface<T> {
-
-    public boolean add(T newEntry);// basic concept
-
-    public boolean add(int givenPosition, T newEntry);
-
-    public T remove(int givenPosition); // basic concept
-
-    public boolean set(int givenPosition, T newEntry);
-
-    public T get(int givenPosition);
     
-    public int size();
+    // To check whether the newEntry is added successfully or not
+    public boolean add(T newEntry); 
 
-    public boolean isEmpty(); // basic concept
+    // To remove the object at the givenPosition
+    public T remove(int givenPosition); 
 
-    public String toString(); // use to print format
+    // To replace the previous object at the givenPosition with newEntry
+    public boolean set(int givenPosition, T newEntry); 
 
-    public boolean addToLast(T newEntry); // got use
+    // To get the object at the givenPosition
+    public T get(int givenPosition); 
+    
+    // To know the total number of the list
+    public int size(); 
+    
+    // Determines whether the list is empty
+    public boolean isEmpty(); 
 
-    public boolean addToFirst(T newEntry);// got use
+    // Use to print format
+    public String toString(); 
 
-    public void clear();
-
-    public T removeFront(); // got use
-
-    public T removeBack(); // got use
+    //To remove all data in the list
+    public void clear(); 
 }
+
