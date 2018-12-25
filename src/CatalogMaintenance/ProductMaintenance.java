@@ -162,6 +162,7 @@ public class ProductMaintenance {
         Product promotionProd = new Product();
         String option = "";
         String options = "";
+        StackInterface<Product> stackPromotion = new LinkedStack<Product>();
 
         Boolean checkDigit = false;
         boolean test = false;
@@ -170,8 +171,9 @@ public class ProductMaintenance {
                 System.out.println("\n*******************************\n Promotion Product Maintenance \n*******************************");
                 System.out.println("1. Register New Promotion Product");
                 System.out.println("2. Display Current Promotion Product List");
-                System.out.println("3. Maintain Promotion Product Information"); // 
-                System.out.println("4. Return Main Menu");
+                System.out.println("3. Maintain Promotion Product Information");  
+                System.out.println("4. Remove Out-of-Stock Promotion Products");
+                System.out.println("5. Return Main Menu");
 
                 System.out.printf("\nOption > ");
                 option = input.next();
@@ -212,7 +214,7 @@ public class ProductMaintenance {
                     System.out.print("\nEnter Any Key Return to Product Menu...");
                     System.in.read();
                     break;
-                case 3:
+                case 3: //Maintain Promotion Product
                     String selectPromoMonth = "";
                     boolean checkMonth = true;
                     do {
@@ -318,7 +320,7 @@ public class ProductMaintenance {
                             test = false;
                         } else {
                             test = true;
-                            
+
                             //position[Integer.parseInt(optionss)] = get the position of the specified product which inside the product list
                             //MaintainProduct(prodList.get(position[Integer.parseInt(optionss) - 1]) 
                             //= Update the specified promotion product in the specified position inside the product list
@@ -329,7 +331,10 @@ public class ProductMaintenance {
                         }
                     } while (!test);
                     break;
-                case 4: //Return to main menu
+                case 4: //Remove Out-of-Stock Promotion Products
+                    RemoveOutOfStockPromotionProduct(prodPromotionList, stackPromotion);
+                    break;
+                case 5: //Return to main menu
                     break;
                 default://Display error message if not within the options provided
                     System.out.println(ConsoleColors.RED + "Invalid Option! Please Try Again" + ConsoleColors.RESET);
@@ -337,7 +342,7 @@ public class ProductMaintenance {
                     System.in.read();
                     System.out.println();
             }
-        } while (Integer.parseInt(option) != 4);
+        } while (Integer.parseInt(option) != 5);
     }
 
     public static boolean ViewProductList(ListInterface<Product> prodList, ListInterface<ProductType> prodTypeList) throws IOException {
@@ -356,12 +361,12 @@ public class ProductMaintenance {
                 System.out.printf("\nSelect Product Type > ");
                 options = input.next();
                 //Check whether the input is in digit or not; option + 1 = return to the product maintenance menu
-            } while (!CheckDigit(options + 1)); 
+            } while (!CheckDigit(options + 1));
 
             if (Integer.parseInt(options) == prodTypeList.size() + 1) {
                 return exit = true;
             } //if the user wants to exit 
-            
+
             //Check whether the input is between the product type list or not
             if (Integer.parseInt(options) <= 0 || Integer.parseInt(options) > prodTypeList.size() + 1) {
                 System.out.printf(ConsoleColors.RED + "Input Out of Range! Please Enter Again" + ConsoleColors.RESET);
@@ -462,7 +467,7 @@ public class ProductMaintenance {
         } while (!checkMonth);
 
         int no = 0;
-        boolean found = false; 
+        boolean found = false;
         //Check whether the current promotion product list exist of the user input month or not
         for (int r = 0; r < prodPromotionList.size(); r++) {
             if (prodPromotionList.get(r).getProductPromotionMonth().equals(selectPromoMonth)) {
@@ -490,13 +495,143 @@ public class ProductMaintenance {
     }
 
     public static void ProductOutOfStockNotification(ListInterface<Product> prodList, ListInterface<ProductType> prodTypeList) {
-        if(!prodList.isEmpty()){ // if the current product list is not empty
+        if (!prodList.isEmpty()) { // if the current product list is not empty
             for (int r = 0; r < prodList.size(); r++) { //display all the product details in dialog which is almost out of stock
                 if (prodList.get(r).getProductQuantity() < 5) {
                     JOptionPane.showMessageDialog(null, "Product Type  : " + prodList.get(r).getProductType().getProductTypeID() + " " + prodList.get(r).getProductType().getProductTypeName() + "\nProduct ID        : " + prodList.get(r).getProductID() + "\nProduct Name : " + prodList.get(r).getProductName() + "\nProduct Color  : " + prodList.get(r).getProductColor() + "\nIn-Stock Qty     : " + prodList.get(r).getProductQuantity(), "InfoBox: " + "Product Out Of Stock Notification", JOptionPane.WARNING_MESSAGE);
                 }
             }
         }
+    }
+
+    public static void RemoveOutOfStockPromotionProduct(ListInterface<Product> prodPromotionList, StackInterface<Product> productStackList) throws IOException {
+        Scanner input = new Scanner(System.in);
+        String continue1;
+        boolean continueRemove = false;
+        do {
+            continueRemove = false;
+            boolean checkID = false;
+            int count=0;
+            
+            System.out.printf("\n" + ConsoleColors.RED + "%90s" + ConsoleColors.RESET, "Current Out of Stock Promotion Product");
+            System.out.println("\n###################################################################################################################################################################");
+            System.out.println(ConsoleColors.BLUE + "Product ID\tName\t\t\t\tDescription\t\tColor\t\tPrice\t\tQuantity\tType Name\t\tPromotion Month" + ConsoleColors.RESET);
+            System.out.println("###################################################################################################################################################################");
+            if (!prodPromotionList.isEmpty()) { // if the current promotion product list is not empty
+                for (int r = 0; r < prodPromotionList.size(); r++) {
+                    if (prodPromotionList.get(r).getProductQuantity() == 0) {
+                        System.out.printf("%-10s\t%-30s\t%-20s\t%-10s\tRM%6.2f\t   %-10d\t%-20s\t%-20s\n",
+                                prodPromotionList.get(r).getProductID(), prodPromotionList.get(r).getProductName(), prodPromotionList.get(r).getProductDesc(),
+                                prodPromotionList.get(r).getProductColor(), prodPromotionList.get(r).getProductPrice(), prodPromotionList.get(r).getProductQuantity(),
+                                prodPromotionList.get(r).getProductType().getProductTypeName(), prodPromotionList.get(r).getProductPromotionMonth());
+                        count++;
+                    }
+                }
+            }else{
+                System.out.println(ConsoleColors.RED + "Current No Out-of-Stock Promotion Product." + ConsoleColors.RESET);
+                System.out.print("\nReturning to Maintain Product Page...");
+                System.in.read();
+                System.out.println();
+                return;
+            }
+
+            do {
+                checkID = false;
+                if (!prodPromotionList.isEmpty()) { // if the current promotion product list is not empty
+                    for (int r = 0; r < prodPromotionList.size(); r++) {
+                        if (prodPromotionList.get(r).getProductQuantity() == 0) {
+                            productStackList.push(prodPromotionList.get(r)); //if those promotion product is out of stock        
+                        }
+                    }
+                    
+                    if (!productStackList.isEmpty()) {
+                        String proceed = "";
+                        String toRemovePromoProdID = "";
+                        String promoProdID="";
+                        
+                        if(count==0){
+                            System.out.println(ConsoleColors.RED + "Current No Out-of-Stock Promotion Product." + ConsoleColors.RESET);
+                            System.out.print("\nReturning to Maintain Product Page...");
+                            System.in.read();
+                            System.out.println();
+                            return;
+                        }
+
+                        System.out.print("\nEnter Promotion Product ID to Remove: ");
+                        promoProdID = input.nextLine();
+                        
+                        promoProdID = promoProdID.toUpperCase();
+                            
+                        for (int r = 0; r < count; r++) {
+
+                            toRemovePromoProdID = productStackList.pop().getProductID(); //obtain the toRemove Promotion Product ID
+                            
+                            if (promoProdID.equals(toRemovePromoProdID)) { // if the promProdID is match with the pop out product promo id
+                                checkID = true;
+
+                                do { //Confirmation of removing the promotion product. y=remove;n=remains unchanged
+                                    System.out.print("Are you sure want to remove? (Y/N): ");
+                                    proceed = input.nextLine();
+                                    if (CheckAlphabetic(proceed)) {
+                                        proceed = proceed.toUpperCase();
+                                    }
+                                } while (!proceed.equals("Y") && !proceed.equals("N"));
+
+                                if (proceed.equals("Y")) { //remove the promotion product
+                                    for (int i = 0; i < prodPromotionList.size(); i++) {
+                                        if (prodPromotionList.get(i).getProductID().equals(toRemovePromoProdID)) {
+                                            prodPromotionList.remove(i); //remove the specified position of the promotion product
+                                            
+                                            for(int g=i;g<prodPromotionList.size();g++){ //To change the promotion product id
+                                                //eg. remove PM1002; change the product id from PM1003 to PM1002 and etc...
+                                                int newPromoID = Integer.parseInt(prodPromotionList.get(g).getProductID().substring(2, 6))-1;
+                                                prodPromotionList.get(g).setProductID("PM" + newPromoID);
+                                            }
+                                        }
+                                    }
+
+                                    System.out.print(ConsoleColors.GREEN + "Remove Promotion Product ID: " + toRemovePromoProdID + " Successfully" + ConsoleColors.RESET);
+                                    System.in.read();
+                                    break;
+                                } else { //return to Remove Promotion Product Menu
+                                    break;
+                                }
+                            } else {
+                                checkID = false; //invalid input or promotion product not found
+                            }
+                        }
+                    } else{ //Display none out-of-stock promotion product message
+                        System.out.println(ConsoleColors.RED + "Current No Out-of-Stock Promotion Product." + ConsoleColors.RESET);
+                        System.out.print("\nReturning to Maintain Product Page...");
+                        System.in.read();
+                        System.out.println();
+                        return;    
+                    } 
+                    if (!checkID) {
+                        System.out.print(ConsoleColors.RED + "No Such Promotion Product ID!" + ConsoleColors.RESET);
+                        System.in.read();
+                        break;
+                    }
+                }
+            } while (!checkID);
+            do { //Confirmation of updating the product name. y=update;n=remains unchanged
+                System.out.print("\nContinue to remove? (Y/N): ");
+                continue1 = input.nextLine();
+                if (CheckAlphabetic(continue1)) {
+                    continue1 = continue1.toUpperCase();
+                }
+            } while (!continue1.equals("Y") && !continue1.equals("N"));
+
+            if (continue1.equals("N")) { //return to maintain product page
+                System.out.print("Returning to Maintain Product Page...");
+                System.in.read();
+                System.out.println();
+                continueRemove = false;
+                break;
+            } else {
+                continueRemove = true;
+            }
+        } while (continueRemove); //if the wants to proceed remove out-of-stock promotion product
     }
 
     public static Product RegisterNewProduct(String newProdID, ListInterface<ProductType> prodTypeList, int access) throws IOException {
@@ -570,7 +705,7 @@ public class ProductMaintenance {
                 System.out.print("Product Color: ");
                 prodColor = input.nextLine();
             } while (!CheckAlphabetic(prodColor));
-            
+
             //Provide user to input the product price in double 
             //(ProductMaintenance.askInputDouble("Product Price: RM ") will return double value
             prodPrice = "" + ProductMaintenance.askInputDouble("Product Price: RM ");
@@ -591,7 +726,7 @@ public class ProductMaintenance {
                     options = input.next();
                     //Only the product type within the list will be accepted and the options must in digit
                 } while (!CheckDigit(options));
-                
+
                 //Check whether the user input product type is within the product type list or not
                 if (Integer.parseInt(options) <= 0 || Integer.parseInt(options) > prodTypeList.size()) {
                     System.out.print(ConsoleColors.RED + "Input Out of Range! Please Enter Again" + ConsoleColors.RESET);
@@ -601,7 +736,7 @@ public class ProductMaintenance {
                     test = true; //if within the range; test = true for proceed
                 }
             } while (!test);
-            
+
             //if the user did not input anything, this will required the user to input again start from the top to bottom
             if (prodName.equals("") || prodDesc.equals("") || prodDesc.equals("") || prodColor.equals("") || prodPrice.equals("") || prodQty.equals("")) {
                 System.out.println(ConsoleColors.RED + "\nSystem Notification: All fields must be filled in!" + ConsoleColors.RESET);
@@ -646,7 +781,7 @@ public class ProductMaintenance {
                 option = input.next();
                 //Check the input is in digit or not
             } while (!CheckDigit(option));
-            
+
             Scanner scan = new Scanner(System.in);
             String proceed;
             switch (Integer.parseInt(option)) { //Check the user input is within the range or not
@@ -843,7 +978,7 @@ public class ProductMaintenance {
             }
         } while (Integer.parseInt(option) != 7);
         //return updateProduct to the main menu in order to update it to the current product、promotion product list according to the user specified position
-        return updateProduct; 
+        return updateProduct;
     }
 
     public static boolean CheckDigit(String input) throws IOException {
