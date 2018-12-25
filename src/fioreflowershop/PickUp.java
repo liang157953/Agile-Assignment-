@@ -5,7 +5,8 @@
  */
 package fioreflowershop;
 
-public class PickUp {
+public class PickUp implements PickUpInterface<PickUp> {
+
     private String pickupNo;
     private String requirePickUpDate;
     private String requirePickUpTime;
@@ -27,6 +28,15 @@ public class PickUp {
         this.pickupStatus = pickupStatus;
         this.staff = staff;
         this.order = order;
+    }
+
+    public PickUp getPickUp() {
+        PickUp pickup = new PickUp(this.pickupNo,this.requirePickUpDate,this.requirePickUpTime,this.pickupDate,this.pickupTime,this.pickupStatus,this.staff,this.order);
+        return pickup;
+    }
+    
+    public int compareTo(PickUpInterface other) {
+        return this.getPickUp().compareTo((PickUpInterface) other.getPickUp());
     }
 
     public String getRequirePickUpDate() {
