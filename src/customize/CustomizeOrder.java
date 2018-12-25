@@ -57,7 +57,7 @@ public class CustomizeOrder {
         orderDataList.add(new Order("O"+ newOrder,"customized",date,"Pending",selectedcustomer,paymentList.get(paymentList.size()-1),staff,"Customer"));
         customizeList.get(customizeList.size()-1).setOrder(orderDataList.get(orderDataList.size()-1));
         System.out.println("You had place order successfully!");
-        ItemizedBill(priority,customizeList,date,totalPrice,orderDataList,pickupList,staff);    
+        ItemizedBill(priority,customizeList,date,totalPrice,pickupList,staff);    
         System.out.print("Do You Want To Make Another Customize Order?(y/n) :");
         do{
            
@@ -77,7 +77,7 @@ public class CustomizeOrder {
         }while(resume == 'y');
     }
     
-   public static void ItemizedBill(int priority, ListInterface<Customized> customizeList, String date,double totalPrice,ListInterface<Order> orderDataList,ListInterface<PickUp> pickupList,Staff staff){
+   public static void ItemizedBill(int priority, ListInterface<Customized> customizeList, String date,double totalPrice,ListInterface<PickUp> pickupList,Staff staff){
              System.out.format(" \t\t\t\t\t\t     %-6s : %-10s",customizeList.get(customizeList.size()-1).getOrder().getStaff().getStaffID(),customizeList.get(customizeList.size()-1).getOrder().getStaff().getStaffName());
              System.out.format("\nItemized Bill \t\t\t\t\t\t Date:%s\n", date);
 
@@ -94,7 +94,7 @@ public class CustomizeOrder {
        }
         System.out.println("**************************************************************************");
        System.out.println("Total : \t\t\t\t\t\t\tRM" + totalPrice +"0");  
-       SelectPickUp(orderDataList,pickupList,staff);
+       SelectPickUp(customizeList,pickupList,staff);
         }
    
    public static Customer SelectCustomer(ListInterface<Customer> customerList){
@@ -240,7 +240,7 @@ public class CustomizeOrder {
         return priority;
    }
    
-   public static void SelectPickUp(ListInterface<Order> orderDataList,ListInterface<PickUp> pickupList,Staff staff){
+   public static void SelectPickUp(ListInterface<Customized> customizeList,ListInterface<PickUp> pickupList,Staff staff){
        Scanner scan = new Scanner(System.in);
        Scanner scanInt = new Scanner(System.in);
        String requirePickUpDate;
@@ -250,24 +250,12 @@ public class CustomizeOrder {
        String requirePickUpTime;
        boolean checkDate = false;
        do{
-       System.out.print("\nPlease Select the Pick Up Date: dd mm yyyy :");
-       day = scanInt.nextInt();
-       month = scanInt.nextInt();
-       year = scanInt.nextInt();
+       requirePickUpDate = DeliveryList.Date();
+       day = Integer.parseInt(requirePickUpDate.substring(0,2));
+       month = Integer.parseInt(requirePickUpDate.substring(3,5));
+       year = Integer.parseInt(requirePickUpDate.substring(6,10));
        checkDate = DeliveryList.ValidDate(day,month,year);
-       if(day<10){
-           if(month<10)
-           requirePickUpDate = "0"+ Integer.toString(day)+"-"+"0"+Integer.toString(month)+"-"+Integer.toString(year);
-           else
-           requirePickUpDate = "0"+ Integer.toString(day)+"-"+Integer.toString(month)+"-"+Integer.toString(year);
-       }
-       else{
-           if(month<10)
-           requirePickUpDate = Integer.toString(day)+"-"+"0"+Integer.toString(month)+"-"+Integer.toString(year);
-           else
-           requirePickUpDate = Integer.toString(day)+"-"+Integer.toString(month)+"-"+Integer.toString(year);     
-                   
-       }
+      
        if(!checkDate){
            System.out.print("The Date is invalid, please enter again!\n\n");
        }
@@ -282,18 +270,56 @@ public class CustomizeOrder {
        else{
            newPickUp = 1001;
        }
-       pickupList.add(new PickUp("PU"+newPickUp,requirePickUpDate,requirePickUpTime,null,null,null,staff,orderDataList.get(orderDataList.size()-1)));
+       pickupList.add(new PickUp("PU"+newPickUp,requirePickUpDate,requirePickUpTime,null,null,null,staff,customizeList.get(customizeList.size()-1),customizeList.get(customizeList.size()-1).getPriority()));
    }
    
    public static QueueInterface<PickUp> GenerateQueue(ListInterface<PickUp> pickupList, String date){  
-       SortedListInterface<PickUp> sortedPickUpList = new SortedLinkedList<PickUp>();
+        
+       ListInterface<PickUp> sortedPriority = new LinkedList<>();
+        SortedListInterface<PickUp> sortedTime = new SortedLinkedList<>();
+        ListInterface<PickUp> newPickUp = new LinkedList<>();
+        QueueInterface<PickUp> pickupqueue = new LinkedQueue<>();
        for(int i = 0; i < pickupList.size();i++){
-           sortedPickUpList.add(pickupList.get(i));
-       }
-       QueueInterface<PickUp> pickupqueue = new LinkedQueue<>();
-       for(int i = 0; i < pickupList.size();i++){
-       pickupqueue.enqueue(sortedPickUpList.getEntry(i));
-       }
+           if(pickupList.get(i).getRequirePickUpDate().equals(date)){
+               newPickUp.add(pickupList.get(i));
+        }
+    }  
+        for(int i = 0; i < newPickUp.size();i++){  
+            sortedTime.add(newPickUp.get(i).getPickUp());
+        }
+        
+        int size = sortedTime.getLength();
+        
+        PickUp highestPriority = new PickUp();
+        
+        for(int i = 1; i <= sortedTime.getLength(); i++){  
+            highestPriority = sortedTime.getEntry(i);
+            for(int r = 1;r <= sortedTime.getLength(); r++){
+                if(sortedTime.getEntry(i).getPriorityLevel()>=sortedTime.getEntry(r).getPriorityLevel()){ 
+                    highestPriority = sortedTime.getEntry(i);
+                }
+            }
+            sortedPriority.add(highestPriority);
+        }
+        
+        size = sortedPriority.size();
+        
+        for(int i = 0; i < size; i++){  
+            pickupqueue.enqueue(sortedPriority.get(i));
+        }
+        //pickupqueue.enqueue(sortedTime.getEntry(i));
+        System.out.println();
+//        PickUp smallest = new PickUp();
+//       for (int i = 0; i < newPickUp.size(); i++) {
+//           smallest = newPickUp.get(i);
+//           for (int j = 0; j < sortedTime.getLength(); j++) {
+//               if (newPickUp.get(i).getRequirePickUpTime().compareTo(sortedTime.getEntry(j))>0) {
+//                   smallest= newPickUp.get(i);
+//               }
+//           }
+//           pickupqueue.enqueue(smallest);
+//       }
+
        return pickupqueue;
    }
    

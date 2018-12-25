@@ -5,7 +5,9 @@
  */
 package fioreflowershop;
 
-public class PickUp implements PickUpInterface<PickUp> {
+import ADT.*;
+
+public class PickUp implements PickUpInterface{ 
 
     private String pickupNo;
     private String requirePickUpDate;
@@ -15,11 +17,13 @@ public class PickUp implements PickUpInterface<PickUp> {
     private String pickupStatus;
     private Staff staff;
     private Order order;
+    private Customized customized;
+    private int priorityLevel;
 
     public PickUp() {
     }
 
-    public PickUp(String pickupNo, String requirePickUpDate, String requirePickUpTime, String pickupDate, String pickupTime, String pickupStatus, Staff staff, Order order) {
+    public PickUp(String pickupNo, String requirePickUpDate, String requirePickUpTime, String pickupDate, String pickupTime, String pickupStatus, Staff staff, Order order, int priorityLevel) {
         this.pickupNo = pickupNo;
         this.requirePickUpDate = requirePickUpDate;
         this.requirePickUpTime = requirePickUpTime;
@@ -28,15 +32,67 @@ public class PickUp implements PickUpInterface<PickUp> {
         this.pickupStatus = pickupStatus;
         this.staff = staff;
         this.order = order;
+        this.priorityLevel = priorityLevel;
+    }
+
+    public PickUp(String pickupNo, String requirePickUpDate, String requirePickUpTime, String pickupDate, String pickupTime, String pickupStatus, Staff staff, Customized customized, int priorityLevel) {
+        this.pickupNo = pickupNo;
+        this.requirePickUpDate = requirePickUpDate;
+        this.requirePickUpTime = requirePickUpTime;
+        this.pickupDate = pickupDate;
+        this.pickupTime = pickupTime;
+        this.pickupStatus = pickupStatus;
+        this.staff = staff;
+        this.customized = customized;
+        this.priorityLevel = priorityLevel;
+    }
+
+    public PickUp(String pickupNo, String requirePickUpDate, String requirePickUpTime, String pickupDate, String pickupTime, String pickupStatus, Staff staff, Order order, Customized customized, int priorityLevel) {
+        this.pickupNo = pickupNo;
+        this.requirePickUpDate = requirePickUpDate;
+        this.requirePickUpTime = requirePickUpTime;
+        this.pickupDate = pickupDate;
+        this.pickupTime = pickupTime;
+        this.pickupStatus = pickupStatus;
+        this.staff = staff;
+        this.order = order;
+        this.customized = customized;
+        this.priorityLevel = priorityLevel;
     }
 
     public PickUp getPickUp() {
-        PickUp pickup = new PickUp(this.pickupNo,this.requirePickUpDate,this.requirePickUpTime,this.pickupDate,this.pickupTime,this.pickupStatus,this.staff,this.order);
+        PickUp pickup = new PickUp(this.pickupNo, this.requirePickUpDate, this.requirePickUpTime, this.pickupDate, this.pickupTime, this.pickupStatus, this.staff, this.order, this.customized, this.priorityLevel);
         return pickup;
     }
     
+    public String getPickUpDate() {
+        String pickupDate = this.requirePickUpDate;
+        return pickupDate;
+    }
+
+    public String getPickUpTime() {
+        String pickupTime = this.requirePickUpTime;
+        return pickupTime;
+    }
+
+    public int getPriorityLevel() {
+        return priorityLevel;
+    }
+
+    public void setPriorityLevel(int priorityLevel) {
+        this.priorityLevel = priorityLevel;
+    }
+
     public int compareTo(PickUpInterface other) {
-        return this.getPickUp().compareTo((PickUpInterface) other.getPickUp());
+        return this.getRequirePickUpTime().compareTo(other.getPickUp().getRequirePickUpTime());
+    }
+
+    public Customized getCustomized() {
+        return customized;
+    }
+
+    public void setCustomized(Customized customized) {
+        this.customized = customized;
     }
 
     public String getRequirePickUpDate() {
@@ -105,6 +161,6 @@ public class PickUp implements PickUpInterface<PickUp> {
 
     @Override
     public String toString() {
-        return "PickUp{" + "pickupNo=" + pickupNo + ", requirePickUpDate=" + requirePickUpDate + ", requirePickUpTime=" + requirePickUpTime + ", pickupDate=" + pickupDate + ", pickupTime=" + pickupTime + ", pickupStatus=" + pickupStatus + ", staff=" + staff + ", order=" + order + '}';
+        return "PickUp{" + "pickupNo=" + pickupNo + ", requirePickUpDate=" + requirePickUpDate + ", requirePickUpTime=" + requirePickUpTime + ", pickupDate=" + pickupDate + ", pickupTime=" + pickupTime + ", pickupStatus=" + pickupStatus + ", staff=" + staff + ", order=" + order + ", customized=" + customized + ", priorityLevel=" + priorityLevel + '}';
     }
 }

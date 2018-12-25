@@ -24,7 +24,6 @@ public class LinkedQueue<T> implements QueueInterface<T> {
     } else {
       lastNode.next = newNode;
     }
-
     lastNode = newNode;
   } // end enqueue
 
@@ -56,7 +55,7 @@ public class LinkedQueue<T> implements QueueInterface<T> {
   public boolean isEmpty() {
     return (firstNode == null) && (lastNode == null);
   } // end isEmpty
-
+  
   public void clear() {
     firstNode = null;
     lastNode = null;
