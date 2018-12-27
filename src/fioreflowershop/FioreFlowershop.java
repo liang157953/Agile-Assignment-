@@ -120,26 +120,12 @@ public class FioreFlowershop {
 
         ListInterface<Product> prodPromotionList = new LinkedList<Product>();
         prodPromotionList.add(new Product("PM1001","Flowers and Chocolates Gift","DESC...","Red",60.00,5,prodTypeList.get(0),"FEBRUARY"));
-        QueueInterface<PickUp> pickupqueue = new LinkedQueue<>();
-        //ProductMaintenance.PromotionProductMaintenanceMenu(prodPromotionList, prodTypeList);
-        
-//        System.out.print("\n**********************\n Before Current Product List \n**********************\n");
-//        System.out.println("Product ID\tName\t\t\t\tDescription\t\tColor\t\tPrice\t\tQuantity\tType");
-//        for(int r=0;r<prodList.size();r++){    
-//            System.out.printf("%-10s\t%-30s\t%-20s\t%-10s\tRM %.2f\t   %-10d\t%20s\n",
-//                prodList.get(r).getProductID(),prodList.get(r).getProductName(),prodList.get(r).getProductDesc(),
-//                prodList.get(r).getProductColor(),prodList.get(r).getProductPrice(),prodList.get(r).getProductQuantity(),
-//                prodList.get(r).getProductType().getProductTypeName());
-//            
-//        }
-        
-        ListInterface<Product> prodPromotionList = new LinkedList<Product>();
-        prodPromotionList.add(new Product("PM1001","Flowers and Chocolates Gift","DESC...","Red",60.00,0,prodTypeList.get(0),"FEBRUARY"));
         prodPromotionList.add(new Product("PM1002","Test1","DESC...","White",30.00,2,prodTypeList.get(2),"MARCH"));
         prodPromotionList.add(new Product("PM1003","Test2","DESC...","Red",20.00,3,prodTypeList.get(1),"FEBRUARY"));
         prodPromotionList.add(new Product("PM1004","Test3","DESC...","Yellow",45.00,0,prodTypeList.get(2),"APRIL"));
-         
-        ProductMaintenance.ProductMainMenu(prodList, prodTypeList, prodPromotionList);
+        QueueInterface<PickUp> pickupqueue = new LinkedQueue<>();
+
+        //ProductMaintenance.ProductMainMenu(prodList, prodTypeList, prodPromotionList);
         //Product OK
         //ProductMaintenance.ProductMaintenanceMenu(prodList, prodTypeList);
         
@@ -219,16 +205,5 @@ public class FioreFlowershop {
           do{
               System.out.println(pickupqueue.dequeue().getPickUp().toString());
           }while(!pickupqueue.isEmpty());
-          
-           
-
-           
-          
-          
-          
     }    
 }
-
-
-
-
