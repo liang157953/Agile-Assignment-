@@ -196,9 +196,22 @@ public class DeliveryList {
 			if(!validDate){
 				System.out.println("\nInvalid Date! Please enter again");
 			}
-		}while(!validDate);
+		}while(!validDate);		
+                String date;
+ if(day<10){
+           if(month<10)
+           date = "0"+ Integer.toString(day)+"/"+"0"+Integer.toString(month)+"/"+Integer.toString(year);
+           else
+           date = "0"+ Integer.toString(day)+"/"+Integer.toString(month)+"/"+Integer.toString(year);
+       }
+       else{
+           if(month<10)
+           date = Integer.toString(day)+"/"+"0"+Integer.toString(month)+"/"+Integer.toString(year);
+           else
+           date = Integer.toString(day)+"/"+Integer.toString(month)+"/"+Integer.toString(year);     
+                   
+       }
 
-		String date = day + "/" + month + "/" + year;
 		return date;
 }
 }
