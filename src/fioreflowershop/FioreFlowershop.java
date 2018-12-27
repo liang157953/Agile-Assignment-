@@ -205,16 +205,5 @@ public class FioreFlowershop {
           do{
               System.out.println(pickupqueue.dequeue().getPickUp().toString());
           }while(!pickupqueue.isEmpty());
-          
-           
-
-           
-          
-          
-          
     }    
 }
-
-
-
-
