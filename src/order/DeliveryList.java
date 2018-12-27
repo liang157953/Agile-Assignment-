@@ -5,6 +5,7 @@
  */
 package order;
 
+import ADT.*;
 import fioreflowershop.*;
 import java.io.IOException;
 import java.util.List;
@@ -19,7 +20,7 @@ public class DeliveryList {
     public static char choice = 'n';
     public static char reenter = 'n';
 
-    public static void ShowDeliveryList(List<Delivery> deliveryList, List<OrderList> orderList) throws IOException{
+    public static void ShowDeliveryList(ListInterface<Delivery> deliveryList, ListInterface<OrderList> orderList) throws IOException{
       
         String option;
 

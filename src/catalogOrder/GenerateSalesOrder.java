@@ -21,6 +21,33 @@ import java.util.Scanner;
  * @author User
  */
 public class GenerateSalesOrder {
+    public static ListInterface<OrderList> GenerateReportMaintenanceMenu(ListInterface<ProductType> prodTypeList, ListInterface<Product> prodList, ListInterface<Order> orderDataList, ListInterface <OrderList> orderList,ListInterface<CorporateCustomer> corporateCustList, ListInterface<Customer> custList ) throws IOException{
+        Scanner input = new Scanner(System.in);
+        String menuOption = "";
+        do{
+        System.out.println("******************Generate Report Maintenance Menu******************");
+        System.out.println("1. Generate Product Type Menu");
+        System.out.println("2. Generate Corporate Customer/ Customer Report");
+        System.out.println("3. Return Main Menu");
+        
+        System.out.print("\nOption >");
+        menuOption = input.next();
+        }while(!CheckDigit(menuOption));
+        switch(Integer.parseInt(menuOption)){
+            case 1:
+                GenerateReportMain(prodTypeList,prodList,orderDataList,orderList);
+                break;
+            case 2:
+                CorporateCustGenerateReport(prodTypeList,prodList,orderDataList, orderList,corporateCustList, custList );
+                break;
+            case 3 :
+                break;
+            default:
+                break;
+            
+        }
+        return orderList;
+    }
     public static void GenerateReportMain(ListInterface<ProductType> prodTypeList, ListInterface<Product> prodList, ListInterface<Order> orderDataList, ListInterface <OrderList> orderList) throws IOException{    
        Scanner scan = new Scanner(System.in); 
        int sumQty = 0;
@@ -294,5 +321,22 @@ public class GenerateSalesOrder {
             }       
         return checkAlphabetic;
     }
-
+    
+    public static boolean CheckDigit(String input) throws IOException{
+        boolean checkDigit = false;
+        for(int r=0;r<input.length();r++){
+            if(Character.isDigit(input.charAt(r))){
+                checkDigit = true;
+            }
+            else{
+                System.out.print( "Input Must be in Digit! Please Try Again\n");
+                System.out.printf("\nPlease Enter Any Key to Proceed...");
+                System.in.read();
+                System.out.println();
+                checkDigit = false;
+                break;
+            }
+        }
+        return checkDigit;
+    }
 }

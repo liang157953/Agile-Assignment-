@@ -31,12 +31,11 @@ public class FioreFlowershop {
         
         //Product Data
         ListInterface<Product> prodList = new LinkedList<Product>();
-        prodList.add(new Product("P1001","Flowers and Chocolates Gift","DESC...","Red",60.00,5,prodTypeList.get(0)));
+        prodList.add(new Product("P1001","Flowers and Chocolates Gift","DESC...","Red",60.00,2,prodTypeList.get(0)));
         prodList.add(new Product("P1002","Ladies Gift Hamper","DESC...","Red",65.00,5,prodTypeList.get(1)));
         prodList.add(new Product("P1003","Christmas Treats Gift Box","DESC...","White",15.00,3,prodTypeList.get(1)));
-        prodList.add(new Product("P1004","Honeybee","DESC...","Yellow",30.00,5,prodTypeList.get(0)));
-        prodList.add(new Product("P1005","Starry Night","DESC...","Blue",45.00,5,prodTypeList.get(2)));
-        
+        prodList.add(new Product("P1004","Honeybee","DESC...","Yellow",30.00,1,prodTypeList.get(0)));
+        prodList.add(new Product("P1005","Starry Night","DESC...","Blue",45.00,5,prodTypeList.get(2)));        
         
         //Customer Data
         ListInterface<Customer> customerList = new LinkedList<Customer>();
@@ -118,6 +117,7 @@ public class FioreFlowershop {
         orderLL.add(new OrderList(orderDataList.get(1),prodList.get(3),3));
         
         ListInterface<Customized> customizedList = new LinkedList<Customized>();
+
         ListInterface<Product> prodPromotionList = new LinkedList<Product>();
         prodPromotionList.add(new Product("PM1001","Flowers and Chocolates Gift","DESC...","Red",60.00,5,prodTypeList.get(0),"FEBRUARY"));
         QueueInterface<PickUp> pickupqueue = new LinkedQueue<>();
@@ -133,15 +133,25 @@ public class FioreFlowershop {
 //            
 //        }
         
+        ListInterface<Product> prodPromotionList = new LinkedList<Product>();
+        prodPromotionList.add(new Product("PM1001","Flowers and Chocolates Gift","DESC...","Red",60.00,0,prodTypeList.get(0),"FEBRUARY"));
+        prodPromotionList.add(new Product("PM1002","Test1","DESC...","White",30.00,2,prodTypeList.get(2),"MARCH"));
+        prodPromotionList.add(new Product("PM1003","Test2","DESC...","Red",20.00,3,prodTypeList.get(1),"FEBRUARY"));
+        prodPromotionList.add(new Product("PM1004","Test3","DESC...","Yellow",45.00,0,prodTypeList.get(2),"APRIL"));
+         
+        ProductMaintenance.ProductMainMenu(prodList, prodTypeList, prodPromotionList);
         //Product OK
         //ProductMaintenance.ProductMaintenanceMenu(prodList, prodTypeList);
         
+        //System.out.println("Return to Main Program");
         //Prmotion Product OK
-        //ProductMaintenance.PromotionProductMaintenanceMenu(prodPromotionList, prodTypeList);
-        
+//        ProductMaintenance.PromotionProductMaintenanceMenu(prodPromotionList, prodTypeList);
+//        for(int r=0;r<prodPromotionList.size();r++){
+//            System.out.println(prodPromotionList.get(r).getProductID() + ", " + prodPromotionList.get(r).getProductName() + ", " +prodPromotionList.get(r).getProductQuantity());
+//        }
        
         //System.out.println("Main Program");
-       //ProductMaintenance.StaffMenu(prodList, prodTypeList);
+        //ProductMaintenance.StaffMenu(prodList, prodTypeList);
         //ProductMaintenance.CustomerViewProducts(prodList, prodTypeList);
         //ProductMaintenance.ProductOutOfStockNotification(prodList, prodTypeList);
         //orderLL = GenerateSalesOrder.CorporateCustGenerateReport(prodTypeList, prodList, orderDataList, orderLL, corporateCustomerList, customerList);
