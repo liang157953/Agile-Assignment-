@@ -31,10 +31,10 @@ public class FioreFlowershop {
         
         //Product Data
         ListInterface<Product> prodList = new LinkedList<Product>();
-        prodList.add(new Product("P1001","Flowers and Chocolates Gift","DESC...","Red",60.00,5,prodTypeList.get(0)));
+        prodList.add(new Product("P1001","Flowers and Chocolates Gift","DESC...","Red",60.00,2,prodTypeList.get(0)));
         prodList.add(new Product("P1002","Ladies Gift Hamper","DESC...","Red",65.00,5,prodTypeList.get(1)));
         prodList.add(new Product("P1003","Christmas Treats Gift Box","DESC...","White",15.00,3,prodTypeList.get(1)));
-        prodList.add(new Product("P1004","Honeybee","DESC...","Yellow",30.00,5,prodTypeList.get(0)));
+        prodList.add(new Product("P1004","Honeybee","DESC...","Yellow",30.00,1,prodTypeList.get(0)));
         prodList.add(new Product("P1005","Starry Night","DESC...","Blue",45.00,5,prodTypeList.get(2)));        
         
         //Customer Data
@@ -120,10 +120,11 @@ public class FioreFlowershop {
         
         ListInterface<Product> prodPromotionList = new LinkedList<Product>();
         prodPromotionList.add(new Product("PM1001","Flowers and Chocolates Gift","DESC...","Red",60.00,0,prodTypeList.get(0),"FEBRUARY"));
-        prodPromotionList.add(new Product("PM1002","Test1","DESC...","Red",60.00,0,prodTypeList.get(2),"FEBRUARY"));
-        prodPromotionList.add(new Product("PM1003","Test2","DESC...","Red",60.00,0,prodTypeList.get(1),"FEBRUARY"));
-        prodPromotionList.add(new Product("PM1004","Test3","DESC...","Red",60.00,0,prodTypeList.get(2),"FEBRUARY"));
+        prodPromotionList.add(new Product("PM1002","Test1","DESC...","White",30.00,2,prodTypeList.get(2),"MARCH"));
+        prodPromotionList.add(new Product("PM1003","Test2","DESC...","Red",20.00,3,prodTypeList.get(1),"FEBRUARY"));
+        prodPromotionList.add(new Product("PM1004","Test3","DESC...","Yellow",45.00,0,prodTypeList.get(2),"APRIL"));
          
+        ProductMaintenance.ProductMainMenu(prodList, prodTypeList, prodPromotionList);
         //Product OK
         //ProductMaintenance.ProductMaintenanceMenu(prodList, prodTypeList);
         

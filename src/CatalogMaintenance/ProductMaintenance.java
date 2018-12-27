@@ -9,17 +9,54 @@ import javax.swing.JOptionPane;
 
 public class ProductMaintenance {
 
+    public static void ProductMainMenu(ListInterface<Product> prodList, ListInterface<ProductType> prodTypeList, ListInterface<Product> prodPromotionList) throws IOException{
+        Scanner input = new Scanner(System.in);
+        String option = "";
+        do {
+            do {
+                System.out.println("\n*******************************\n Product Maintenance Main Menu\n*******************************");
+                System.out.println("1. Product Maintenance Menu");
+                System.out.println("2. Promotion Product Maintenance Menu");
+                System.out.println("3. Return Main Menu");
+
+                System.out.printf("\nOption > ");
+                option = input.next();
+                //Validation of User Input(Only can be digit)                
+            } while (!CheckDigit(option));
+
+            switch (Integer.parseInt(option)) {
+                case 1: //Product Maintenance Menu
+                    ProductMaintenanceMenu(prodList, prodTypeList);
+                    break;
+                case 2: //Prmotion Product Maintenance Menu
+                    PromotionProductMaintenanceMenu(prodPromotionList, prodTypeList);
+                    break;
+                case 3: //Return Main Menu
+                    System.out.print("Returning to Main Menu...");
+                    System.in.read();
+                    System.out.println();
+                    break;
+                default: //Display error message if not within the options provided
+                    System.out.println(ConsoleColors.RED + "Invalid Option! Please Try Again" + ConsoleColors.RESET);
+                    System.out.print("Please Enter Any Key to Proceed...");
+                    System.in.read();
+                    System.out.println();
+            }
+        } while (Integer.parseInt(option) != 3);
+    }
+    
     public static void ProductMaintenanceMenu(ListInterface<Product> prodList, ListInterface<ProductType> prodTypeList) throws IOException {
         Scanner input = new Scanner(System.in);
 
         Product prod = new Product();
         String option = "";
         String options = "";
-
+        
         Boolean checkDigit = false;
         boolean test = false;
         do {
             do {
+                ProductOutOfStockNotification(prodList, prodTypeList);
                 System.out.println("\n*********************\n Product Maintenance \n*********************");
                 System.out.println("1. Register New Product");
                 System.out.println("2. Display Current Product List");
@@ -97,12 +134,12 @@ public class ProductMaintenance {
                     Boolean check = false;
                     int num = 0;
                     test = false;
-                    int[] position = new int[100];
                     int index = 0;
                     String optionss = "";
 
                     if (!returnMenu) {
                         do {
+                            int[] position = new int[100];
                             index = 0;
                             num = 0;
                             test = false;
@@ -134,13 +171,16 @@ public class ProductMaintenance {
                                 test = false;
                             } else {
                                 test = true;
-                                //position[Integer.parseInt(optionss)] = get the position of the specified product which inside the product list
                                 //MaintainProduct(prodList.get(position[Integer.parseInt(optionss) - 1]) 
-                                //= Update the specified product in the specified position inside the product list
-                                prodList.set(position[Integer.parseInt(optionss)], MaintainProduct(prodList.get(position[Integer.parseInt(optionss) - 1]), prodTypeList));
+                                //= Update the specified product in the product list according to the user selected
+                                Product maintainProduct = MaintainProduct(prodList.get(position[Integer.parseInt(optionss) - 1]),prodTypeList);
+                                prodList.set(0, maintainProduct);
+                                
+                                
                                 System.out.printf("Enter Any Key Return to Product Menu...");
                                 System.in.read();
                                 input.nextLine();
+                                break;
                             }
                         } while (!test);
                     }
@@ -321,10 +361,10 @@ public class ProductMaintenance {
                         } else {
                             test = true;
 
-                            //position[Integer.parseInt(optionss)] = get the position of the specified product which inside the product list
-                            //MaintainProduct(prodList.get(position[Integer.parseInt(optionss) - 1]) 
-                            //= Update the specified promotion product in the specified position inside the product list
-                            prodPromotionList.set(position[Integer.parseInt(optionss)], MaintainProduct(prodPromotionList.get(position[Integer.parseInt(optionss) - 1]), prodTypeList));
+                            //MaintainProduct(prodPromotionList.get(position[Integer.parseInt(optionss) - 1]) 
+                            //= Update the specified product in the product list according to the user selected
+                            Product maintainPromotionProduct = MaintainProduct(prodPromotionList.get(position[Integer.parseInt(optionss) - 1]), prodTypeList);
+                            prodPromotionList.set(0, maintainPromotionProduct);
                             System.out.printf("Enter Any Key Return to Product Menu...");
                             System.in.read();
                             input.nextLine();
@@ -380,12 +420,24 @@ public class ProductMaintenance {
 
         int no = 0;
         boolean found = false;
+        int asd = prodList.size();
         for (int r = 0; r < prodList.size(); r++) { //Compare whether the user input (product type) is valid in the list or not
             if (prodList.get(r).getProductType().equals(prodTypeList.get(Integer.parseInt(options) - 1))) {
                 selectedProdType = prodList.get(r).getProductType().getProductTypeName();
                 found = true; //if valid return true
             }
         }
+        
+        System.out.println("\nSelected Product Type: " + ConsoleColors.RED + selectedProdType + ConsoleColors.RESET);
+        System.out.println("####################################################################################################################");
+        System.out.println(ConsoleColors.BLUE + "Product ID\tName\t\t\t\tDescription\t\tColor\t\tPrice\t\tQuantity" + ConsoleColors.RESET);
+        System.out.println("####################################################################################################################");
+        for (int r = 0; r < prodList.size(); r++) {
+            System.out.printf("%-10s\t%-30s\t%-20s\t%-10s\tRM%6.2f\t   %-10d\n",
+                    prodList.get(r).getProductID(), prodList.get(r).getProductName(), prodList.get(r).getProductDesc(),
+                    prodList.get(r).getProductColor(), prodList.get(r).getProductPrice(), prodList.get(r).getProductQuantity());
+        }
+        
 
         if (found) { //if true; display the product details according to the selected product type
             System.out.println("\nSelected Product Type: " + ConsoleColors.RED + selectedProdType + ConsoleColors.RESET);
@@ -393,7 +445,7 @@ public class ProductMaintenance {
             System.out.println(ConsoleColors.BLUE + "Product ID\tName\t\t\t\tDescription\t\tColor\t\tPrice\t\tQuantity" + ConsoleColors.RESET);
             System.out.println("####################################################################################################################");
             for (int r = 0; r < prodList.size(); r++) {
-                if (prodList.get(r).getProductType().equals(prodTypeList.get(Integer.parseInt(options) - 1))) {
+                if (prodList.get(r).getProductType().getProductTypeName().equals(selectedProdType)){
                     System.out.printf("%-10s\t%-30s\t%-20s\t%-10s\tRM%6.2f\t   %-10d\n",
                             prodList.get(r).getProductID(), prodList.get(r).getProductName(), prodList.get(r).getProductDesc(),
                             prodList.get(r).getProductColor(), prodList.get(r).getProductPrice(), prodList.get(r).getProductQuantity());
@@ -496,7 +548,7 @@ public class ProductMaintenance {
 
     public static void ProductOutOfStockNotification(ListInterface<Product> prodList, ListInterface<ProductType> prodTypeList) {
         if (!prodList.isEmpty()) { // if the current product list is not empty
-            for (int r = 0; r < prodList.size(); r++) { //display all the product details in dialog which is almost out of stock
+            for (int r = 0; r < prodList.size(); r++) { //display all the product details in dialog which product is almost out of stock
                 if (prodList.get(r).getProductQuantity() < 5) {
                     JOptionPane.showMessageDialog(null, "Product Type  : " + prodList.get(r).getProductType().getProductTypeID() + " " + prodList.get(r).getProductType().getProductTypeName() + "\nProduct ID        : " + prodList.get(r).getProductID() + "\nProduct Name : " + prodList.get(r).getProductName() + "\nProduct Color  : " + prodList.get(r).getProductColor() + "\nIn-Stock Qty     : " + prodList.get(r).getProductQuantity(), "InfoBox: " + "Product Out Of Stock Notification", JOptionPane.WARNING_MESSAGE);
                 }
@@ -519,7 +571,7 @@ public class ProductMaintenance {
             System.out.println("###################################################################################################################################################################");
             if (!prodPromotionList.isEmpty()) { // if the current promotion product list is not empty
                 for (int r = 0; r < prodPromotionList.size(); r++) {
-                    if (prodPromotionList.get(r).getProductQuantity() == 0) {
+                    if (prodPromotionList.get(r).getProductQuantity() <= 0) {
                         System.out.printf("%-10s\t%-30s\t%-20s\t%-10s\tRM%6.2f\t   %-10d\t%-20s\t%-20s\n",
                                 prodPromotionList.get(r).getProductID(), prodPromotionList.get(r).getProductName(), prodPromotionList.get(r).getProductDesc(),
                                 prodPromotionList.get(r).getProductColor(), prodPromotionList.get(r).getProductPrice(), prodPromotionList.get(r).getProductQuantity(),
@@ -708,12 +760,23 @@ public class ProductMaintenance {
 
             //Provide user to input the product price in double 
             //(ProductMaintenance.askInputDouble("Product Price: RM ") will return double value
-            prodPrice = "" + ProductMaintenance.askInputDouble("Product Price: RM ");
+            do{
+                prodPrice = "" + ProductMaintenance.askInputDouble("Product Price: RM ");
+                if(Double.parseDouble(prodPrice)<=0){
+                    System.out.println(ConsoleColors.RED + "Minimum Product Price: RM 1.00" + ConsoleColors.RESET);
+                }
+            }while(Double.parseDouble(prodPrice)<=0);
 
-            do {//Check the product quantity only in digit
-                System.out.print("Product Quantity: ");
-                prodQty = input.next();
-            } while (!CheckDigit(prodQty));
+            do{
+                do {//Check the product quantity only in digit
+                    System.out.print("Product Quantity: ");
+                    prodQty = input.next();
+                } while (!CheckDigit(prodQty));
+                if (Integer.parseInt(prodQty)< 1) { //check quantity cannot less than 1
+                    System.out.println(ConsoleColors.RED + "Minimum Product Quantity: 1" + ConsoleColors.RESET);
+                }
+            }while (Integer.parseInt(prodQty)< 1);
+            
             boolean test = false;
             do { // display the current product type list for user to select
                 do {
@@ -863,9 +926,15 @@ public class ProductMaintenance {
                 case 4: //update product price
                     Boolean checkDigit = false;
                     String newProdPrice = "";
-                    System.out.printf("Current Product Price: RM %.2f\n", updateProduct.getProductPrice());
-                    newProdPrice = "" + ProductMaintenance.askInputDouble("Enter New Product Price: RM ");
-                    System.out.println();
+                    
+                    do{
+                        System.out.printf("Current Product Price: RM %.2f\n", updateProduct.getProductPrice());
+                        newProdPrice = "" + ProductMaintenance.askInputDouble("Enter New Product Price: RM ");
+                        System.out.println();
+                        if (Double.parseDouble(newProdPrice) <= 0) {
+                            System.out.println(ConsoleColors.RED + "Minimum Price: RM 1.00" + ConsoleColors.RESET + "\n");
+                        }
+                    } while (Double.parseDouble(newProdPrice) <= 0);     
 
                     do { //Confirmation of updating the product price. y=update;n=remains unchanged
                         System.out.print("Are you sure want to proceed? (Y/N): ");
@@ -895,7 +964,6 @@ public class ProductMaintenance {
                         System.out.printf("Current Product Quantity: %2d\n", updateProduct.getProductQuantity());
                         System.out.print("Enter New Product Quantity: ");
                         newProdQty = input.next();
-
                     } while (!CheckDigit(newProdQty));
 
                     do { //Confirmation of updating the product quantity. y=update;n=remains unchanged
