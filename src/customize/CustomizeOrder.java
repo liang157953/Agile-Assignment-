@@ -148,11 +148,11 @@ public class CustomizeOrder {
       Scanner scan = new Scanner(System.in);
        int product = 0;
         System.out.println("\nProduct Price List");
-        System.out.println("***************************");
+        System.out.println("*************************************************");
         for(int i = 0; i < productList.size();i++){
             System.out.format("%d. %-25s \t RM %.2f \n",i+1,productList.get(i).getProductName(),productList.get(i).getProductPrice());
         }
-        System.out.println("***************************");
+        System.out.println("*************************************************");
         do{
         System.out.print("Please select the flower: ");
         
@@ -168,13 +168,13 @@ public class CustomizeOrder {
        Scanner scan = new Scanner(System.in);
        int size =0;
         System.out.println("\nSize Price List");
-        System.out.println("***************************");
+        System.out.println("*************************************************");
         for(int i = 0; i < sizeList.size();i++){
             System.out.format("%d. %-20s RM %.2f \n",i+1,sizeList.get(i).getSizeDesc(),sizeList.get(i).getSizePrice());
 
         }
         do{
-        System.out.println("***************************");
+        System.out.println("*************************************************");
         System.out.print("Please select the size: ");
         size = scan.nextInt();
          if(size < 0 || size > sizeList.size()){
@@ -188,12 +188,12 @@ public class CustomizeOrder {
        Scanner scan = new Scanner(System.in);
        int style =0;
        System.out.println("\nStyle Price List");
-        System.out.println("************************************************");
+        System.out.println("*************************************************");
         for(int i = 0; i < styleList.size();i++){
             System.out.format("%d. %-20s RM %.2f \n",i+1,styleList.get(i).getStyleDesc(),styleList.get(i).getStylePrice());
         }
         do{
-        System.out.println("************************************************");
+        System.out.println("*************************************************");
         System.out.print("Please select the style: ");
         style = scan.nextInt();
           if(style < 0 || style > styleList.size()){
@@ -273,55 +273,44 @@ public class CustomizeOrder {
        pickupList.add(new PickUp("PU"+newPickUp,requirePickUpDate,requirePickUpTime,null,null,null,staff,customizeList.get(customizeList.size()-1),customizeList.get(customizeList.size()-1).getPriority()));
    }
    
-   public static QueueInterface<PickUp> GenerateQueue(ListInterface<PickUp> pickupList, String date){  
-        
-       ListInterface<PickUp> sortedPriority = new LinkedList<>();
+    public static QueueInterface<PickUp> GenerateQueue(ListInterface<PickUp> pickupList, String date) {
+
+        ListInterface<PickUp> sortedPriority = new LinkedList<>();
         SortedListInterface<PickUp> sortedTime = new SortedLinkedList<>();
-        ListInterface<PickUp> newPickUp = new LinkedList<>();
+        ListInterface<PickUp> sameDate = new LinkedList<>();
         QueueInterface<PickUp> pickupqueue = new LinkedQueue<>();
-       for(int i = 0; i < pickupList.size();i++){
-           if(pickupList.get(i).getRequirePickUpDate().equals(date)){
-               newPickUp.add(pickupList.get(i));
-        }
-    }  
-        for(int i = 0; i < newPickUp.size();i++){  
-            sortedTime.add(newPickUp.get(i).getPickUp());
+        for (int i = 0; i < pickupList.size(); i++) { //compare same date
+            if (pickupList.get(i).getRequirePickUpDate().equals(date)) {
+                sameDate.add(pickupList.get(i));
+            }
         }
         
+        for (int i = 0; i < sameDate.size(); i++) { //sort time morning = highest priority
+            sortedTime.add(sameDate.get(i).getPickUp());
+        }
+
         int size = sortedTime.getLength();
-        
+
         PickUp highestPriority = new PickUp();
-        
-        for(int i = 1; i <= sortedTime.getLength(); i++){  
+
+        for (int i = 1; i <= sortedTime.getLength(); i++) {
             highestPriority = sortedTime.getEntry(i);
-            for(int r = 1;r <= sortedTime.getLength(); r++){
-                if(sortedTime.getEntry(i).getPriorityLevel()>=sortedTime.getEntry(r).getPriorityLevel()){ 
+            for (int r = 1; r <= sortedTime.getLength(); r++) {
+                if (sortedTime.getEntry(i).getPriorityLevel() >= sortedTime.getEntry(r).getPriorityLevel()) {
                     highestPriority = sortedTime.getEntry(i);
                 }
             }
             sortedPriority.add(highestPriority);
         }
-        
+
         size = sortedPriority.size();
-        
-        for(int i = 0; i < size; i++){  
+
+        for (int i = 0; i < size; i++) {
             pickupqueue.enqueue(sortedPriority.get(i));
         }
-        //pickupqueue.enqueue(sortedTime.getEntry(i));
-        System.out.println();
-//        PickUp smallest = new PickUp();
-//       for (int i = 0; i < newPickUp.size(); i++) {
-//           smallest = newPickUp.get(i);
-//           for (int j = 0; j < sortedTime.getLength(); j++) {
-//               if (newPickUp.get(i).getRequirePickUpTime().compareTo(sortedTime.getEntry(j))>0) {
-//                   smallest= newPickUp.get(i);
-//               }
-//           }
-//           pickupqueue.enqueue(smallest);
-//       }
 
-       return pickupqueue;
-   }
+        return pickupqueue;
+    }
    
    public static void addNewCustomer(ListInterface<Customer> customerList){
     String custID;
