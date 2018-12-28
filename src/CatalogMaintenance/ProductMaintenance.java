@@ -397,18 +397,33 @@ public class ProductMaintenance {
                 for (int r = 0; r < prodTypeList.size(); r++) { //Display all the current product type list
                     System.out.println((r + 1) + ". " + prodTypeList.get(r).getProductTypeName());
                 }
-                System.out.println((prodTypeList.size() + 1) + ". Return Product Maintenance Menu");
+                System.out.println((prodTypeList.size() + 1) + ". Display All Current Product List");
+                System.out.println((prodTypeList.size() + 2) + ". Return Product Maintenance Menu");
                 System.out.printf("\nSelect Product Type > ");
                 options = input.next();
                 //Check whether the input is in digit or not; option + 1 = return to the product maintenance menu
-            } while (!CheckDigit(options + 1));
+            } while (!CheckDigit(options));
 
             if (Integer.parseInt(options) == prodTypeList.size() + 1) {
+                System.out.println("############################################################################################################################################");
+                System.out.println(ConsoleColors.BLUE + "Product ID\tName\t\t\t\tDescription\t\tColor\t\tPrice\t\tQuantity\tType Name" + ConsoleColors.RESET);
+                System.out.println("############################################################################################################################################");
+                for (int r = 0; r < prodList.size(); r++) {
+                    System.out.printf("%-10s\t%-30s\t%-20s\t%-10s\tRM%6.2f\t   %-10d\t%-20s\n",
+                            prodList.get(r).getProductID(), prodList.get(r).getProductName(), prodList.get(r).getProductDesc(),
+                            prodList.get(r).getProductColor(), prodList.get(r).getProductPrice(), prodList.get(r).getProductQuantity(),
+                            prodList.get(r).getProductType().getProductTypeName());
+                }
+                
                 return exit = true;
-            } //if the user wants to exit 
+            } //after display then exit 
+            
+            if (Integer.parseInt(options) == prodTypeList.size() + 2) {
+                return exit = true;
+            } //exit to main menu
 
             //Check whether the input is between the product type list or not
-            if (Integer.parseInt(options) <= 0 || Integer.parseInt(options) > prodTypeList.size() + 1) {
+            if (Integer.parseInt(options) <= 0 || Integer.parseInt(options) > prodTypeList.size() + 2) {
                 System.out.printf(ConsoleColors.RED + "Input Out of Range! Please Enter Again" + ConsoleColors.RESET);
                 System.in.read();
                 System.out.println();
@@ -427,17 +442,6 @@ public class ProductMaintenance {
                 found = true; //if valid return true
             }
         }
-        
-        System.out.println("\nSelected Product Type: " + ConsoleColors.RED + selectedProdType + ConsoleColors.RESET);
-        System.out.println("####################################################################################################################");
-        System.out.println(ConsoleColors.BLUE + "Product ID\tName\t\t\t\tDescription\t\tColor\t\tPrice\t\tQuantity" + ConsoleColors.RESET);
-        System.out.println("####################################################################################################################");
-        for (int r = 0; r < prodList.size(); r++) {
-            System.out.printf("%-10s\t%-30s\t%-20s\t%-10s\tRM%6.2f\t   %-10d\n",
-                    prodList.get(r).getProductID(), prodList.get(r).getProductName(), prodList.get(r).getProductDesc(),
-                    prodList.get(r).getProductColor(), prodList.get(r).getProductPrice(), prodList.get(r).getProductQuantity());
-        }
-        
 
         if (found) { //if true; display the product details according to the selected product type
             System.out.println("\nSelected Product Type: " + ConsoleColors.RED + selectedProdType + ConsoleColors.RESET);

@@ -123,6 +123,7 @@ public class FioreFlowershop {
         prodPromotionList.add(new Product("PM1002","Test1","DESC...","White",30.00,2,prodTypeList.get(2),"MARCH"));
         prodPromotionList.add(new Product("PM1003","Test2","DESC...","Red",20.00,3,prodTypeList.get(1),"FEBRUARY"));
         prodPromotionList.add(new Product("PM1004","Test3","DESC...","Yellow",45.00,0,prodTypeList.get(2),"APRIL"));
+
         QueueInterface<PickUp> pickupqueue = new LinkedQueue<>();
 
         //ProductMaintenance.ProductMainMenu(prodList, prodTypeList, prodPromotionList);
