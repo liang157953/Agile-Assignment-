@@ -5,6 +5,7 @@
  */
 package catalogOrder;
 
+import ADT.*;
 import fioreflowershop.Customer;
 import fioreflowershop.Order;
 import fioreflowershop.OrderList;
@@ -20,9 +21,9 @@ import java.util.List;
 import java.util.Scanner;
 import fioreflowershop.FioreFlowershop.*;
 public class catalogOrder {
-public static List<Order> CatalogOrderMenu(List<ProductType> listProdType, List<Product> listProduct,List<Order> orderDataList, List<Customer> customerList,List<Staff> staffList, List<Payment> paymentList) throws IOException{    
+public static ListInterface<Order> CatalogOrderMenu(ListInterface<ProductType> listProdType, ListInterface<Product> listProduct,ListInterface<Order> orderDataList, ListInterface<Customer> customerList,ListInterface<Staff> staffList, ListInterface<Payment> paymentList) throws IOException{    
   
-        List<OrderList> orderlist = new ArrayList<OrderList>();
+        ListInterface<OrderList> orderlist = new LinkedList<OrderList>();
         //orderList.add(new Order("O1001","Give to my girlfriend ","11-11-2018","Process",customerList.get(0),paymentList.get(0),staffList.get(0)));
         boolean addon = false;
         int selection;
