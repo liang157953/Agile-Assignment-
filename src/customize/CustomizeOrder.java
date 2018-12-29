@@ -122,6 +122,15 @@ public class CustomizeOrder {
    
    public static void CreateCustomizedOrder(ListInterface<Customized> customizeList,ListInterface<Style> styleList,int style,ListInterface<Size> sizeList,int size,ListInterface<Product> productList,int product,ListInterface<Accessories> accessoriesList,int accessories,int priority){
        customizeList.add(new Customized());
+       int newCustomize;
+       if(customizeList.get(customizeList.size()-1).getCustomizedID() != null){
+       newCustomize = Integer.parseInt(customizeList.get(customizeList.size()-1).getCustomizedID().substring(2,6));
+       newCustomize += 1;
+       }
+       else{
+           newCustomize = 1001;
+       }
+       customizeList.get(customizeList.size()-1).setCustomizedID("CZ"+newCustomize);
        customizeList.get(customizeList.size()-1).setStyle(styleList.get(style-1));
         customizeList.get(customizeList.size()-1).setSize(sizeList.get(size-1));
         customizeList.get(customizeList.size()-1).setProduct(productList.get(product-1));
