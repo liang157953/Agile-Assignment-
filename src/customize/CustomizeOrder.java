@@ -8,6 +8,7 @@ import fioreflowershop.*;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import ADT.*;
+import CatalogMaintenance.Validation;
 import java.util.Date;
 import java.util.Scanner;
 import order.DeliveryList;
@@ -16,7 +17,7 @@ import order.DeliveryList;
  * @author User
  */
 public class CustomizeOrder {
-   public static void Customize(ListInterface<Customer> customerList,ListInterface<Customized> customizeList,ListInterface<Order> orderDataList,ListInterface<Style> styleList,ListInterface<Size> sizeList, ListInterface<Product> productList, ListInterface<Accessories> accessoriesList,ListInterface<Payment> paymentList,Staff staff,ListInterface<PickUp> pickupList){
+   public static void Customize(ListInterface<Customer> customerList,ListInterface<Customized> customizeList,ListInterface<Order> orderDataList,ListInterface<Style> styleList,ListInterface<Size> sizeList, ListInterface<Product> productList, ListInterface<Accessories> accessoriesList,ListInterface<Payment> paymentList,Staff staff,ListInterface<PickUp> pickupList) throws IOException{
         int size,style,product,accessories,priority;
         double totalPrice = 0;
         Scanner scan = new Scanner(System.in);
@@ -153,9 +154,9 @@ public class CustomizeOrder {
        return totalPrice;
    }
    
-   public static int SelectProduct(ListInterface<Product> productList){
+   public static int SelectProduct(ListInterface<Product> productList) throws IOException{
       Scanner scan = new Scanner(System.in);
-       int product = 0;
+       String product ;
         System.out.println("\nProduct Price List");
         System.out.println("*************************************************");
         for(int i = 0; i < productList.size();i++){
@@ -163,90 +164,100 @@ public class CustomizeOrder {
         }
         System.out.println("*************************************************");
         do{
-        System.out.print("Please select the flower: ");
-        
-        product = scan.nextInt();
-        if(product < 0 || product > productList.size()){
+            do{
+                System.out.print("Please select the flower: ");
+                product = scan.next();
+            }while(!Validation.CheckDigit(product));
+        if(Integer.parseInt(product) < 0 || Integer.parseInt(product) > productList.size()){
             System.out.println("Invalid Input, Please Enter Again!");
         }
-        }while(product < 0 || product > productList.size());
-        return product;
+        }while(Integer.parseInt(product) < 0 || Integer.parseInt(product) > productList.size());
+        
+        
+        return Integer.parseInt(product);
    }
    
-   public static int SelectSize(ListInterface<Size> sizeList){
+   public static int SelectSize(ListInterface<Size> sizeList) throws IOException{
        Scanner scan = new Scanner(System.in);
-       int size =0;
+       String size;
         System.out.println("\nSize Price List");
         System.out.println("*************************************************");
         for(int i = 0; i < sizeList.size();i++){
             System.out.format("%d. %-20s RM %.2f \n",i+1,sizeList.get(i).getSizeDesc(),sizeList.get(i).getSizePrice());
-
-        }
-        do{
+        } 
         System.out.println("*************************************************");
+        do{ 
+        do{
         System.out.print("Please select the size: ");
-        size = scan.nextInt();
-         if(size < 0 || size > sizeList.size()){
+        size = scan.next();
+        }while(!Validation.CheckDigit(size));
+         if(Integer.parseInt(size) < 0 || Integer.parseInt(size) > sizeList.size()){
             System.out.println("Invalid Input, Please Enter Again!");
         }
-        }while(size < 0 || size > sizeList.size());
-        return size;
+        }while(Integer.parseInt(size) < 0 || Integer.parseInt(size) > sizeList.size());
+        return Integer.parseInt(size);
    }
     
-   public static int SelectStyle(ListInterface<Style> styleList){
+   public static int SelectStyle(ListInterface<Style> styleList) throws IOException{
        Scanner scan = new Scanner(System.in);
-       int style =0;
+       String style;
        System.out.println("\nStyle Price List");
         System.out.println("*************************************************");
         for(int i = 0; i < styleList.size();i++){
             System.out.format("%d. %-20s RM %.2f \n",i+1,styleList.get(i).getStyleDesc(),styleList.get(i).getStylePrice());
         }
-        do{
         System.out.println("*************************************************");
+        do{
+            do{     
         System.out.print("Please select the style: ");
-        style = scan.nextInt();
-          if(style < 0 || style > styleList.size()){
+        style = scan.next();
+            }while(!Validation.CheckDigit(style));
+          if(Integer.parseInt(style) < 0 || Integer.parseInt(style) > styleList.size()){
             System.out.println("Invalid Input, Please Enter Again!");
         }
-        }while(style < 0 || style > styleList.size());
-        return style;
+        }while(Integer.parseInt(style) < 0 || Integer.parseInt(style) > styleList.size());
+        return Integer.parseInt(style);
    }
    
-   public static int SelectAccessories(ListInterface<Accessories> accessoriesList){
+   public static int SelectAccessories(ListInterface<Accessories> accessoriesList) throws IOException{
         Scanner scan = new Scanner(System.in);
-        int accessories  = 0;
+        String accessories;
        System.out.println("\nAccessories Price List");
         System.out.println("************************************************");
        for(int i = 0; i < accessoriesList.size();i++){
             System.out.format("%d. %-10s RM %.2f \n",i+1,accessoriesList.get(i).getAccDesc(),accessoriesList.get(i).getAccPrice());
        } 
+       System.out.println("************************************************");
        do{
-        System.out.println("************************************************");
+        do{
         System.out.print("Please select the flower: ");
-        accessories = scan.nextInt();
-         if(accessories < 0 || accessories > accessoriesList.size()){
+        accessories = scan.next();
+        }while(!Validation.CheckDigit(accessories));
+         if(Integer.parseInt(accessories) < 0 || Integer.parseInt(accessories) > accessoriesList.size()){
             System.out.println("Invalid Input, Please Enter Again!");
         }
-        }while(accessories < 0 || accessories > accessoriesList.size());
-       return accessories;
+        }while(Integer.parseInt(accessories) < 0 || Integer.parseInt(accessories) > accessoriesList.size());
+       return Integer.parseInt(accessories);
    }
    
-   public static int SelectPriority(){
+   public static int SelectPriority() throws IOException{
        Scanner scan = new Scanner(System.in);
-       int priority = 0;
+       String priority;
        System.out.println("\nPick Up Priority");
         System.out.println("***************************");
         System.out.println("1. Normal   RM  8.00");
         System.out.println("2. Express  RM 20.00");
-        do{
         System.out.println("***************************");
+        do{
+        do{
         System.out.print("Please select the priority level: ");
-        priority = scan.nextInt();
-          if(priority < 0 || priority > 2){
+        priority = scan.next();
+        }while(!Validation.CheckDigit(priority));
+          if(Integer.parseInt(priority) < 0 || Integer.parseInt(priority) > 2){
             System.out.println("Invalid Input, Please Enter Again!");
         }
-        }while(priority < 0 || priority > 3);
-        return priority;
+        }while(Integer.parseInt(priority) < 0 || Integer.parseInt(priority) > 2);
+        return Integer.parseInt(priority);
    }
    
    public static void SelectPickUp(ListInterface<Customized> customizeList,ListInterface<PickUp> pickupList,Staff staff){

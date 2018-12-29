@@ -139,7 +139,7 @@ public class FioreFlowershop {
         ListInterface<Product> prodPromotionList = new LinkedList<Product>();
         prodPromotionList.add(new Product("PM1001","Flowers and Chocolates Gift","DESC...","Red",60.00,5,prodTypeList.get(0),"FEBRUARY"));
         QueueInterface<Delivery> deliveryqueue = new LinkedQueue<>();
-        orderLL =GenerateSalesOrder.GenerateReportMaintenanceMenu(prodTypeList, prodList, orderDataList, orderLL, corporateCustomerList, customerList);
+  //      orderLL =GenerateSalesOrder.GenerateReportMaintenanceMenu(prodTypeList, prodList, orderDataList, orderLL, corporateCustomerList, customerList);
         //ProductMaintenance.PromotionProductMaintenanceMenu(prodPromotionList, prodTypeList);
         
 //        System.out.print("\n**********************\n Before Current Product List \n**********************\n");
@@ -185,12 +185,12 @@ public class FioreFlowershop {
 
           
           //paymentList = CustomerPayment.MakePayment(paymentList);
-         deliveryqueue = Catalog_Order.GenerateDeliveryQueue(deliveryList, "20/11/2018");
+   //      deliveryqueue = Catalog_Order.GenerateDeliveryQueue(deliveryList, "20/11/2018");
           
        
-          do{
-              System.out.println(deliveryqueue.dequeue().getDelivery().toString());
-          }while(!deliveryqueue.isEmpty());
+    //      do{
+//              System.out.println(deliveryqueue.dequeue().getDelivery().toString());
+//          }while(!deliveryqueue.isEmpty());
         //orderDataList = Catalog_Order.CatalogOrderM(prodTypeList, prodList, orderDataList, customerList, staffList, paymentList, corporateCustomerList);
 
         //Catalog_Order.CatalogOrderM(prodTypeList, prodList, orderDataList, customerList, staffList.get(0), paymentList, corporateCustomerList, orderLL, deliveryList, staffList, pickupList);
@@ -231,7 +231,7 @@ public class FioreFlowershop {
 
 
        //CorporateCustomerMaintenance.Menu(corporateCustomerList, staffList.get(0), orderDataList, paymentList, customerList);
-//        CustomizeOrder.Customize(customerList, staffList, customizedList, orderDataList, styleList, sizeList, prodList, accessoriesList, paymentList);
+        CustomizeOrder.Customize(customerList, customizedList, orderDataList, styleList, sizeList, prodList, accessoriesList, paymentList,staffList.get(2),pickupList);
 
 
         //orderLL = GenerateSalesOrder.GenerateReportMain(prodTypeList, prodList, orderDataList, orderLL);
