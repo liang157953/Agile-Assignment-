@@ -6,11 +6,14 @@
 package catalogOrder;
 
 import ADT.*;
+import CatalogMaintenance.ProductMaintenance.ConsoleColors;
 import fioreflowershop.CorporateCustomer;
 import fioreflowershop.Customer;
+import fioreflowershop.Delivery;
 import fioreflowershop.Order;
 import fioreflowershop.OrderList;
 import fioreflowershop.Payment;
+import fioreflowershop.PickUp;
 import fioreflowershop.Product;
 import fioreflowershop.ProductType;
 import fioreflowershop.Staff;
@@ -29,7 +32,9 @@ import java.util.Scanner;
 public class Catalog_Order {
     public static void CatalogOrderM(ListInterface<ProductType> listProdType, ListInterface<Product> listProduct,ListInterface<Order> orderDataList, 
                                                       ListInterface<Customer> customerList,Staff incharge_staff, ListInterface<Payment> paymentList,
-                                                      ListInterface<CorporateCustomer> corporateCustList, ListInterface<OrderList> orderlist) throws IOException{  
+                                                      ListInterface<CorporateCustomer> corporateCustList, ListInterface<OrderList> orderlist,
+                                                      ListInterface<Delivery> deliveryList, ListInterface<Staff> staffList,
+                                                      ListInterface<PickUp> pickupList) throws IOException{  
                                                         
         Scanner scan = new Scanner(System.in);
         
@@ -44,13 +49,14 @@ public class Catalog_Order {
         String optionProdType = "";
         String selectedProdType = "";
         String optionProd = "";
-        int selectionQty=0;
+        int selectionQty = 0;
         char selectionContinue;
         Boolean addon = false;
-
         String storeCust = "";
         double balanceCreditLimit = 0;
         char orderAgain=' ';
+        
+        //do{
         Order addOrder = new Order();
         OrderList addOrderList = new OrderList();
         
@@ -66,17 +72,43 @@ public class Catalog_Order {
         Payment payment = new Payment();
         //incharge_staff got
         String orderCustType=""; //got
-        
         int newQty;
         int selectionDeliveryMode;
         
+        //Delivery
+        Delivery newDelivery = new Delivery();
+        int newDeliveryID = Integer.parseInt(deliveryList.get(deliveryList.size()-1).getTrackingNo().substring(1, 5))+1;
+        String trackingNo = "T" + newDeliveryID;
+        String deliveryAddress = "";
+        String state = "";
+        String deliveryContactNo = "";
+        String requireDeliveryDate = "";
+        String requireDeliveryTime = "";
+        String arrivalDate = "";
+        String arrivalTime = "";
+        String deliveryStatus = "Processing";
+        String deliveryStaffID;
+        Staff addDeliveryStaff = new Staff();
+        //int priorityLevel=0;
+        
+        //pickUp
+        PickUp newPickUp = new PickUp();
+        int newpickupID = Integer.parseInt(pickupList.get(pickupList.size()-1).getPickupNo().substring(2,6))+1;
+        String pickupNo = "PU" + newpickupID;
+        String requirePickUpDate = "";
+        String requirePickUpTime = "";
+        String pickupDate = "";
+        String pickupTime = "";
+        String pickupStatus ="Standby";
+        Staff addPickUpStaff = new Staff();
+        String pickUpStaffID;
         System.out.println("Order ID: " + orderID);
         
         System.out.print("Order Description: ");
-        orderDesc = scan.next();
+        orderDesc = scan.nextLine();
         System.out.println();
         
-        System.out.println("Order Customer Type List");
+        System.out.println("---------Order Customer Type List---------");
         System.out.println("1. Customer");
         System.out.println("2. Corporate Customer");
         
@@ -85,6 +117,7 @@ public class Catalog_Order {
 
         System.out.println();
         if(optionsType.equals("1")){ //refer to option 2
+            System.out.println("\n\n********** Customer List **********");
             for(int i=0;i< customerList.size();i++){
                 System.out.println(String.format("%d. %s  %s", num , customerList.get(i).getCustID(),customerList.get(i).getCustName()));
                 num++;
@@ -92,7 +125,7 @@ public class Catalog_Order {
             do{
                 orderCustType="Customer";
                 checkid = false;
-                System.out.print("Enter Customer ID > ");
+                System.out.print("\nEnter Customer ID > ");
                 option2 = scan.next();
                 for(int r=0;r< customerList.size();r++){
                     if(customerList.get(r).getCustID().equals(option2)){
@@ -105,6 +138,7 @@ public class Catalog_Order {
             addOrder = new Order(orderID, orderDesc, orderDate, orderStatus, customer, payment, incharge_staff, orderCustType);
         }
         else if(optionsType.equals("2")){
+            System.out.println("\n\n********** Coporate Customer List **********");
             for(int i=0;i< corporateCustList.size();i++){
                 System.out.println(String.format("%d. %s  %s", num , corporateCustList.get(i).getCustID(),corporateCustList.get(i).getCustName()));
                 num++;
@@ -112,7 +146,7 @@ public class Catalog_Order {
             do{
                 orderCustType="Corporate";
                 checkid = false;
-                System.out.print("Enter Corporate Customer ID > ");
+                System.out.print("\nEnter Corporate Customer ID > ");
                 option2 = scan.next();
                 for(int r=0;r< corporateCustList.size();r++){
                     if(corporateCustList.get(r).getCustID().equals(option2)){
@@ -128,9 +162,9 @@ public class Catalog_Order {
             }while(!checkid);    
             addOrder = new Order(orderID, orderDesc, orderDate, orderStatus, corporateCustomer, payment, incharge_staff, orderCustType);
         }
-       do{
-           totalAmt = 0;
-           checkid=false;
+
+        totalAmt = 0;
+        checkid=false;
         do{
             if(allow){
                 ProductType selectedProductType = new ProductType();
@@ -196,7 +230,7 @@ public class Catalog_Order {
                                                 }while(selectionQty > listProduct.get(j).getProductQuantity() || selectionQty<=0); 
                                             
                                                 do{
-                                                    System.out.print("Do you want to reenter quantity? For(Product ID: " + listProduct.get(j).getProductID() +") [Y/N]: ");
+                                                    System.out.print("\nDo you want to reenter quantity? For(Product ID: " + listProduct.get(j).getProductID() +") [Y/N]: ");
                                                     selectionContinue = scan.next().charAt(0);
                                                     if(CheckAlphabetic(selectionContinue)){ // Yes = continue; No = Exit
                                                         switch(selectionContinue)
@@ -241,18 +275,18 @@ public class Catalog_Order {
                                     }
                                 } 
                                 if(!checkProdID){
-                                    System.out.println("Cannot Find Product ID. Re-enter Again... \n");
+                                    System.out.println("\nCannot Find Product ID. Re-enter Again... \n");
                                 }  
                             }while(!checkProdID);
                         }
                     }
                     if(!checkid){
-                        System.out.println("Cannot Find The Product Type ID. Re-enter Again... \n");
+                        System.out.println("\nCannot Find The Product Type ID. Re-enter Again... \n");
                     }
                 }while(!checkid);
             }
             do{
-                System.out.print("Do you want to add new product? (Y/N): ");
+                System.out.print("\nDo you want to add new product? (Y/N): ");
                 selectionContinue = scan.next().charAt(0);
                 if(CheckAlphabetic(selectionContinue)){ // Yes = continue; No = Exit
                     switch(selectionContinue)
@@ -285,30 +319,85 @@ public class Catalog_Order {
         }
         
      if(validCredit && allow){ //ok
-//        System.out.println("======    Select Delivery Mode     ===========");
-//        System.out.println("====== 1. Pick-up on date and time ===========");
-//        System.out.println("====== 2. Delivery                 ===========");
-//        System.out.print("Please make a selection : ");
-        //selectionDeliveryMode = scan.nextInt();
+        System.out.println("======    Select Delivery Mode     ===========");
+        System.out.println("====== 1. Pick-up on date and time ===========");
+        System.out.println("====== 2. Delivery                 ===========");
+        System.out.print("Please make a selection : ");
+        selectionDeliveryMode = scan.nextInt();
         System.out.println("\n");
-//        if(selectionDeliveryMode == 1){
-//            System.out.printf("Enter date : ");
-//            enterDate = scan.next();            
-//            System.out.printf("Enter time : ");
-//            enterTime = scan.next();
-//        }
-//        else if(selectionDeliveryMode == 2){
-//            System.out.print("Enter address : ");
-//            delivery = scan.next();
-//        }
-//        else{
-//            System.out.print("Error");
-//        }
+        if(selectionDeliveryMode == 1){
+            System.out.printf("Enter date : ");
+            requirePickUpDate = Date();
+
+            System.out.printf("Enter time : ");
+            requirePickUpTime = Time();
+            
+            System.out.println("Pick Up staff Details");
+            System.out.println("Staff ID \t\tStaff Name");
+            for(int k=0; k<staffList.size();k++){
+                System.out.println(staffList.get(k).getStaffID()+"\t\t"+staffList.get(k).getStaffName());
+            }
+            System.out.print("Enter Pick Up Staff ID > ");
+            pickUpStaffID = scan.next();
+            
+        }else if(selectionDeliveryMode == 2){
+            Scanner scn = new Scanner(System.in);
+            System.out.print("Enter Delivery Address : ");
+            deliveryAddress = scn.nextLine();
+            System.out.print("\nEnter State : ");
+            state = scan.next();
+            System.out.print("\nEnter Delivery Contact Number : ");
+            deliveryContactNo = scan.next();
+            
+            requireDeliveryDate = Date();
+            requireDeliveryTime = Time();
+            
+            System.out.println("Delivery staff Details");
+            System.out.println("Staff ID \t\tStaff Name");
+            for(int k=0; k<staffList.size();k++){
+                System.out.println(staffList.get(k).getStaffID()+"\t\t"+staffList.get(k).getStaffName());
+            }
+            System.out.print("Enter Delivery Staff ID > ");
+            deliveryStaffID = scan.next();
+            //compare the id get the id to store the id that user input
+            for(int r=0; r<staffList.size();r++){
+                if(staffList.get(r).getStaffID().equals(deliveryStaffID)){
+                    addDeliveryStaff = staffList.get(r);
+                }
+            }      
+//            //Enter priotity
+//            System.out.println("\nPick Up Priority");
+//            System.out.println("***************************");
+//            System.out.println("1. Normal   RM  8.00");
+//            System.out.println("2. Express  RM 20.00");
+//            do{
+//                System.out.println("***************************");
+//                System.out.print("Please select the priority level: ");
+//                priorityLevel = scan.nextInt();
+//                if(priorityLevel < 0 || priorityLevel > 2){
+//                    System.out.println("Invalid Input, Please Enter Again!");
+//                }
+//            }while(priorityLevel < 0 || priorityLevel > 3);
+
+        }else{
+            System.out.print("Error");
+        }
             
             //Payment
             indexno = paymentList.get(paymentList.size()-1).getPaymentID();
             indexnum = Integer.parseInt(indexno.substring(2, 6)) +1;
-            payment = new Payment("PA"+indexnum,null,totalAmt,"Unpaid");
+            payment = new Payment("PA"+indexnum,null,totalAmt,"");
+            
+            if(optionsType.equals("1")){//customer
+                if(selectionDeliveryMode == 1){//pick-up (direct pay)
+                    payment.setPaymentStatus("Paid");
+                }else{//cash on delivery
+                    payment.setPaymentStatus("Unpaid");
+                }
+            }else{//corporate customer
+                payment.setPaymentStatus("Unpaid");
+            }
+            
             addOrder.setPayment(payment);
 
             orderDataList.add(addOrder);
@@ -319,9 +408,12 @@ public class Catalog_Order {
                     orderlist.get(r).getOrder().setPayment(payment);
                 }
             }
-                
-            System.out.println("Make Order Successfully!");
-            
+            //Store delivery details
+            newDelivery = new Delivery(trackingNo,deliveryAddress,state,deliveryContactNo,requireDeliveryDate,requireDeliveryTime,arrivalDate,arrivalTime,deliveryStatus,addDeliveryStaff,addOrder);
+            deliveryList.add(newDelivery);
+            //Store pick up details
+            newPickUp = new PickUp(pickupNo,requirePickUpDate,requirePickUpTime,pickupDate,pickupTime ,pickupStatus, addPickUpStaff, addOrder,2);
+            System.out.println("Make Order Successfully!\n");
             if(orderCustType.equals("Corporate")){
                 System.out.print("Corporate Customer ID/ Name : " + corporateCustomer.getCustID() + "\t\t");
                 System.out.println(corporateCustomer.getCustName());
@@ -340,17 +432,208 @@ public class Catalog_Order {
             }
             System.out.println("********************************************************************");
             System.out.printf("Total Amount : RM %.2f\n",totalAmt);
-            
             if(orderCustType.equals("Corporate")){
                 System.out.printf("Total Credit Limit : RM %.2f\n", corporateCustomer.getCreditLimit());
                 System.out.printf("Balance Credit Limit : RM %.2f\n", balanceCreditLimit);
             }
             orderAgain='N';
        } 
-    }while(orderAgain=='Y');
-    return; 
-}   
+//        do{
+//            System.out.print("\nOrder Again? (Y/N): ");
+//            orderAgain = Character.toUpperCase(scan.next().charAt(0));
+//        }while(orderAgain !='Y' && orderAgain !='N' );
+     
     
+        return; 
+    //}while(orderAgain=='Y');
+}   
+    public static QueueInterface<Delivery> GenerateDeliveryQueue(ListInterface<Delivery> deliveryList, String date) {
+
+        ListInterface<Delivery> sortedPriority = new LinkedList<>();
+        SortedListInterface<Delivery> sortedTime = new SortedLinkedList<>();
+        ListInterface<Delivery> sameDate = new LinkedList<>();
+        QueueInterface<Delivery> deliveryqueue = new LinkedQueue<>();
+        for (int i = 0; i < deliveryList.size(); i++) { //compare same date
+            if (deliveryList.get(i).getRequireDeliveryDate().equals(date)) {
+                sameDate.add(deliveryList.get(i));
+            }
+        }
+        
+        for (int i = 0; i < sameDate.size(); i++) { //sort time morning = highest priority
+            sortedTime.add(sameDate.get(i).getDelivery());
+        }
+
+        int size = sortedTime.getLength();
+
+        Delivery state = new Delivery();
+
+        for (int i = 1; i <= sortedTime.getLength(); i++) {
+            state = sortedTime.getEntry(i);
+            for (int r = 1; r <= sortedTime.getLength(); r++) {
+                if (sortedTime.getEntry(i).getState().equals(sortedTime.getEntry(r).getState())) {
+                    state = sortedTime.getEntry(i);
+                }
+            }
+            sortedPriority.add(state);
+        }
+
+        size = sortedPriority.size();
+
+        for (int i = 0; i < size; i++) {
+            deliveryqueue.enqueue(sortedPriority.get(i));
+        }
+
+        return deliveryqueue;
+    }
+    
+    public static String Time() {
+        Scanner input = new Scanner(System.in);
+        String t_str = "";
+        int time_int = 0;
+        boolean validTime = false;
+        do {
+            do {
+                System.out.print("Enter Time(1000-2000): ");
+                t_str = input.next();
+
+                //Validation of time(Only can be digit)
+                for (int r = 0; r < t_str.length(); r++) {
+                    if (Character.isDigit(t_str.charAt(r))) {
+                        validTime = true;
+                    } else {
+                        validTime = false;
+                        break;
+                    }
+                }
+
+                if (!validTime) {
+                    System.out.print("Invalid Time Format! Please Try Again\n");
+                }
+            } while (!validTime);
+
+            //Convert the value string time to interger time
+            time_int = Integer.parseInt(t_str);
+
+            if (time_int >= 1000 && time_int <= 2000) {
+                validTime = true;
+            } else {
+                validTime = false;
+            }
+        } while (!validTime);
+
+        //Return Time
+        String time = "" + time_int / 100 + String.format("%02d", time_int % 100);
+        return time;
+    }
+    
+    public static String Date() throws IOException{
+        Scanner input = new Scanner(System.in);
+        boolean validDate = false;
+        int day = 0;
+        int month = 0;
+        int year = 0;
+        String d = "";
+        String m = "";
+        String y = "";
+        do {
+            boolean checkD = false;
+            boolean checkM = false;
+            boolean checkY = false;
+            do {
+                System.out.print("Enter Date(DD MM YYYY): ");
+                d = input.next();
+                m = input.next();
+                y = input.next();
+
+                //Validation of day(Only can be digit)
+                checkD = CheckDigit(d);
+
+                if (checkD == true) {
+                    //Validation of month(Only can be digit)
+                    checkM = CheckDigit(m);
+                }
+
+                if (checkM == true) {
+                    //Validation of year(Only can be digit)
+                    checkY = CheckDigit(y);
+                }
+
+                if (!checkY) {
+                    System.out.println("\nInvalid Date! Please enter again\n");
+                }
+            } while (!checkY);
+
+            day = Integer.parseInt(d);
+            month = Integer.parseInt(m);
+            year = Integer.parseInt(y);
+            validDate = ValidDate(day, month, year);
+
+            if (!validDate) {
+                System.out.println("\nInvalid Date! Please enter again");
+            }
+        } while (!validDate);
+
+        String date = day + "/" + month + "/" + year;
+        return date;
+    }
+    
+    public static boolean CheckDigit(String input) throws IOException{
+        boolean checkDigit = false;
+        for(int r=0;r<input.length();r++){
+            if(Character.isDigit(input.charAt(r))){
+                checkDigit = true;
+            }
+            else{
+                System.out.print("Input Must be in Digit! Please Try Again\n");
+                System.out.printf("\nPlease Enter Any Key to Proceed...");
+                System.in.read();
+                System.out.println();
+                checkDigit = false;
+                break;
+            }
+        }
+        return checkDigit;
+    }
+    
+    public static boolean ValidDate(int day, int month, int year) {
+        boolean valid = false;
+        if (year > 2000 && year <= 2100) {
+            switch (month) {
+                case 1:
+                case 3:
+                case 5:
+                case 7:
+                case 8:
+                case 10:
+                case 12:
+                    if (day > 0 && day <= 31) {
+                        valid = true;
+                        break;
+                    }
+                case 2:
+                    if (year % 4 == 0) {
+                        if (day > 0 && day <= 29) {
+                            valid = true;
+                        }
+                    } else {
+                        if (day > 0 && day <= 28) {
+                            valid = true;
+                        }
+                    }
+                    break;
+                case 4:
+                case 6:
+                case 9:
+                case 11:
+                    if (day > 0 && day <= 30) {
+                        valid = true;
+                        break;
+                    }
+            }
+        }
+        return valid;
+    }
+
     public static boolean CheckAlphabetic(char input) throws IOException{
         boolean checkAlphabetic = false;
      

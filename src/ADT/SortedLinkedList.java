@@ -147,7 +147,7 @@ public class SortedLinkedList<T extends Comparable<? super T>> implements Sorted
     String outputStr = "";
     Node currentNode = firstNode;
     while (currentNode != null) {
-      outputStr += currentNode.data + "\n";;
+      outputStr += currentNode.data + "\n";
       currentNode = currentNode.next;
     }
     return outputStr;
@@ -168,4 +168,8 @@ public class SortedLinkedList<T extends Comparable<? super T>> implements Sorted
       next = nextNode;
     }
   }
+
 }
+
+}
+
