@@ -5,6 +5,7 @@
  */
 package order;
 
+import ADT.*;
 import fioreflowershop.*;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -23,10 +24,18 @@ public class PickedUpTimeStamp {
     private static Scanner in = new Scanner(System.in);
     public static char choice = 'n';
     
-    public static List<PickUp> TimeStamp(List<PickUp> pul, List<Order> order) throws IOException{
+    public static ListInterface<PickUp> TimeStamp(ListInterface<PickUp> pul) throws IOException{
         
         boolean display = false;
-        
+        System.out.println("\nStandby PickUp List ");
+        System.out.println("======================");
+        for(int i=0; i<pul.size();i++)
+        {
+            if(pul.get(i).getPickupStatus().equals("Standby"))
+            {
+                System.out.println(pul.get(i).getPickupNo());
+            }
+        }
         do{
             System.out.print(" \nPlease enter the PickUp Number: ");
             String no = in.next();
@@ -73,24 +82,19 @@ public class PickedUpTimeStamp {
                         
                     }
                        
-                }else if(display == false){
-                    System.out.println("\nSorry, This PickUp number is invalid.");
-                    break;
                 }
+                
 
+            }
+            if(display == false){
+                System.out.println("\nSorry, This PickUp number is invalid.");
+                break;
             }
             
             System.out.print("\nDo you want to search another PickUp Number? (yes/no): "); 
             choice = in.next().charAt(0);
             
-        }while(choice == 'y'|| choice == 'Y');
-        
-         
-            
-            
-        System.out.println("\n\nPress any key to back PickUp Menu...");
-        System.in.read();
-
+        }while(choice == 'y'|| choice == 'Y');  
         return pul;
     }
     
