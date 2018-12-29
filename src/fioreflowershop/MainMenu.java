@@ -154,7 +154,7 @@ public class MainMenu {
 
                     break;
                 case 5: //Generate Report
-
+                    orderLL = GenerateSalesOrder.GenerateReportMaintenanceMenu(prodTypeList, prodList, orderDataList, orderLL, corporateCustomerList, customerList);
                     break;
                 case 6: //Exit the system
                     System.out.print("Existing...");
