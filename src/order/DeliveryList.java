@@ -5,6 +5,7 @@
  */
 package order;
 
+import ADT.*;
 import fioreflowershop.*;
 import java.io.IOException;
 import java.util.List;
@@ -19,7 +20,7 @@ public class DeliveryList {
     public static char choice = 'n';
     public static char reenter = 'n';
 
-    public static void ShowDeliveryList(List<Delivery> deliveryList, List<OrderList> orderList) throws IOException{
+    public static void ShowDeliveryList(ListInterface<Delivery> deliveryList, ListInterface<OrderList> orderList) throws IOException{
       
         String option;
 
@@ -195,9 +196,22 @@ public class DeliveryList {
 			if(!validDate){
 				System.out.println("\nInvalid Date! Please enter again");
 			}
-		}while(!validDate);
+		}while(!validDate);		
+                String date;
+ if(day<10){
+           if(month<10)
+           date = "0"+ Integer.toString(day)+"/"+"0"+Integer.toString(month)+"/"+Integer.toString(year);
+           else
+           date = "0"+ Integer.toString(day)+"/"+Integer.toString(month)+"/"+Integer.toString(year);
+       }
+       else{
+           if(month<10)
+           date = Integer.toString(day)+"/"+"0"+Integer.toString(month)+"/"+Integer.toString(year);
+           else
+           date = Integer.toString(day)+"/"+Integer.toString(month)+"/"+Integer.toString(year);     
+                   
+       }
 
-		String date = day + "/" + month + "/" + year;
 		return date;
 }
 }

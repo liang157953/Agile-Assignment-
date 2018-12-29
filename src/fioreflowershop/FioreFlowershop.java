@@ -4,10 +4,14 @@
  * and open the template in the editor.
  */
 package fioreflowershop;
+
 import ADT.ListInterface;
 import ADT.LinkedList;
 import ADT.LinkedQueue;
 import ADT.QueueInterface;
+
+import ADT.*;
+
 import CatalogMaintenance.ProductMaintenance;
 import catalogOrder.*;
 import corporatecustomer.CorporateCustomerMaintenance;
@@ -34,12 +38,11 @@ public class FioreFlowershop {
         
         //Product Data
         ListInterface<Product> prodList = new LinkedList<Product>();
-        prodList.add(new Product("P1001","Flowers and Chocolates Gift","DESC...","Red",60.00,5,prodTypeList.get(0)));
+        prodList.add(new Product("P1001","Flowers and Chocolates Gift","DESC...","Red",60.00,2,prodTypeList.get(0)));
         prodList.add(new Product("P1002","Ladies Gift Hamper","DESC...","Red",65.00,5,prodTypeList.get(1)));
         prodList.add(new Product("P1003","Christmas Treats Gift Box","DESC...","White",15.00,3,prodTypeList.get(1)));
-        prodList.add(new Product("P1004","Honeybee","DESC...","Yellow",30.00,5,prodTypeList.get(0)));
-        prodList.add(new Product("P1005","Starry Night","DESC...","Blue",45.00,5,prodTypeList.get(2)));
-        
+        prodList.add(new Product("P1004","Honeybee","DESC...","Yellow",30.00,1,prodTypeList.get(0)));
+        prodList.add(new Product("P1005","Starry Night","DESC...","Blue",45.00,5,prodTypeList.get(2)));        
         
         //Customer Data
         ListInterface<Customer> customerList = new LinkedList<Customer>();
@@ -86,7 +89,9 @@ public class FioreFlowershop {
         pickupList.add(new PickUp("PU1004","20/11/2018","1200","20/11/2018","1610","Standby",staffList.get(0),orderDataList.get(0),2));
         pickupList.add(new PickUp("PU1005","20/11/2018","1300","20/11/2018","1610","Standby",staffList.get(0),orderDataList.get(0),2));
 
+
         
+
 
         //Style Data
         ListInterface<Style> styleList = new LinkedList<Style>();
@@ -109,9 +114,16 @@ public class FioreFlowershop {
   
         ListInterface<Delivery> deliveryList = new LinkedList<Delivery>();
 
+
         deliveryList.add(new Delivery("T1101","25-20,PV16","ZZZ","019-7132686","20/11/2018","1400","26/11/2018","1200","Processing",staffList.get(0),orderDataList.get(0)));
         deliveryList.add(new Delivery("T1102","20,jalan barongan,taman berjaya","Johor","019-7788115","20/11/2018","1200","5/11/2018","1200","Processing",staffList.get(2),orderDataList.get(0)));
         deliveryList.add(new Delivery("T1103","25-20,PV16","Setapak","019-7755115","20/11/2018","1200","11/12/2018","1200","Processing",staffList.get(1),orderDataList.get(0)));
+
+        deliveryList.add(new Delivery("T1101","25-20,PV16","Setapak","019-7132686","20/11/2018","1200","26/11/2018","1200","Processing",staffList.get(0),orderDataList.get(0),1));
+        deliveryList.add(new Delivery("T1102","20,jalan barongan,taman berjaya","Johor","019-7788115","2/11/2018","1200","5/11/2018","1200","Processing",staffList.get(2),orderDataList.get(0),1));
+        deliveryList.add(new Delivery("T1103","25-20,PV16","Setapak","019-7755115","20/11/2018","1200","11/12/2018","1200","Processing",staffList.get(1),orderDataList.get(0),1));
+
+
 
         ListInterface<OrderList> orderLL = new LinkedList<OrderList>();
         orderLL.add(new OrderList(orderDataList.get(0),prodList.get(0),2));
@@ -123,6 +135,7 @@ public class FioreFlowershop {
         orderLL.add(new OrderList(orderDataList.get(1),prodList.get(3),3));
         
         ListInterface<Customized> customizedList = new LinkedList<Customized>();
+
         ListInterface<Product> prodPromotionList = new LinkedList<Product>();
         prodPromotionList.add(new Product("PM1001","Flowers and Chocolates Gift","DESC...","Red",60.00,5,prodTypeList.get(0),"FEBRUARY"));
         QueueInterface<Delivery> deliveryqueue = new LinkedQueue<>();
@@ -139,15 +152,27 @@ public class FioreFlowershop {
 //            
 //        }
         
+
+        prodPromotionList.add(new Product("PM1002","Test1","DESC...","White",30.00,2,prodTypeList.get(2),"MARCH"));
+        prodPromotionList.add(new Product("PM1003","Test2","DESC...","Red",20.00,3,prodTypeList.get(1),"FEBRUARY"));
+        prodPromotionList.add(new Product("PM1004","Test3","DESC...","Yellow",45.00,0,prodTypeList.get(2),"APRIL"));
+
+        QueueInterface<PickUp> pickupqueue = new LinkedQueue<>();
+
+        //ProductMaintenance.ProductMainMenu(prodList, prodTypeList, prodPromotionList);
+
         //Product OK
         //ProductMaintenance.ProductMaintenanceMenu(prodList, prodTypeList);
         
+        //System.out.println("Return to Main Program");
         //Prmotion Product OK
-        //ProductMaintenance.PromotionProductMaintenanceMenu(prodPromotionList, prodTypeList);
-        
+//        ProductMaintenance.PromotionProductMaintenanceMenu(prodPromotionList, prodTypeList);
+//        for(int r=0;r<prodPromotionList.size();r++){
+//            System.out.println(prodPromotionList.get(r).getProductID() + ", " + prodPromotionList.get(r).getProductName() + ", " +prodPromotionList.get(r).getProductQuantity());
+//        }
        
         //System.out.println("Main Program");
-       //ProductMaintenance.StaffMenu(prodList, prodTypeList);
+        //ProductMaintenance.StaffMenu(prodList, prodTypeList);
         //ProductMaintenance.CustomerViewProducts(prodList, prodTypeList);
         //ProductMaintenance.ProductOutOfStockNotification(prodList, prodTypeList);
         //orderLL = GenerateSalesOrder.CorporateCustGenerateReport(prodTypeList, prodList, orderDataList, orderLL, corporateCustomerList, customerList);
@@ -167,9 +192,14 @@ public class FioreFlowershop {
               System.out.println(deliveryqueue.dequeue().getDelivery().toString());
           }while(!deliveryqueue.isEmpty());
         //orderDataList = Catalog_Order.CatalogOrderM(prodTypeList, prodList, orderDataList, customerList, staffList, paymentList, corporateCustomerList);
+
         //Catalog_Order.CatalogOrderM(prodTypeList, prodList, orderDataList, customerList, staffList.get(0), paymentList, corporateCustomerList, orderLL, deliveryList, staffList, pickupList);
         //GenerateSalesOrder.CorporateCustGenerateReport(prodTypeList, prodList, orderDataList, orderLL, corporateCustomerList, customerList);
         //GenerateSalesOrder.GenerateReportMain(prodTypeList, prodList, orderDataList, orderLL);
+ //       Catalog_Order.CatalogOrderM(prodTypeList, prodList, orderDataList, customerList, staffList.get(0), paymentList, corporateCustomerList, orderLL);
+  //     GenerateSalesOrder.CorporateCustGenerateReport(prodTypeList, prodList, orderDataList, orderLL, corporateCustomerList, customerList);
+   //     GenerateSalesOrder.GenerateReportMain(prodTypeList, prodList, orderDataList, orderLL);
+
 //        System.out.println("Product ID\tName\t\t\t\tDescription\t\tColor\t\tPrice\t\tQuantity\tType");
 //        for(int r=0;r<prodList.size();r++){    
 //            System.out.printf("%-10s\t%-30s\t%-20s\t%-10s\tRM %.2f\t   %-10d\t%20s\n",
@@ -212,11 +242,13 @@ public class FioreFlowershop {
 //        
       // CorporateCustomerMaintenance.Menu(corporateCustomerList, staffList.get(0), orderDataList, paymentList, customerList);
 
-       //   CustomizeOrder.Customize(customerList,customizedList, orderDataList, styleList, sizeList, prodList, accessoriesList, paymentList,staffList.get(0));
 
+//CustomizeOrder.Customize(customerList,customizedList, orderDataList, styleList, sizeList, prodList, accessoriesList, paymentList,staffList.get(0),pickupList);
+          pickupqueue = CustomizeOrder.GenerateQueue(pickupList, "20/11/2018");
+          
+       
+          do{
+              System.out.println(pickupqueue.dequeue().getPickUp().toString());
+          }while(!pickupqueue.isEmpty());
     }    
 }
-
-
-
-
