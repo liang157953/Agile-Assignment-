@@ -22,7 +22,7 @@ public class ProductMaintenance {
                 System.out.printf("\nOption > ");
                 option = input.next();
                 //Validation of User Input(Only can be digit)                
-            } while (!CheckDigit(option));
+            } while (!Validation.CheckDigit(option));
 
             switch (Integer.parseInt(option)) {
                 case 1: //Product Maintenance Menu
@@ -61,12 +61,12 @@ public class ProductMaintenance {
                 System.out.println("1. Register New Product");
                 System.out.println("2. Display Current Product List");
                 System.out.println("3. Maintain Product Information");
-                System.out.println("4. Return Main Menu");
+                System.out.println("4. Return Product Maintenance Main Menu");
 
                 System.out.printf("\nOption > ");
                 option = input.next();
                 //Validation of User Input(Only can be digit)                
-            } while (!CheckDigit(option));
+            } while (!Validation.CheckDigit(option));
 
             switch (Integer.parseInt(option)) {
                 case 1: //Register new product
@@ -113,7 +113,7 @@ public class ProductMaintenance {
                             System.out.println((prodTypeList.size() + 1) + ". Return Product Maintenance Menu");
                             System.out.printf("\nSelect Product Type > ");
                             options = input.next();
-                        } while (!CheckDigit(options + 1)); //CheckDigit: check whether the options is in digit or not
+                        } while (!Validation.CheckDigit(options + 1)); //Validation.CheckDigit: check whether the options is in digit or not
 
                         //options+1 = Return Product Maintenance Menu
                         if (Integer.parseInt(options) == prodTypeList.size() + 1) {
@@ -158,7 +158,7 @@ public class ProductMaintenance {
                                 System.out.printf("\nOption > ");
                                 optionss = input.next();
 
-                            } while (!CheckDigit(optionss)); //Check whether the optionss is in integer or not
+                            } while (!Validation.CheckDigit(optionss)); //Check whether the optionss is in integer or not
                             if (Integer.parseInt(optionss) == index + 1) { //index+1 = return.
                                 break;
                             }
@@ -198,6 +198,7 @@ public class ProductMaintenance {
 
     public static void PromotionProductMaintenanceMenu(ListInterface<Product> prodPromotionList, ListInterface<ProductType> prodTypeList) throws IOException {
         Scanner input = new Scanner(System.in);
+        Scanner scan = new Scanner(System.in);
 
         Product promotionProd = new Product();
         String option = "";
@@ -213,12 +214,12 @@ public class ProductMaintenance {
                 System.out.println("2. Display Current Promotion Product List");
                 System.out.println("3. Maintain Promotion Product Information");  
                 System.out.println("4. Remove Out-of-Stock Promotion Products");
-                System.out.println("5. Return Main Menu");
+                System.out.println("5. Return Product Maintenance Main Menu");
 
                 System.out.printf("\nOption > ");
                 option = input.next();
                 //Validation of User Input(Only can be digit)    
-            } while (!CheckDigit(option));
+            } while (!Validation.CheckDigit(option));
 
             switch (Integer.parseInt(option)) {
                 case 1: //Register new promotion product
@@ -251,7 +252,7 @@ public class ProductMaintenance {
                         System.out.println(ConsoleColors.RED + "\nNo Current Promotion Product List" + ConsoleColors.RESET);
                     }
 
-                    System.out.print("\nEnter Any Key Return to Product Menu...");
+                    System.out.print("\nEnter Any Key Return to Promotion Product Menu...");
                     System.in.read();
                     break;
                 case 3: //Maintain Promotion Product
@@ -261,9 +262,17 @@ public class ProductMaintenance {
                         selectPromoMonth = "";
                         checkMonth = true;
                         do {
+                            do{
                             System.out.print("Enter Promotion Month (eg. 1 = Jan): ");
-                            selectPromoMonth = input.next();
-                        } while (!CheckDigit(selectPromoMonth)); //Check whether the user input in digit or not
+                            selectPromoMonth = scan.nextLine();
+                            
+                            if(selectPromoMonth.equals("")){
+                                System.out.print(ConsoleColors.RED + "Promotion Month Cannot Be Empty" + ConsoleColors.RESET);
+                                System.in.read();
+                                System.out.println();
+                            }
+                        }while(selectPromoMonth.equals(""));
+                        } while (!Validation.CheckDigit(selectPromoMonth)); //Check whether the user input in digit or not
 
                         //Compare the user input with the month; Check whether is the valid month or not
                         switch (Integer.parseInt(selectPromoMonth)) {
@@ -304,7 +313,7 @@ public class ProductMaintenance {
                                 selectPromoMonth = "DECEMBER";
                                 break;
                             default: //Display error message
-                                System.err.println("Error: Input out of Range!");
+                                System.err.println("Error: Input out of Range!\n");
                                 checkMonth = false;
                         }
                     } while (!checkMonth);
@@ -348,7 +357,7 @@ public class ProductMaintenance {
                             System.out.printf("\nOption > ");
                             optionss = input.next();
 
-                        } while (!CheckDigit(optionss));
+                        } while (!Validation.CheckDigit(optionss));
                         if (Integer.parseInt(optionss) == index + 1) {
                             break;
                         }
@@ -402,7 +411,7 @@ public class ProductMaintenance {
                 System.out.printf("\nSelect Product Type > ");
                 options = input.next();
                 //Check whether the input is in digit or not; option + 1 = return to the product maintenance menu
-            } while (!CheckDigit(options));
+            } while (!Validation.CheckDigit(options));
 
             if (Integer.parseInt(options) == prodTypeList.size() + 1) {
                 System.out.println("############################################################################################################################################");
@@ -467,85 +476,128 @@ public class ProductMaintenance {
     public static boolean ViewPromotionProductList(ListInterface<Product> prodPromotionList, ListInterface<ProductType> prodTypeList) throws IOException {
         Scanner input = new Scanner(System.in);
         String selectPromoMonth = "";
-        boolean checkMonth = true;
+        boolean checkMonth = true, found = false;
+        String option="";
         do {
-            selectPromoMonth = "";
-            checkMonth = true;
             do {
-                System.out.print("\nEnter Promotion Month (eg. 1 = Jan): ");
-                selectPromoMonth = input.next();
-                //Check the user input only in digit
-            } while (!CheckDigit(selectPromoMonth));
-            System.out.println();
-            switch (Integer.parseInt(selectPromoMonth)) {
-                case 1:
-                    selectPromoMonth = "JANUARY";
-                    break;
-                case 2:
-                    selectPromoMonth = "FEBRUARY";
-                    break;
-                case 3:
-                    selectPromoMonth = "MARCH";
-                    break;
-                case 4:
-                    selectPromoMonth = "APRIL";
-                    break;
-                case 5:
-                    selectPromoMonth = "MAY";
-                    break;
-                case 6:
-                    selectPromoMonth = "JUNE";
-                    break;
-                case 7:
-                    selectPromoMonth = "JULY";
-                    break;
-                case 8:
-                    selectPromoMonth = "AUGUST";
-                    break;
-                case 9:
-                    selectPromoMonth = "SEPTEMBER";
-                    break;
-                case 10:
-                    selectPromoMonth = "OCTORBER";
-                    break;
-                case 11:
-                    selectPromoMonth = "NOVEMBER";
-                    break;
-                case 12:
-                    selectPromoMonth = "DECEMBER";
-                    break;
-                default:
-                    //if invalid input display error message
-                    System.err.println("Error: Input out of Range!");
-                    checkMonth = false;
-            }
-            //Check until the user input valid month in digit
-        } while (!checkMonth);
+                System.out.println("\n****************************\n Display Promotion Products\n****************************");
+                System.out.println("1. Promotion Products in Month");
+                System.out.println("2. All Promotion Products");
+                System.out.println("3. Return Promotion Products Menu");
 
-        int no = 0;
-        boolean found = false;
-        //Check whether the current promotion product list exist of the user input month or not
-        for (int r = 0; r < prodPromotionList.size(); r++) {
-            if (prodPromotionList.get(r).getProductPromotionMonth().equals(selectPromoMonth)) {
-                found = true; //if found = true
-            }
-        }
+                System.out.printf("\nOption > ");
+                option = input.next();
+                //Validation of User Input(Only can be digit)                
+            } while (!Validation.CheckDigit(option));
 
-        if (found) { //if found in the promotion product list; Display the product details according to the input month
-            System.out.print("********************************\n Current Promotion Product List \n********************************\n");
-            System.out.println("\nMonthly Promotion: " + ConsoleColors.RED + selectPromoMonth + ConsoleColors.RESET);
-            System.out.println("############################################################################################################################################");
-            System.out.println(ConsoleColors.BLUE + "Product ID\tName\t\t\t\tDescription\t\tColor\t\tPrice\t\tQuantity\tType Name" + ConsoleColors.RESET);
-            System.out.println("############################################################################################################################################");
-            for (int r = 0; r < prodPromotionList.size(); r++) {
-                if (prodPromotionList.get(r).getProductPromotionMonth().equals(selectPromoMonth)) {
-                    System.out.printf("%-10s\t%-30s\t%-20s\t%-10s\tRM%6.2f\t   %-10d\t%-20s\n",
-                            prodPromotionList.get(r).getProductID(), prodPromotionList.get(r).getProductName(), prodPromotionList.get(r).getProductDesc(),
-                            prodPromotionList.get(r).getProductColor(), prodPromotionList.get(r).getProductPrice(), prodPromotionList.get(r).getProductQuantity(),
-                            prodPromotionList.get(r).getProductType().getProductTypeName());
-                }
+            switch (Integer.parseInt(option)) {
+                case 1: //Display Promotion Product in Month
+                    do {
+                        selectPromoMonth = "";
+                        checkMonth = true;
+                        do {
+                            System.out.print("\nEnter Promotion Month (eg. 1 = Jan): ");
+                            selectPromoMonth = input.next();
+                            //Check the user input only in digit
+                        } while (!Validation.CheckDigit(selectPromoMonth));
+                        System.out.println();
+                        switch (Integer.parseInt(selectPromoMonth)) {
+                            case 1:
+                                selectPromoMonth = "JANUARY";
+                                break;
+                            case 2:
+                                selectPromoMonth = "FEBRUARY";
+                                break;
+                            case 3:
+                                selectPromoMonth = "MARCH";
+                                break;
+                            case 4:
+                                selectPromoMonth = "APRIL";
+                                break;
+                            case 5:
+                                selectPromoMonth = "MAY";
+                                break;
+                            case 6:
+                                selectPromoMonth = "JUNE";
+                                break;
+                            case 7:
+                                selectPromoMonth = "JULY";
+                                break;
+                            case 8:
+                                selectPromoMonth = "AUGUST";
+                                break;
+                            case 9:
+                                selectPromoMonth = "SEPTEMBER";
+                                break;
+                            case 10:
+                                selectPromoMonth = "OCTORBER";
+                                break;
+                            case 11:
+                                selectPromoMonth = "NOVEMBER";
+                                break;
+                            case 12:
+                                selectPromoMonth = "DECEMBER";
+                                break;
+                            default:
+                                //if invalid input display error message
+                                System.err.println("Error: Input out of Range!");
+                                checkMonth = false;
+                        }
+                        //Check until the user input valid month in digit
+                    } while (!checkMonth);
+
+                    int no = 0;
+                    found = false;
+                    //Check whether the current promotion product list exist of the user input month or not
+                    for (int r = 0; r < prodPromotionList.size(); r++) {
+                        if (prodPromotionList.get(r).getProductPromotionMonth().equals(selectPromoMonth)) {
+                            found = true; //if found = true
+                        }
+                    }
+
+                    if (found) { //if found in the promotion product list; Display the product details according to the input month
+                        System.out.print("********************************\n Current Promotion Product List \n********************************\n");
+                        System.out.println("\nMonthly Promotion: " + ConsoleColors.RED + selectPromoMonth + ConsoleColors.RESET);
+                        System.out.println("############################################################################################################################################");
+                        System.out.println(ConsoleColors.BLUE + "Product ID\tName\t\t\t\tDescription\t\tColor\t\tPrice\t\tQuantity\tType Name" + ConsoleColors.RESET);
+                        System.out.println("############################################################################################################################################");
+                        for (int r = 0; r < prodPromotionList.size(); r++) {
+                            if (prodPromotionList.get(r).getProductPromotionMonth().equals(selectPromoMonth)) {
+                                System.out.printf("%-10s\t%-30s\t%-20s\t%-10s\tRM%6.2f\t   %-10d\t%-20s\n",
+                                        prodPromotionList.get(r).getProductID(), prodPromotionList.get(r).getProductName(), prodPromotionList.get(r).getProductDesc(),
+                                        prodPromotionList.get(r).getProductColor(), prodPromotionList.get(r).getProductPrice(), prodPromotionList.get(r).getProductQuantity(),
+                                        prodPromotionList.get(r).getProductType().getProductTypeName());
+                            }
+                        }
+                    }
+                    System.out.print("\nPlease Enter Any Key to Proceed...");
+                    System.in.read();
+                    break;
+                case 2: //Display all promotion products
+                    found=true;
+                    System.out.print("********************************\n Current Promotion Product List \n********************************\n");
+                    System.out.println("##################################################################################################################################################################");
+                    System.out.println(ConsoleColors.BLUE + "Product ID\tName\t\t\t\tDescription\t\tColor\t\tPrice\t\tQuantity\tType Name\t\tPromotion Month" + ConsoleColors.RESET);
+                    System.out.println("##################################################################################################################################################################");
+                    for (int r = 0; r < prodPromotionList.size(); r++) {
+                        System.out.printf("%-10s\t%-30s\t%-20s\t%-10s\tRM%6.2f\t   %-10d\t%-20s\t%-20s\n",
+                                prodPromotionList.get(r).getProductID(), prodPromotionList.get(r).getProductName(), prodPromotionList.get(r).getProductDesc(),
+                                prodPromotionList.get(r).getProductColor(), prodPromotionList.get(r).getProductPrice(), prodPromotionList.get(r).getProductQuantity(),
+                                prodPromotionList.get(r).getProductType().getProductTypeName(),prodPromotionList.get(r).getProductPromotionMonth());
+                    }
+                    System.out.print("\nPlease Enter Any Key to Proceed...");
+                    System.in.read();
+                    break;
+                case 3: //Return Main Menu
+                    found=true;
+                    break;
+                default: //Display error message if not within the options provided
+                    System.out.println(ConsoleColors.RED + "Invalid Option! Please Try Again" + ConsoleColors.RESET);
+                    System.out.print("Please Enter Any Key to Proceed...");
+                    System.in.read();
+                    System.out.println();
             }
-        }
+        } while (Integer.parseInt(option) != 3);
 
         return found;
     }
@@ -628,7 +680,7 @@ public class ProductMaintenance {
                                 do { //Confirmation of removing the promotion product. y=remove;n=remains unchanged
                                     System.out.print("Are you sure want to remove? (Y/N): ");
                                     proceed = input.nextLine();
-                                    if (CheckAlphabetic(proceed)) {
+                                    if (Validation.CheckAlphabetic(proceed)) {
                                         proceed = proceed.toUpperCase();
                                     }
                                 } while (!proceed.equals("Y") && !proceed.equals("N"));
@@ -673,15 +725,13 @@ public class ProductMaintenance {
             do { //Confirmation of updating the product name. y=update;n=remains unchanged
                 System.out.print("\nContinue to remove? (Y/N): ");
                 continue1 = input.nextLine();
-                if (CheckAlphabetic(continue1)) {
+                if (Validation.CheckAlphabetic(continue1)) {
                     continue1 = continue1.toUpperCase();
                 }
             } while (!continue1.equals("Y") && !continue1.equals("N"));
 
             if (continue1.equals("N")) { //return to maintain product page
-                System.out.print("Returning to Maintain Product Page...");
-                System.in.read();
-                System.out.println();
+                ReturnMaintainProductPage();
                 continueRemove = false;
                 break;
             } else {
@@ -700,9 +750,17 @@ public class ProductMaintenance {
                 do {
                     checkMonth = true;
                     do { //input month in digit
-                        System.out.print("Enter Promotion Month (eg. 1 = Jan): ");
-                        promoMonth = input.nextLine();
-                    } while (!CheckDigit(promoMonth));
+                        do{
+                            System.out.print("Enter Promotion Month (eg. 1 = Jan): ");
+                            promoMonth = input.nextLine();
+                            
+                            if(promoMonth.equals("")){
+                                System.out.print(ConsoleColors.RED + "Promotion Month Cannot Be Empty" + ConsoleColors.RESET);
+                                System.in.read();
+                                System.out.println();
+                            }
+                        }while(promoMonth.equals(""));
+                    } while (!Validation.CheckDigit(promoMonth));
 
                     switch (Integer.parseInt(promoMonth)) {
                         case 1:
@@ -751,21 +809,45 @@ public class ProductMaintenance {
             //For both add new product or promotion product
             System.out.println("Product ID: " + ConsoleColors.BLUE + newProdID + ConsoleColors.RESET);
 
-            System.out.print("Product Name: ");
-            prodName = input.nextLine();
-
-            System.out.print("Product Description: ");
-            prodDesc = input.nextLine();
-
+            do{
+                System.out.print("Product Name: ");
+                prodName = input.nextLine();
+                
+                if (prodName.equals("")) {
+                    System.out.print(ConsoleColors.RED + "Product Name Cannot Be Empty" + ConsoleColors.RESET);
+                    System.in.read();
+                    System.out.println();
+                }
+            }while(prodName.equals(""));
+            
+            do{
+                System.out.print("Product Description: ");
+                prodDesc = input.nextLine();
+                
+                if (prodDesc.equals("")) {
+                    System.out.print(ConsoleColors.RED + "Product Description Cannot Be Empty" + ConsoleColors.RESET);
+                    System.in.read();
+                    System.out.println();
+                }
+            }while(prodDesc.equals(""));
+            
             do { //Check the input color in alphabetic only since the color dont have integer 
-                System.out.print("Product Color: ");
-                prodColor = input.nextLine();
-            } while (!CheckAlphabetic(prodColor));
+                do{
+                    System.out.print("Product Color: ");
+                    prodColor = input.nextLine();
+
+                    if (prodColor.equals("")) {
+                        System.out.print(ConsoleColors.RED + "Product Description Cannot Be Empty" + ConsoleColors.RESET);
+                        System.in.read();
+                        System.out.println();
+                    }
+                }while(prodColor.equals(""));
+            } while (!Validation.CheckAlphabetic(prodColor));
 
             //Provide user to input the product price in double 
-            //(ProductMaintenance.askInputDouble("Product Price: RM ") will return double value
+            //(Validation.askInputDouble("Product Price: RM ") will return double value
             do{
-                prodPrice = "" + ProductMaintenance.askInputDouble("Product Price: RM ");
+                prodPrice = "" + Validation.askInputDouble("Product Price: RM ");
                 if(Double.parseDouble(prodPrice)<=0){
                     System.out.println(ConsoleColors.RED + "Minimum Product Price: RM 1.00" + ConsoleColors.RESET);
                 }
@@ -773,11 +855,20 @@ public class ProductMaintenance {
 
             do{
                 do {//Check the product quantity only in digit
-                    System.out.print("Product Quantity: ");
-                    prodQty = input.next();
-                } while (!CheckDigit(prodQty));
+                    do{
+                        System.out.print("Product Quantity: ");
+                        prodQty = input.nextLine();
+                        
+                        if (prodQty.equals("")) {
+                            System.out.print(ConsoleColors.RED + "Product Quantity Cannot Be Empty" + ConsoleColors.RESET);
+                            System.in.read();
+                            System.out.println();
+                        }
+                    }while(prodQty.equals(""));
+                } while (!Validation.CheckDigit(prodQty));
                 if (Integer.parseInt(prodQty)< 1) { //check quantity cannot less than 1
                     System.out.println(ConsoleColors.RED + "Minimum Product Quantity: 1" + ConsoleColors.RESET);
+                    System.out.println();
                 }
             }while (Integer.parseInt(prodQty)< 1);
             
@@ -792,7 +883,7 @@ public class ProductMaintenance {
                     System.out.printf("\nSelect Product Type > ");
                     options = input.next();
                     //Only the product type within the list will be accepted and the options must in digit
-                } while (!CheckDigit(options));
+                } while (!Validation.CheckDigit(options));
 
                 //Check whether the user input product type is within the product type list or not
                 if (Integer.parseInt(options) <= 0 || Integer.parseInt(options) > prodTypeList.size()) {
@@ -807,7 +898,7 @@ public class ProductMaintenance {
             //if the user did not input anything, this will required the user to input again start from the top to bottom
             if (prodName.equals("") || prodDesc.equals("") || prodDesc.equals("") || prodColor.equals("") || prodPrice.equals("") || prodQty.equals("")) {
                 System.out.println(ConsoleColors.RED + "\nSystem Notification: All fields must be filled in!" + ConsoleColors.RESET);
-                System.out.printf("Enter Any Key Return to Register Form");
+                System.out.println("Enter Any Key Return to Register Form\n");
                 System.in.read();
                 status = false; //if is empty; return false
             } else {
@@ -847,48 +938,54 @@ public class ProductMaintenance {
                 System.out.printf("\nOption > ");
                 option = input.next();
                 //Check the input is in digit or not
-            } while (!CheckDigit(option));
+            } while (!Validation.CheckDigit(option));
 
             Scanner scan = new Scanner(System.in);
-            String proceed;
+            String proceed="";
             switch (Integer.parseInt(option)) { //Check the user input is within the range or not
                 case 1: //update product name
-                    System.out.printf("Current Product Name: %s", updateProduct.getProductName());
-                    System.out.print("\nEnter New Product Name: ");
-                    String newProdName = scan.nextLine();
-
-                    do { //Confirmation of updating the product name. y=update;n=remains unchanged
-                        System.out.print("Are you sure want to proceed? (Y/N): ");
-                        proceed = input.next();
-                        if (CheckAlphabetic(proceed)) {
-                            proceed = proceed.toUpperCase();
+                    String newProdName="";
+                    do{
+                        System.out.printf("Current Product Name: %s", updateProduct.getProductName());
+                        System.out.print("\nEnter New Product Name: ");
+                        newProdName = scan.nextLine();
+                        
+                        if(newProdName.equals("")){
+                            System.out.print(ConsoleColors.RED + "Product Name Cannot Be Empty" + ConsoleColors.RESET);
+                            System.in.read();
+                            System.out.println();
                         }
-                    } while (!proceed.equals("Y") && !proceed.equals("N"));
+                    }while(newProdName.equals(""));
+
+                    //Confirmation of updating the product name. y=update;n=remains unchanged
+                    proceed = ConfirmProceed(proceed, input); 
 
                     if (proceed.equals("Y")) { //update product name
                         updateProduct.setProductName(newProdName);
                         System.out.print(ConsoleColors.GREEN + "Update Product Name Successfully!" + ConsoleColors.RESET);
                         System.in.read();
                         System.out.println("\n");
-                    } else { //return to maintain product page
-                        System.out.print("Returning to Maintain Product Page...");
-                        System.in.read();
-                        System.out.println();
+                    } else {                         
+                        ReturnMaintainProductPage();
                         break;
                     }
                     break;
                 case 2: //update product description
-                    System.out.printf("Current Product Description: %s", updateProduct.getProductDesc());
-                    System.out.print("\nEnter New Product Description: ");
-                    String newProdDesc = scan.nextLine();
-
-                    do { //Confirmation of updating the product description. y=update;n=remains unchanged
-                        System.out.print("Are you sure want to proceed? (Y/N): ");
-                        proceed = input.next();
-                        if (CheckAlphabetic(proceed)) {
-                            proceed = proceed.toUpperCase();
+                    String newProdDesc="";
+                    do{
+                        System.out.printf("Current Product Description: %s", updateProduct.getProductDesc());
+                        System.out.print("\nEnter New Product Description: ");
+                        newProdDesc = scan.nextLine();
+                        
+                        if(newProdDesc.equals("")){
+                            System.out.print(ConsoleColors.RED + "Product Description Cannot Be Empty" + ConsoleColors.RESET);
+                            System.in.read();
+                            System.out.println();
                         }
-                    } while (!proceed.equals("Y") && !proceed.equals("N"));
+                    }while(newProdDesc.equals(""));
+
+                    //Confirmation of updating the product description. y=update;n=remains unchanged
+                    proceed = ConfirmProceed(proceed, input); 
 
                     if (proceed.equals("Y")) {  //update product description
                         updateProduct.setProductDesc(newProdDesc);
@@ -896,24 +993,26 @@ public class ProductMaintenance {
                         System.in.read();
                         System.out.println("\n");
                     } else { //return to maintain product page
-                        System.out.print("Returning to Maintain Product Page...");
-                        System.in.read();
-                        System.out.println();
+                        ReturnMaintainProductPage();
                         break;
                     }
                     break;
                 case 3: //update product color
-                    System.out.printf("Current Product Color: %s", updateProduct.getProductColor());
-                    System.out.print("\nEnter New Product Color: ");
-                    String newProdColor = scan.nextLine();
-
-                    do { //Confirmation of updating the product color. y=update;n=remains unchanged
-                        System.out.print("Are you sure want to proceed? (Y/N): ");
-                        proceed = input.next();
-                        if (CheckAlphabetic(proceed)) {
-                            proceed = proceed.toUpperCase();
+                    String newProdColor="";
+                    do{
+                        System.out.printf("Current Product Color: %s", updateProduct.getProductColor());
+                        System.out.print("\nEnter New Product Color: ");
+                        newProdColor = scan.nextLine();
+                        
+                        if(newProdColor.equals("")){
+                            System.out.print(ConsoleColors.RED + "Product Color Cannot Be Empty" + ConsoleColors.RESET);
+                            System.in.read();
+                            System.out.println();
                         }
-                    } while (!proceed.equals("Y") && !proceed.equals("N"));
+                    }while(newProdColor.equals(""));
+
+                    //Confirmation of updating the product color. y=update;n=remains unchanged
+                    proceed = ConfirmProceed(proceed, input); 
 
                     if (proceed.equals("Y")) { //update product color
                         updateProduct.setProductColor(newProdColor);
@@ -921,9 +1020,7 @@ public class ProductMaintenance {
                         System.in.read();
                         System.out.println("\n");
                     } else { //return to maintain product page
-                        System.out.print("Returning to Maintain Product Page...");
-                        System.in.read();
-                        System.out.println();
+                        ReturnMaintainProductPage();
                         break;
                     }
                     break;
@@ -933,21 +1030,15 @@ public class ProductMaintenance {
                     
                     do{
                         System.out.printf("Current Product Price: RM %.2f\n", updateProduct.getProductPrice());
-                        newProdPrice = "" + ProductMaintenance.askInputDouble("Enter New Product Price: RM ");
+                        newProdPrice = "" + Validation.askInputDouble("Enter New Product Price: RM ");
                         System.out.println();
                         if (Double.parseDouble(newProdPrice) <= 0) {
                             System.out.println(ConsoleColors.RED + "Minimum Price: RM 1.00" + ConsoleColors.RESET + "\n");
                         }
                     } while (Double.parseDouble(newProdPrice) <= 0);     
 
-                    do { //Confirmation of updating the product price. y=update;n=remains unchanged
-                        System.out.print("Are you sure want to proceed? (Y/N): ");
-                        proceed = input.next();
-                        if (CheckAlphabetic(proceed)) {
-                            proceed = proceed.toUpperCase();
-                        }
-                        System.out.println();
-                    } while (!proceed.equals("Y") && !proceed.equals("N"));
+                    //Confirmation of updating the product price. y=update;n=remains unchanged
+                    proceed = ConfirmProceed(proceed, input); 
 
                     if (proceed.equals("Y")) { //update product price
                         updateProduct.setProductPrice(Double.parseDouble(newProdPrice));
@@ -955,9 +1046,7 @@ public class ProductMaintenance {
                         System.in.read();
                         System.out.println("\n");
                     } else { //return to maintain product page
-                        System.out.print("Returning to Maintain Product Page...");
-                        System.in.read();
-                        System.out.println();
+                        ReturnMaintainProductPage();
                         break;
                     }
                     break;
@@ -965,19 +1054,21 @@ public class ProductMaintenance {
                 case 5: //update product quantity
                     String newProdQty = "";
                     do {
-                        System.out.printf("Current Product Quantity: %2d\n", updateProduct.getProductQuantity());
-                        System.out.print("Enter New Product Quantity: ");
-                        newProdQty = input.next();
-                    } while (!CheckDigit(newProdQty));
+                        do{
+                            System.out.printf("Current Product Quantity: %2d\n", updateProduct.getProductQuantity());
+                            System.out.print("Enter New Product Quantity: ");
+                            newProdQty = scan.nextLine();
+                            
+                            if(newProdQty.equals("")){
+                                System.out.print(ConsoleColors.RED + "Product Name Cannot Be Empty" + ConsoleColors.RESET);
+                                System.in.read();
+                                System.out.println();
+                            }
+                        }while(newProdQty.equals(""));
+                    } while (!Validation.CheckDigit(newProdQty));
 
-                    do { //Confirmation of updating the product quantity. y=update;n=remains unchanged
-                        System.out.print("Are you sure want to proceed? (Y/N): ");
-                        proceed = input.next();
-                        if (CheckAlphabetic(proceed)) {
-                            proceed = proceed.toUpperCase();
-                        }
-                        System.out.println();
-                    } while (!proceed.equals("Y") && !proceed.equals("N"));
+                    //Confirmation of updating the product quantity. y=update;n=remains unchanged
+                    proceed = ConfirmProceed(proceed, input); 
 
                     if (proceed.equals("Y")) { //update product qunantity
                         updateProduct.setProductQuantity(Integer.parseInt(newProdQty));
@@ -985,9 +1076,7 @@ public class ProductMaintenance {
                         System.in.read();
                         System.out.println("\n");
                     } else { //return to maintain product page
-                        System.out.print("Returning to Maintain Product Page...");
-                        System.in.read();
-                        System.out.println();
+                        ReturnMaintainProductPage();
                         break;
                     }
                     break;
@@ -1003,12 +1092,10 @@ public class ProductMaintenance {
                             System.out.println((prodTypeList.size() + 1) + ". Return to Maintain Product Page");
                             System.out.printf("\nSelect Product Type > ");
                             option = input.next();
-                        } while (!CheckDigit(option + 1));
+                        } while (!Validation.CheckDigit(option));
 
                         if (Integer.parseInt(option) == prodTypeList.size() + 1) {
-                            System.out.print("Returning to Maintain Product Page...");
-                            System.in.read();
-                            System.out.println();
+                            ReturnMaintainProductPage();
                             break;
                         }
 
@@ -1018,13 +1105,7 @@ public class ProductMaintenance {
                             test = false;
                         } else {
                             test = true;
-                            do { //Confirmation of updating the product type. y=update;n=remains unchanged
-                                System.out.print("Are you sure want to proceed? (Y/N): ");
-                                proceed = input.next();
-                                if (CheckAlphabetic(proceed)) {
-                                    proceed = proceed.toUpperCase();
-                                }
-                            } while (!proceed.equals("Y") && !proceed.equals("N"));
+                            proceed = ConfirmProceed(proceed, input);
 
                             if (proceed.equals("Y")) { //update product type
                                 updateProduct.setProductType(prodTypeList.get(Integer.parseInt(option) - 1));
@@ -1032,9 +1113,7 @@ public class ProductMaintenance {
                                 System.in.read();
                                 System.out.println("\n");
                             } else { //return to maintain product page
-                                System.out.print("Returning to Maintain Product Page...");
-                                System.in.read();
-                                System.out.println();
+                                ReturnMaintainProductPage();
                                 break;
                             }
                         }
@@ -1053,146 +1132,21 @@ public class ProductMaintenance {
         return updateProduct;
     }
 
-    public static boolean CheckDigit(String input) throws IOException {
-        boolean checkDigit = false;
-        //Check every character if the input string is in digit
-        for (int r = 0; r < input.length(); r++) {
-            if (Character.isDigit(input.charAt(r))) {
-                checkDigit = true; //if is digit return true
-            } else { //if got one of the character of the string is not digit; return false
-                System.out.print(ConsoleColors.RED + "Input Must be in Digit! Please Try Again\n" + ConsoleColors.RESET);
-                System.out.printf("\nPlease Enter Any Key to Proceed...");
-                System.in.read();
-                System.out.println();
-                checkDigit = false;
-                break;
+    private static String ConfirmProceed(String proceed, Scanner input) throws IOException {
+        do { //Confirmation of updating the product. y=update;n=remains unchanged
+            System.out.print("Are you sure want to proceed? (Y/N): ");
+            proceed = input.next();
+            if (Validation.CheckAlphabetic(proceed)) {
+                proceed = proceed.toUpperCase();
             }
-        }
-        return checkDigit;
+        } while (!proceed.equals("Y") && !proceed.equals("N"));
+        return proceed;
     }
 
-    public static boolean CheckAlphabetic(String input) throws IOException {
-        boolean checkAlphabetic = false;
-        //Check every character if the input string is in alphabetic
-        for (int r = 0; r < input.length(); r++) {
-            if (Character.isAlphabetic(input.charAt(r))) {
-                checkAlphabetic = true; //if is alphabet return true
-            } else { //if got one of the character of the string is not alphabet; return false
-                System.out.println(ConsoleColors.RED + "Input Must be in Alphabet! Please Try Again\n" + ConsoleColors.RESET);
-                System.out.printf("Please Enter Any Key to Proceed...");
-                System.in.read();
-                System.out.println();
-                checkAlphabetic = false;
-                break;
-            }
-        }
-
-        return checkAlphabetic;
-    }
-
-    public static double askInputDouble(String informationText) {
-        Scanner input = new Scanner(System.in);
-        Boolean error = false;
-        String userInp = "";
-        do {
-            System.out.print(informationText); //display the information of the user wants to display
-            userInp = input.nextLine();
-            if (!ProductMaintenance.isDouble(userInp, "double")) {//Check the user input type is double
-                //if not in double data type display error message and return error = true
-                System.out.println(ConsoleColors.RED + "Error: must be a Double." + ConsoleColors.RESET);
-                error = true;
-            } else {
-                error = false;
-            }
-        } while (error == true);
-        //return the input in double
-        return Double.parseDouble(userInp);
-    }
-
-    public static boolean isDouble(String input, String type) {
-        try { //Check whether the input data type in double or not
-            if (type.equalsIgnoreCase("double")) {
-                Double.parseDouble(input);
-            }
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
-    }
-
-    public class ConsoleColors {
-        // Reset
-
-        public static final String RESET = "\033[0m";  // Text Reset
-
-        // Regular Colors
-        public static final String BLACK = "\033[0;30m";   // BLACK
-        public static final String RED = "\033[0;31m";     // RED
-        public static final String GREEN = "\033[0;32m";   // GREEN
-        public static final String YELLOW = "\033[0;33m";  // YELLOW
-        public static final String BLUE = "\033[0;34m";    // BLUE
-        public static final String PURPLE = "\033[0;35m";  // PURPLE
-        public static final String CYAN = "\033[0;36m";    // CYAN
-        public static final String WHITE = "\033[0;37m";   // WHITE
-
-        // Bold
-        public static final String BLACK_BOLD = "\033[1;30m";  // BLACK
-        public static final String RED_BOLD = "\033[1;31m";    // RED
-        public static final String GREEN_BOLD = "\033[1;32m";  // GREEN
-        public static final String YELLOW_BOLD = "\033[1;33m"; // YELLOW
-        public static final String BLUE_BOLD = "\033[1;34m";   // BLUE
-        public static final String PURPLE_BOLD = "\033[1;35m"; // PURPLE
-        public static final String CYAN_BOLD = "\033[1;36m";   // CYAN
-        public static final String WHITE_BOLD = "\033[1;37m";  // WHITE
-
-        // Underline
-        public static final String BLACK_UNDERLINED = "\033[4;30m";  // BLACK
-        public static final String RED_UNDERLINED = "\033[4;31m";    // RED
-        public static final String GREEN_UNDERLINED = "\033[4;32m";  // GREEN
-        public static final String YELLOW_UNDERLINED = "\033[4;33m"; // YELLOW
-        public static final String BLUE_UNDERLINED = "\033[4;34m";   // BLUE
-        public static final String PURPLE_UNDERLINED = "\033[4;35m"; // PURPLE
-        public static final String CYAN_UNDERLINED = "\033[4;36m";   // CYAN
-        public static final String WHITE_UNDERLINED = "\033[4;37m";  // WHITE
-
-        // Background
-        public static final String BLACK_BACKGROUND = "\033[40m";  // BLACK
-        public static final String RED_BACKGROUND = "\033[41m";    // RED
-        public static final String GREEN_BACKGROUND = "\033[42m";  // GREEN
-        public static final String YELLOW_BACKGROUND = "\033[43m"; // YELLOW
-        public static final String BLUE_BACKGROUND = "\033[44m";   // BLUE
-        public static final String PURPLE_BACKGROUND = "\033[45m"; // PURPLE
-        public static final String CYAN_BACKGROUND = "\033[46m";   // CYAN
-        public static final String WHITE_BACKGROUND = "\033[47m";  // WHITE
-
-        // High Intensity
-        public static final String BLACK_BRIGHT = "\033[0;90m";  // BLACK
-        public static final String RED_BRIGHT = "\033[0;91m";    // RED
-        public static final String GREEN_BRIGHT = "\033[0;92m";  // GREEN
-        public static final String YELLOW_BRIGHT = "\033[0;93m"; // YELLOW
-        public static final String BLUE_BRIGHT = "\033[0;94m";   // BLUE
-        public static final String PURPLE_BRIGHT = "\033[0;95m"; // PURPLE
-        public static final String CYAN_BRIGHT = "\033[0;96m";   // CYAN
-        public static final String WHITE_BRIGHT = "\033[0;97m";  // WHITE
-
-        // Bold High Intensity
-        public static final String BLACK_BOLD_BRIGHT = "\033[1;90m"; // BLACK
-        public static final String RED_BOLD_BRIGHT = "\033[1;91m";   // RED
-        public static final String GREEN_BOLD_BRIGHT = "\033[1;92m"; // GREEN
-        public static final String YELLOW_BOLD_BRIGHT = "\033[1;93m";// YELLOW
-        public static final String BLUE_BOLD_BRIGHT = "\033[1;94m";  // BLUE
-        public static final String PURPLE_BOLD_BRIGHT = "\033[1;95m";// PURPLE
-        public static final String CYAN_BOLD_BRIGHT = "\033[1;96m";  // CYAN
-        public static final String WHITE_BOLD_BRIGHT = "\033[1;97m"; // WHITE
-
-        // High Intensity backgrounds
-        public static final String BLACK_BACKGROUND_BRIGHT = "\033[0;100m";// BLACK
-        public static final String RED_BACKGROUND_BRIGHT = "\033[0;101m";// RED
-        public static final String GREEN_BACKGROUND_BRIGHT = "\033[0;102m";// GREEN
-        public static final String YELLOW_BACKGROUND_BRIGHT = "\033[0;103m";// YELLOW
-        public static final String BLUE_BACKGROUND_BRIGHT = "\033[0;104m";// BLUE
-        public static final String PURPLE_BACKGROUND_BRIGHT = "\033[0;105m"; // PURPLE
-        public static final String CYAN_BACKGROUND_BRIGHT = "\033[0;106m";  // CYAN
-        public static final String WHITE_BACKGROUND_BRIGHT = "\033[0;107m";   // WHITE
+    private static void ReturnMaintainProductPage() throws IOException {
+        //return to maintain product page
+        System.out.print("Returning to Maintain Product Page...");
+        System.in.read();
+        System.out.println();
     }
 }
