@@ -6,7 +6,7 @@
 package catalogOrder;
 
 import ADT.*;
-import static catalogOrder.catalogOrder.CheckAlphabetic;
+import static catalogOrder.Catalog_Order.CheckAlphabetic;
 import fioreflowershop.*;
 //import fioreflowershop.OrderList;
 //import fioreflowershop.Product;

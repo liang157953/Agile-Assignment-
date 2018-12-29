@@ -6,6 +6,8 @@
 package fioreflowershop;
 import ADT.ListInterface;
 import ADT.LinkedList;
+import ADT.LinkedQueue;
+import ADT.QueueInterface;
 import CatalogMaintenance.ProductMaintenance;
 import catalogOrder.*;
 import corporatecustomer.CorporateCustomerMaintenance;
@@ -78,9 +80,11 @@ public class FioreFlowershop {
         //PickUp Data
         ListInterface<PickUp> pickupList = new LinkedList<PickUp>();
 
-        pickupList.add(new PickUp("PU1001","20/11/2018","1400","20/11/2018","1410","Standby",staffList.get(0),orderDataList.get(0)));
-        pickupList.add(new PickUp("PU1002","20/11/2018","1200","20/11/2018","1230","Standby",staffList.get(0),orderDataList.get(2)));
-        pickupList.add(new PickUp("PU1003","21/11/2018","1500","21/11/2018","1610","Standby",staffList.get(0),orderDataList.get(0)));
+        pickupList.add(new PickUp("PU1001","20/11/2018","1400","20/11/2018","1410","Standby",staffList.get(0),orderDataList.get(0),1));
+        pickupList.add(new PickUp("PU1002","20/11/2018","1200","20/11/2018","1230","Standby",staffList.get(0),orderDataList.get(2),1));
+        pickupList.add(new PickUp("PU1003","21/11/2018","1500","21/11/2018","1610","Standby",staffList.get(0),orderDataList.get(0),2));
+        pickupList.add(new PickUp("PU1004","20/11/2018","1200","20/11/2018","1610","Standby",staffList.get(0),orderDataList.get(0),2));
+        pickupList.add(new PickUp("PU1005","20/11/2018","1300","20/11/2018","1610","Standby",staffList.get(0),orderDataList.get(0),2));
 
         
 
@@ -105,9 +109,9 @@ public class FioreFlowershop {
   
         ListInterface<Delivery> deliveryList = new LinkedList<Delivery>();
 
-        deliveryList.add(new Delivery("T1101","25-20,PV16","Setapak","019-7132686","20/11/2018","1200","26/11/2018","1200","Processing",staffList.get(0),orderDataList.get(0),1));
-        deliveryList.add(new Delivery("T1102","20,jalan barongan,taman berjaya","Johor","019-7788115","2/11/2018","1200","5/11/2018","1200","Processing",staffList.get(2),orderDataList.get(0),1));
-        deliveryList.add(new Delivery("T1103","25-20,PV16","Setapak","019-7755115","20/11/2018","1200","11/12/2018","1200","Processing",staffList.get(1),orderDataList.get(0),1));
+        deliveryList.add(new Delivery("T1101","25-20,PV16","ZZZ","019-7132686","20/11/2018","1400","26/11/2018","1200","Processing",staffList.get(0),orderDataList.get(0)));
+        deliveryList.add(new Delivery("T1102","20,jalan barongan,taman berjaya","Johor","019-7788115","20/11/2018","1200","5/11/2018","1200","Processing",staffList.get(2),orderDataList.get(0)));
+        deliveryList.add(new Delivery("T1103","25-20,PV16","Setapak","019-7755115","20/11/2018","1200","11/12/2018","1200","Processing",staffList.get(1),orderDataList.get(0)));
 
         ListInterface<OrderList> orderLL = new LinkedList<OrderList>();
         orderLL.add(new OrderList(orderDataList.get(0),prodList.get(0),2));
@@ -121,7 +125,8 @@ public class FioreFlowershop {
         ListInterface<Customized> customizedList = new LinkedList<Customized>();
         ListInterface<Product> prodPromotionList = new LinkedList<Product>();
         prodPromotionList.add(new Product("PM1001","Flowers and Chocolates Gift","DESC...","Red",60.00,5,prodTypeList.get(0),"FEBRUARY"));
-        
+        QueueInterface<Delivery> deliveryqueue = new LinkedQueue<>();
+        orderLL =GenerateSalesOrder.GenerateReportMaintenanceMenu(prodTypeList, prodList, orderDataList, orderLL, corporateCustomerList, customerList);
         //ProductMaintenance.PromotionProductMaintenanceMenu(prodPromotionList, prodTypeList);
         
 //        System.out.print("\n**********************\n Before Current Product List \n**********************\n");
@@ -155,11 +160,16 @@ public class FioreFlowershop {
 
           
           //paymentList = CustomerPayment.MakePayment(paymentList);
-         
+         deliveryqueue = Catalog_Order.GenerateDeliveryQueue(deliveryList, "20/11/2018");
+          
+       
+          do{
+              System.out.println(deliveryqueue.dequeue().getDelivery().toString());
+          }while(!deliveryqueue.isEmpty());
         //orderDataList = Catalog_Order.CatalogOrderM(prodTypeList, prodList, orderDataList, customerList, staffList, paymentList, corporateCustomerList);
-        Catalog_Order.CatalogOrderM(prodTypeList, prodList, orderDataList, customerList, staffList.get(0), paymentList, corporateCustomerList, orderLL);
-        GenerateSalesOrder.CorporateCustGenerateReport(prodTypeList, prodList, orderDataList, orderLL, corporateCustomerList, customerList);
-        GenerateSalesOrder.GenerateReportMain(prodTypeList, prodList, orderDataList, orderLL);
+        //Catalog_Order.CatalogOrderM(prodTypeList, prodList, orderDataList, customerList, staffList.get(0), paymentList, corporateCustomerList, orderLL, deliveryList, staffList, pickupList);
+        //GenerateSalesOrder.CorporateCustGenerateReport(prodTypeList, prodList, orderDataList, orderLL, corporateCustomerList, customerList);
+        //GenerateSalesOrder.GenerateReportMain(prodTypeList, prodList, orderDataList, orderLL);
 //        System.out.println("Product ID\tName\t\t\t\tDescription\t\tColor\t\tPrice\t\tQuantity\tType");
 //        for(int r=0;r<prodList.size();r++){    
 //            System.out.printf("%-10s\t%-30s\t%-20s\t%-10s\tRM %.2f\t   %-10d\t%20s\n",

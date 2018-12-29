@@ -9,7 +9,7 @@ package fioreflowershop;
  *
  * @author User
  */
-public class Delivery {
+public class Delivery implements DeliveryInterface{
     private String trackingNo;
     private String deliveryAddress;
     private String state;
@@ -21,12 +21,12 @@ public class Delivery {
     private String deliveryStatus;
     private Staff staff;
     private Order order;
-    private int priorityLevel;
+    //private int priorityLevel;
 
     public Delivery() {
     }
 
-    public Delivery(String trackingNo, String deliveryAddress, String state, String deliveryContactNo, String requireDeliveryDate, String requireDeliveryTime, String arrivalDate, String arrivalTime, String deliveryStatus, Staff staff, Order order, int priorityLevel) {
+    public Delivery(String trackingNo, String deliveryAddress, String state, String deliveryContactNo, String requireDeliveryDate, String requireDeliveryTime, String arrivalDate, String arrivalTime, String deliveryStatus, Staff staff, Order order) {
         this.trackingNo = trackingNo;
         this.deliveryAddress = deliveryAddress;
         this.state = state;
@@ -38,9 +38,13 @@ public class Delivery {
         this.deliveryStatus = deliveryStatus;
         this.staff = staff;
         this.order = order;
-        this.priorityLevel = priorityLevel;
+        //this.priorityLevel = priorityLevel;
     }
-
+  
+     public Delivery getDelivery() {
+       Delivery delivery = new Delivery(this.trackingNo, this.deliveryAddress, this.state, this.deliveryContactNo, this.requireDeliveryDate, this.requireDeliveryTime, this.arrivalDate, this.arrivalTime, this.deliveryStatus,this.staff,this.order);
+        return delivery;
+     }
     public String getTrackingNo() {
         return trackingNo;
     }
@@ -85,9 +89,9 @@ public class Delivery {
         return order;
     }
 
-    public int getPriorityLevel() {
-        return priorityLevel;
-    }
+//    public int getPriorityLevel() {
+//        return priorityLevel;
+//    }
 
     public void setTrackingNo(String trackingNo) {
         this.trackingNo = trackingNo;
@@ -133,14 +137,23 @@ public class Delivery {
         this.order = order;
     }
 
-    public void setPriorityLevel(int priorityLevel) {
-        this.priorityLevel = priorityLevel;
-    }
+//    public void setPriorityLevel(int priorityLevel) {
+//        this.priorityLevel = priorityLevel;
+//    }
 
+//    @Override
+//    public String toString() {
+//        return "Delivery{" + "trackingNo=" + trackingNo + ", deliveryAddress=" + deliveryAddress + ", state=" + state + ", deliveryContactNo=" + deliveryContactNo + ", requireDeliveryDate=" + requireDeliveryDate + ", requireDeliveryTime=" + requireDeliveryTime + ", arrivalDate=" + arrivalDate + ", arrivalTime=" + arrivalTime + ", deliveryStatus=" + deliveryStatus + ", staff=" + staff + ", order=" + order + ", priorityLevel=" + priorityLevel + '}';
+//    }
+        public int compareTo(DeliveryInterface other) {
+        return this.getRequireDeliveryTime().compareTo(other.getDelivery().getRequireDeliveryTime());
+    }
     @Override
     public String toString() {
-        return "Delivery{" + "trackingNo=" + trackingNo + ", deliveryAddress=" + deliveryAddress + ", state=" + state + ", deliveryContactNo=" + deliveryContactNo + ", requireDeliveryDate=" + requireDeliveryDate + ", requireDeliveryTime=" + requireDeliveryTime + ", arrivalDate=" + arrivalDate + ", arrivalTime=" + arrivalTime + ", deliveryStatus=" + deliveryStatus + ", staff=" + staff + ", order=" + order + ", priorityLevel=" + priorityLevel + '}';
+        return "Delivery{" + "trackingNo=" + trackingNo + ", deliveryAddress=" + deliveryAddress + ", state=" + state + ", deliveryContactNo=" + deliveryContactNo + ", requireDeliveryDate=" + requireDeliveryDate + ", requireDeliveryTime=" + requireDeliveryTime + ", arrivalDate=" + arrivalDate + ", arrivalTime=" + arrivalTime + ", deliveryStatus=" + deliveryStatus + ", staff=" + staff + ", order=" + order + '}';
     }
+    
+    
 
     
 }
