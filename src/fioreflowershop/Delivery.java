@@ -21,7 +21,7 @@ public class Delivery implements DeliveryInterface{
     private String deliveryStatus;
     private Staff staff;
     private Order order;
-    //private int priorityLevel;
+    private int priorityLevel;
 
     public Delivery() {
     }
