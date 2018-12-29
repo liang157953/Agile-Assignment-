@@ -115,9 +115,9 @@ public class FioreFlowershop {
         ListInterface<Delivery> deliveryList = new LinkedList<Delivery>();
 
 
-       deliveryList.add(new Delivery("T1101","25-20,PV16","ZZZ","019-7132686","20/11/2018","1400","26/11/2018","1200","Processing",staffList.get(0),orderDataList.get(0)));
-       deliveryList.add(new Delivery("T1102","20,jalan barongan,taman berjaya","Johor","019-7788115","20/11/2018","1200","5/11/2018","1200","Processing",staffList.get(2),orderDataList.get(0)));
-       deliveryList.add(new Delivery("T1103","25-20,PV16","Setapak","019-7755115","20/11/2018","1200","11/12/2018","1200","Processing",staffList.get(1),orderDataList.get(0)));
+       deliveryList.add(new Delivery("T1101","25-20,PV16","ZZZ","019-7132686","20/11/2018","1400","26/11/2018","1200","Processing",staffList.get(0),orderDataList.get(0),1));
+       deliveryList.add(new Delivery("T1102","20,jalan barongan,taman berjaya","Johor","019-7788115","20/11/2018","1200","5/11/2018","1200","Processing",staffList.get(2),orderDataList.get(0),1));
+       deliveryList.add(new Delivery("T1103","25-20,PV16","Setapak","019-7755115","20/11/2018","1200","11/12/2018","1200","Processing",staffList.get(1),orderDataList.get(0),1));
 
 //        deliveryList.add(new Delivery("T1101","25-20,PV16","Setapak","019-7132686","20/11/2018","1200","26/11/2018","1200","Processing",staffList.get(0),orderDataList.get(0),1));
 //        deliveryList.add(new Delivery("T1102","20,jalan barongan,taman berjaya","Johor","019-7788115","2/11/2018","1200","5/11/2018","1200","Processing",staffList.get(2),orderDataList.get(0),1));

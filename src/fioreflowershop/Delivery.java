@@ -26,7 +26,7 @@ public class Delivery implements DeliveryInterface{
     public Delivery() {
     }
 
-    public Delivery(String trackingNo, String deliveryAddress, String state, String deliveryContactNo, String requireDeliveryDate, String requireDeliveryTime, String arrivalDate, String arrivalTime, String deliveryStatus, Staff staff, Order order) {
+    public Delivery(String trackingNo, String deliveryAddress, String state, String deliveryContactNo, String requireDeliveryDate, String requireDeliveryTime, String arrivalDate, String arrivalTime, String deliveryStatus, Staff staff, Order order, int priorityLevel) {
         this.trackingNo = trackingNo;
         this.deliveryAddress = deliveryAddress;
         this.state = state;
@@ -38,11 +38,11 @@ public class Delivery implements DeliveryInterface{
         this.deliveryStatus = deliveryStatus;
         this.staff = staff;
         this.order = order;
-        //this.priorityLevel = priorityLevel;
+        this.priorityLevel = priorityLevel;
     }
   
      public Delivery getDelivery() {
-       Delivery delivery = new Delivery(this.trackingNo, this.deliveryAddress, this.state, this.deliveryContactNo, this.requireDeliveryDate, this.requireDeliveryTime, this.arrivalDate, this.arrivalTime, this.deliveryStatus,this.staff,this.order);
+       Delivery delivery = new Delivery(this.trackingNo, this.deliveryAddress, this.state, this.deliveryContactNo, this.requireDeliveryDate, this.requireDeliveryTime, this.arrivalDate, this.arrivalTime, this.deliveryStatus,this.staff,this.order,this.priorityLevel);
         return delivery;
      }
     public String getTrackingNo() {

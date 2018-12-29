@@ -6,7 +6,7 @@
 package catalogOrder;
 
 import ADT.*;
-import CatalogMaintenance.ProductMaintenance.ConsoleColors;
+import CatalogMaintenance.ConsoleColors;
 import fioreflowershop.CorporateCustomer;
 import fioreflowershop.Customer;
 import fioreflowershop.Delivery;
@@ -317,7 +317,7 @@ public class Catalog_Order {
         }else{
             validCredit=true;
         }
-        
+        int priorityLevel=0;
      if(validCredit && allow){ //ok
         System.out.println("======    Select Delivery Mode     ===========");
         System.out.println("====== 1. Pick-up on date and time ===========");
@@ -365,19 +365,19 @@ public class Catalog_Order {
                     addDeliveryStaff = staffList.get(r);
                 }
             }      
-//            //Enter priotity
-//            System.out.println("\nPick Up Priority");
-//            System.out.println("***************************");
-//            System.out.println("1. Normal   RM  8.00");
-//            System.out.println("2. Express  RM 20.00");
-//            do{
-//                System.out.println("***************************");
-//                System.out.print("Please select the priority level: ");
-//                priorityLevel = scan.nextInt();
-//                if(priorityLevel < 0 || priorityLevel > 2){
-//                    System.out.println("Invalid Input, Please Enter Again!");
-//                }
-//            }while(priorityLevel < 0 || priorityLevel > 3);
+            //Enter priotity
+            System.out.println("\nPick Up Priority");
+            System.out.println("***************************");
+            System.out.println("1. Normal   RM  8.00");
+            System.out.println("2. Express  RM 20.00");
+            do{
+                System.out.println("***************************");
+                System.out.print("Please select the priority level: ");
+                priorityLevel = scan.nextInt();
+                if(priorityLevel < 1 || priorityLevel > 2){
+                    System.out.println("Invalid Input, Please Enter Again!");
+                }
+            }while(priorityLevel < 1 || priorityLevel > 3);
 
         }else{
             System.out.print("Error");
@@ -409,7 +409,7 @@ public class Catalog_Order {
                 }
             }
             //Store delivery details
-            newDelivery = new Delivery(trackingNo,deliveryAddress,state,deliveryContactNo,requireDeliveryDate,requireDeliveryTime,arrivalDate,arrivalTime,deliveryStatus,addDeliveryStaff,addOrder);
+            newDelivery = new Delivery(trackingNo,deliveryAddress,state,deliveryContactNo,requireDeliveryDate,requireDeliveryTime,arrivalDate,arrivalTime,deliveryStatus,addDeliveryStaff,addOrder,priorityLevel);
             deliveryList.add(newDelivery);
             //Store pick up details
             newPickUp = new PickUp(pickupNo,requirePickUpDate,requirePickUpTime,pickupDate,pickupTime ,pickupStatus, addPickUpStaff, addOrder,2);
