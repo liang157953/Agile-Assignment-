@@ -24,5 +24,4 @@ public interface SortedListInterface<T extends Comparable<? super T>> {
 
 }
 
-}
 
