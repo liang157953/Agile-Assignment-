@@ -264,4 +264,34 @@ public class CorporateCustomerMaintenance {
         }while(resume == 'y');
         
     }
+    
+     public static void addNewCorporateCustomer(ListInterface<CorporateCustomer> corporateList){
+        String custID;
+        String custName;
+        String custAddress;
+        String custContactNo;
+        double creditLimit;
+        Scanner scan = new Scanner(System.in);
+        Scanner scanDouble = new Scanner(System.in);
+        System.out.println("= = = = = = = = = = = = = = = = = = = ");
+        System.out.println("Regiter New Corporate Customer");
+        System.out.println("= = = = = = = = = = = = = = = = = = = ");
+
+        int newCID;
+        newCID = Integer.parseInt(corporateList.get(corporateList.size()-1).getCustID().substring(2,6));
+        newCID += 1;
+        custID = "C"+newCID;
+        System.out.print("Customer Name:");
+        custName = scan.nextLine();
+        System.out.print("Customer Address:");
+        custAddress = scan.nextLine();
+        System.out.print("Customer Contact No:");
+        custContactNo = scan.nextLine();
+        System.out.print("Monthly Credit Limit:");
+        creditLimit = scanDouble.nextDouble();
+        System.out.print("\n\n\n");
+        corporateList.add(new CorporateCustomer(creditLimit,0.00,"Available","CO" +custID,custName,custAddress,custContactNo));
+    
+   }
+
 }
