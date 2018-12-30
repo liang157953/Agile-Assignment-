@@ -28,29 +28,35 @@ public class CorporateCustomerMaintenance {
             do{
                if(err == 1)
                {
-                       System.out.println("Please enter between 1 to 3");
+                       System.out.println("Please enter between 1 to 5");
                }
                 
             Scanner menu = new Scanner(System.in);
             System.out.println("\n\n");
-            System.out.println("Menu");
+            System.out.println("                 Menu");
             System.out.println("******************************************");
-            System.out.println("1. Check Debt and Make Payment");
-            System.out.println("2. Approve Corporate Customer Application");
-            System.out.println("3. Corporate Customer That haven't make payment");
-            System.out.println("4. Exit");
+            System.out.println("1. Regiter New Corporate Customer");
+            System.out.println("2. Check Debt and Make Payment");
+            System.out.println("3. Approve Corporate Customer Application");
+            System.out.println("4. Corporate Customer That haven't make payment");
+            System.out.println("5. Exit");
             System.out.println("******************************************");
             System.out.print("Enter Your Choice: ");
             menuint = menu.nextInt();
             err++;
-            }while(menuint<0 || menuint > 3);
+            }while(menuint<1 || menuint > 5);
             
             
             if(menuint == 1){
+                addNewCorporateCustomer(corporateList);
+            }
+            
+            if(menuint == 2){
             Scanner scan = new Scanner(System.in);
             CorporateCustomer selectedcust = new CorporateCustomer();
            
             double totaldebt =0.0;
+          
             Scanner string = new Scanner(System.in);
             System.out.print("Enter Customer ID: ");
             String custID = string.nextLine();
@@ -60,21 +66,30 @@ public class CorporateCustomerMaintenance {
                         selectedcust = corporateList.get(i);
                     }
                 }
-                System.out.println("PaymentID \t Amount Status");
-                System.out.println("******************************");
+                
+            int a = 0;   
             for(int i =0; i <order.size();i++){
+                
                 if(order.get(i).getCorporateCustomer() != null){
                 if(order.get(i).getCorporateCustomer().equals(selectedcust)){
+                    
                     if(order.get(i).getPayment().getPaymentStatus().equals("UnPaid")){
+                        a++;
+                        if (a == 1){
+                        System.out.println("\nPaymentID \t Amount Status");
+                        System.out.println("******************************************");
+                        }
+                        
                     System.out.println( order.get(i).getPayment().getPaymentID() + "\t\t " + order.get(i).getPayment().getTotalAmount() + "0" + "\t " + order.get(i).getPayment().getPaymentStatus());
                     totaldebt += order.get(i).getPayment().getTotalAmount();
                     }
                 }
                }
             }
+           
             
             if(totaldebt == 0.00){
-                System.out.print("**No Debt For This Customer**");
+                System.out.print("\n**No Debt For This Customer**");
                  do{
                 Scanner newscan = new Scanner(System.in);
                 System.out.print("\nBack To Menu? (y/n): ");
@@ -160,7 +175,7 @@ public class CorporateCustomerMaintenance {
               continue;
              } //System.out.println("\nOn The Way Back To Menu...");
 
-        }else if(menuint == 2){
+        }else if(menuint == 3){
                 Scanner selectcustomer = new Scanner(System.in);
                 Scanner limit = new Scanner(System.in);
                 String customerID;
@@ -184,14 +199,14 @@ public class CorporateCustomerMaintenance {
                     }
                 }
                 if(found == 0){
-                    System.out.println("Invalid Customer ID , Please Enter Again!");
+                    System.out.println("**Invalid Customer ID , Please Enter Again!** \n\n");
                 }
                 }while(found == 0);
                 int newCorID;
                 newCorID = Integer.parseInt(corporateList.get(corporateList.size()-1).getCustID().substring(2,6));
                 newCorID += 1;
                 
-                System.out.print("Please Enter Monthly Limit:" );
+                System.out.print("\nPlease Enter Monthly Limit:" );
                 limitAmount = limit.nextDouble();              
                 corporateList.add(new CorporateCustomer(limitAmount,0.00,"Available","CO" + newCorID,customerList.get(customerindex-1).getCustName(),customerList.get(customerindex-1).getCustAddress(),customerList.get(customerindex-1).getCustContactNo()));
                 customerList.remove(customerindex-1);
@@ -199,9 +214,11 @@ public class CorporateCustomerMaintenance {
                 System.out.println("**************************************");
                 for(int i =0; i< corporateList.size();i++){
                     System.out.println(i+1 + ". "+corporateList.get(i).getCustID() + "\t" + corporateList.get(i).getCustName() + "\t" + corporateList.get(i).getCreditLimit());
-                }      
+                }     
+                System.out.println("You are returning to main menu.");
+                 break;
             }
-            if(menuint == 3){
+            if(menuint == 4){
             do{
                 String date = new SimpleDateFormat("dd/MM/yyyy").format(new Date());
                 Date date1 =new SimpleDateFormat("dd/MM/yyyy").parse(date);  
@@ -258,8 +275,9 @@ public class CorporateCustomerMaintenance {
             }
             }
             else{
-                System.out.println("Thank You!");
-                 break;
+                System.out.println("You are returning to corporate customer menu.");
+                
+                break;
             }
         }while(resume == 'y');
         
@@ -293,5 +311,4 @@ public class CorporateCustomerMaintenance {
         corporateList.add(new CorporateCustomer(creditLimit,0.00,"Available","CO" +custID,custName,custAddress,custContactNo));
     
    }
-
 }
