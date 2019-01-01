@@ -34,24 +34,56 @@ public class CorporateCustomerMaintenance {
             Scanner menu = new Scanner(System.in);
             System.out.println("\n\n");
             System.out.println("                 Menu");
-            System.out.println("******************************************");
+            System.out.println("************************************************");
             System.out.println("1. Regiter New Corporate Customer");
-            System.out.println("2. Check Debt and Make Payment");
-            System.out.println("3. Approve Corporate Customer Application");
-            System.out.println("4. Corporate Customer That haven't make payment");
-            System.out.println("5. Exit");
-            System.out.println("******************************************");
+            System.out.println("2. Display Current Corporate Customer");
+            System.out.println("3. Check Debt and Make Payment");
+            System.out.println("4. Approve Corporate Customer Application");
+            System.out.println("5. Corporate Customer That haven't make payment");
+            System.out.println("6. Exit");
+            System.out.println("************************************************");
             System.out.print("Enter Your Choice: ");
             menuint = menu.nextInt();
             err++;
-            }while(menuint<1 || menuint > 5);
+            }while(menuint<1 || menuint > 6);
             
             
-            if(menuint == 1){
+            if(menuint == 1){ //Regiter New Corporate Customer
                 addNewCorporateCustomer(corporateList);
+                resume='y';
             }
             
-            if(menuint == 2){
+            else if(menuint == 2){ //Display Current Corporate Customer
+               
+                System.out.println("###################################################################################################");
+                System.out.println("Product ID\tName\t\t\tAddress\t\t\tContact Number\t\tCredit Limit");
+                System.out.println("###################################################################################################");
+                for (int r = 0; r < corporateList.size(); r++) {
+                    System.out.printf("%-10s\t%-20s\t%-20s\t%-20s\tRM%6.2f\n",
+                        corporateList.get(r).getCustID(), corporateList.get(r).getCustName(), corporateList.get(r).getCustAddress(), corporateList.get(r).getCustContactNo(), corporateList.get(r).getCreditLimit());
+                }
+
+                do{
+                Scanner newscan = new Scanner(System.in);
+                System.out.print("\nBack To Menu? (y/n): ");
+                resume = (newscan.next().charAt(0));
+                switch(resume){
+                    case 'Y':
+                        resume = 'y';
+                        break;
+                    case 'N':
+                        resume = 'n';
+                        break;
+                }
+                if(resume != 'y' &&resume !='n'){
+                    System.out.println("Please Enter y/n only");
+                }    
+                }while(resume != 'y' &&resume !='n');   
+            }
+            
+            
+            
+            else if(menuint == 3){ //Check Debt and Make Payment
             Scanner scan = new Scanner(System.in);
             CorporateCustomer selectedcust = new CorporateCustomer();
            
@@ -175,7 +207,7 @@ public class CorporateCustomerMaintenance {
               continue;
              } //System.out.println("\nOn The Way Back To Menu...");
 
-        }else if(menuint == 3){
+        }else if(menuint == 4){ //Approve Corporate Customer Application
                 Scanner selectcustomer = new Scanner(System.in);
                 Scanner limit = new Scanner(System.in);
                 String customerID;
@@ -218,7 +250,7 @@ public class CorporateCustomerMaintenance {
                 System.out.println("You are returning to main menu.");
                  break;
             }
-            if(menuint == 4){
+        else if(menuint == 5){ //Corporate Customer That haven't make payment
             do{
                 String date = new SimpleDateFormat("dd/MM/yyyy").format(new Date());
                 Date date1 =new SimpleDateFormat("dd/MM/yyyy").parse(date);  
@@ -274,9 +306,8 @@ public class CorporateCustomerMaintenance {
                 break;
             }
             }
-            else{
-                System.out.println("You are returning to corporate customer menu.");
-                
+            else{ //exit
+                System.out.println("You are returning to main menu.");
                 break;
             }
         }while(resume == 'y');
