@@ -17,7 +17,7 @@ public class Validation {
                 checkDigit = true; //if is digit return true
             } else { //if got one of the character of the string is not digit; return false
                 System.out.print(ConsoleColors.RED + "Input Must be in Digit! Please Try Again\n" + ConsoleColors.RESET);
-                System.out.printf("\nPlease Enter Any Key to Proceed...");
+                System.out.printf("\nPress Enter to Proceed...");
                 System.in.read();
                 System.out.println();
                 checkDigit = false;
@@ -35,7 +35,7 @@ public class Validation {
                 checkAlphabetic = true; //if is alphabet return true
             } else { //if got one of the character of the string is not alphabet; return false
                 System.out.println(ConsoleColors.RED + "Input Must be in Alphabet! Please Try Again\n" + ConsoleColors.RESET);
-                System.out.printf("Please Enter Any Key to Proceed...");
+                System.out.printf("Press Enter to Proceed...");
                 System.in.read();
                 System.out.println();
                 checkAlphabetic = false;
@@ -55,7 +55,7 @@ public class Validation {
             userInp = input.nextLine();
             if (!isDouble(userInp, "double")) {//Check the user input type is double
                 //if not in double data type display error message and return error = true
-                System.out.println(ConsoleColors.RED + "Error: must be a Double." + ConsoleColors.RESET);
+                System.out.println(ConsoleColors.RED + "Error: must be a Double." + ConsoleColors.RESET + "\n");
                 error = true;
             } else {
                 error = false;
