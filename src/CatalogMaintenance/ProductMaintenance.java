@@ -17,7 +17,7 @@ public class ProductMaintenance {
                 System.out.println("\n*******************************\n Product Maintenance Main Menu\n*******************************");
                 System.out.println("1. Product Maintenance Menu");
                 System.out.println("2. Promotion Product Maintenance Menu");
-                System.out.println("3. Return Main Menu");
+                System.out.println(ConsoleColors.RED + "3. Return Main Menu" + ConsoleColors.RESET);
 
                 System.out.printf("\nOption > ");
                 option = input.next();
@@ -38,7 +38,7 @@ public class ProductMaintenance {
                     break;
                 default: //Display error message if not within the options provided
                     System.out.println(ConsoleColors.RED + "Invalid Option! Please Try Again" + ConsoleColors.RESET);
-                    System.out.print("Please Enter Any Key to Proceed...");
+                    System.out.print("Press Enter to Proceed...");
                     System.in.read();
                     System.out.println();
             }
@@ -61,7 +61,7 @@ public class ProductMaintenance {
                 System.out.println("1. Register New Product");
                 System.out.println("2. Display Current Product List");
                 System.out.println("3. Maintain Product Information");
-                System.out.println("4. Return Product Maintenance Main Menu");
+                System.out.println(ConsoleColors.RED + "4. Return Product Maintenance Main Menu" + ConsoleColors.RESET);
 
                 System.out.printf("\nOption > ");
                 option = input.next();
@@ -82,7 +82,7 @@ public class ProductMaintenance {
                         prodList.add(prod); //add the new product into the product list
                         //display the message in green color to notify user the new product has added sucessfully
                         System.out.print(ConsoleColors.GREEN + "Add New Product Successfully!\n\n" + ConsoleColors.RESET);
-                        System.out.print("Enter Any Key Return to Product Menu...");
+                        System.out.print("Press Enter to Return Product Menu...");
                         System.in.read(); //Pause it, to let user enter any key to continue the process
                         input.nextLine();
                     } else {
@@ -95,7 +95,7 @@ public class ProductMaintenance {
                     //Call the ViewProductList method to view the current product list
                     exit = ViewProductList(prodList, prodTypeList);
                     if (exit) {
-                        System.out.print("\nEnter Any Key Return to Product Menu...");
+                        System.out.print("\nPress Enter to Return Product Menu...");
                         System.in.read();
                     }
                     break;
@@ -110,7 +110,7 @@ public class ProductMaintenance {
                             for (int r = 0; r < prodTypeList.size(); r++) {
                                 System.out.println((r + 1) + ". " + prodTypeList.get(r).getProductTypeName());
                             }
-                            System.out.println((prodTypeList.size() + 1) + ". Return Product Maintenance Menu");
+                            System.out.println(ConsoleColors.RED + (prodTypeList.size() + 1) + ". Return Product Maintenance Menu" + ConsoleColors.RESET);
                             System.out.printf("\nSelect Product Type > ");
                             options = input.next();
                         } while (!Validation.CheckDigit(options + 1)); //Validation.CheckDigit: check whether the options is in digit or not
@@ -154,7 +154,8 @@ public class ProductMaintenance {
                                         index++;
                                     }
                                 }
-                                System.out.println((num + 1) + " Return Product Maintenance Menu");//num+1 = Return Product Maintenance Menu
+                                //num+1 = Return Product Maintenance Menu
+                                System.out.println(ConsoleColors.RED + (num + 1) + " Return Product Maintenance Menu" + ConsoleColors.RESET);
                                 System.out.printf("\nOption > ");
                                 optionss = input.next();
 
@@ -176,8 +177,7 @@ public class ProductMaintenance {
                                 Product maintainProduct = MaintainProduct(prodList.get(position[Integer.parseInt(optionss) - 1]),prodTypeList);
                                 prodList.set(0, maintainProduct);
                                 
-                                
-                                System.out.printf("Enter Any Key Return to Product Menu...");
+                                System.out.printf("Press Enter to Return Product Menu...");
                                 System.in.read();
                                 input.nextLine();
                                 break;
@@ -189,7 +189,7 @@ public class ProductMaintenance {
                     break; //Return to main menu
                 default: //Display error message if not within the options provided
                     System.out.println(ConsoleColors.RED + "Invalid Option! Please Try Again" + ConsoleColors.RESET);
-                    System.out.print("Please Enter Any Key to Proceed...");
+                    System.out.print("Press Enter to Proceed...");
                     System.in.read();
                     System.out.println();
             }
@@ -214,7 +214,7 @@ public class ProductMaintenance {
                 System.out.println("2. Display Current Promotion Product List");
                 System.out.println("3. Maintain Promotion Product Information");  
                 System.out.println("4. Remove Out-of-Stock Promotion Products");
-                System.out.println("5. Return Product Maintenance Main Menu");
+                System.out.println(ConsoleColors.RED + "5. Return Product Maintenance Main Menu" + ConsoleColors.RESET);
 
                 System.out.printf("\nOption > ");
                 option = input.next();
@@ -235,7 +235,7 @@ public class ProductMaintenance {
                         prodPromotionList.add(promotionProd);//add the new product into the product list
                         //display the message in green color to notify user the new product has added sucessfully
                         System.out.print(ConsoleColors.GREEN + "Add New Promotion Product Successfully!\n\n" + ConsoleColors.RESET);
-                        System.out.print("Enter Any Key Return to Product Menu...");
+                        System.out.print("Press Enter to Return Promotion Product Menu...");
                         System.in.read();
                         input.nextLine();
                     } else {
@@ -252,7 +252,7 @@ public class ProductMaintenance {
                         System.out.println(ConsoleColors.RED + "\nNo Current Promotion Product List" + ConsoleColors.RESET);
                     }
 
-                    System.out.print("\nEnter Any Key Return to Promotion Product Menu...");
+                    System.out.print("\nPress Enter to Return Promotion Product Menu...");
                     System.in.read();
                     break;
                 case 3: //Maintain Promotion Product
@@ -353,7 +353,7 @@ public class ProductMaintenance {
                                 }
                             }
                             //num+1 = Return Product Maintenance Menu
-                            System.out.println((num + 1) + " Return Product Maintenance Menu");
+                            System.out.println(ConsoleColors.RED + (num + 1) + " Return Product Maintenance Menu" + ConsoleColors.RESET);
                             System.out.printf("\nOption > ");
                             optionss = input.next();
 
@@ -374,7 +374,7 @@ public class ProductMaintenance {
                             //= Update the specified product in the product list according to the user selected
                             Product maintainPromotionProduct = MaintainProduct(prodPromotionList.get(position[Integer.parseInt(optionss) - 1]), prodTypeList);
                             prodPromotionList.set(0, maintainPromotionProduct);
-                            System.out.printf("Enter Any Key Return to Product Menu...");
+                            System.out.printf("Press Enter to Return Promotion Product Menu...");
                             System.in.read();
                             input.nextLine();
                         }
@@ -387,7 +387,7 @@ public class ProductMaintenance {
                     break;
                 default://Display error message if not within the options provided
                     System.out.println(ConsoleColors.RED + "Invalid Option! Please Try Again" + ConsoleColors.RESET);
-                    System.out.print("Please Enter Any Key to Proceed...");
+                    System.out.print("Press Enter to Proceed...");
                     System.in.read();
                     System.out.println();
             }
@@ -406,8 +406,8 @@ public class ProductMaintenance {
                 for (int r = 0; r < prodTypeList.size(); r++) { //Display all the current product type list
                     System.out.println((r + 1) + ". " + prodTypeList.get(r).getProductTypeName());
                 }
-                System.out.println((prodTypeList.size() + 1) + ". Display All Current Product List");
-                System.out.println((prodTypeList.size() + 2) + ". Return Product Maintenance Menu");
+                System.out.println(ConsoleColors.BLUE + (prodTypeList.size() + 1) + ". Display All Current Product List" + ConsoleColors.RESET);
+                System.out.println(ConsoleColors.RED + (prodTypeList.size() + 2) + ". Return Product Maintenance Menu" + ConsoleColors.RESET);
                 System.out.printf("\nSelect Product Type > ");
                 options = input.next();
                 //Check whether the input is in digit or not; option + 1 = return to the product maintenance menu
@@ -483,7 +483,7 @@ public class ProductMaintenance {
                 System.out.println("\n****************************\n Display Promotion Products\n****************************");
                 System.out.println("1. Promotion Products in Month");
                 System.out.println("2. All Promotion Products");
-                System.out.println("3. Return Promotion Products Menu");
+                System.out.println(ConsoleColors.RED + "3. Return Promotion Products Menu" + ConsoleColors.RESET);
 
                 System.out.printf("\nOption > ");
                 option = input.next();
@@ -570,7 +570,7 @@ public class ProductMaintenance {
                             }
                         }
                     }
-                    System.out.print("\nPlease Enter Any Key to Proceed...");
+                    System.out.print("\nPress Enter to Proceed...");
                     System.in.read();
                     break;
                 case 2: //Display all promotion products
@@ -585,7 +585,7 @@ public class ProductMaintenance {
                                 prodPromotionList.get(r).getProductColor(), prodPromotionList.get(r).getProductPrice(), prodPromotionList.get(r).getProductQuantity(),
                                 prodPromotionList.get(r).getProductType().getProductTypeName(),prodPromotionList.get(r).getProductPromotionMonth());
                     }
-                    System.out.print("\nPlease Enter Any Key to Proceed...");
+                    System.out.print("\nPress Enter to Proceed...");
                     System.in.read();
                     break;
                 case 3: //Return Main Menu
@@ -593,7 +593,7 @@ public class ProductMaintenance {
                     break;
                 default: //Display error message if not within the options provided
                     System.out.println(ConsoleColors.RED + "Invalid Option! Please Try Again" + ConsoleColors.RESET);
-                    System.out.print("Please Enter Any Key to Proceed...");
+                    System.out.print("Press Enter to Proceed...");
                     System.in.read();
                     System.out.println();
             }
@@ -800,7 +800,7 @@ public class ProductMaintenance {
                             promoMonth = "DECEMBER";
                             break;
                         default:
-                            System.err.println("Error: Input out of Range!");
+                            System.err.println("Error: Input out of Range!\n");
                             checkMonth = false;
                     }
                 } while (!checkMonth); //while the month is valid then exit the do while
@@ -898,7 +898,7 @@ public class ProductMaintenance {
             //if the user did not input anything, this will required the user to input again start from the top to bottom
             if (prodName.equals("") || prodDesc.equals("") || prodDesc.equals("") || prodColor.equals("") || prodPrice.equals("") || prodQty.equals("")) {
                 System.out.println(ConsoleColors.RED + "\nSystem Notification: All fields must be filled in!" + ConsoleColors.RESET);
-                System.out.println("Enter Any Key Return to Register Form\n");
+                System.out.println("Press Enter to Return Register Form\n");
                 System.in.read();
                 status = false; //if is empty; return false
             } else {
@@ -933,7 +933,7 @@ public class ProductMaintenance {
                 System.out.println("4. Product Price");
                 System.out.println("5. Product Quantity");
                 System.out.println("6. Product Type");
-                System.out.println("7. Return Product Menu");
+                System.out.println(ConsoleColors.RED + "7. Return Product Menu" + ConsoleColors.RESET);
 
                 System.out.printf("\nOption > ");
                 option = input.next();
@@ -1123,7 +1123,7 @@ public class ProductMaintenance {
                     break;
                 default: //invalid input, display error message
                     System.out.print(ConsoleColors.RED + "Invalid Option! Please Try Again\n" + ConsoleColors.RESET);
-                    System.out.printf("Please Enter Any Key to Proceed...");
+                    System.out.printf("Press Enter to Proceed...");
                     System.in.read();
                     System.out.println();
             }
