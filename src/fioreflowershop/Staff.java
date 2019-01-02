@@ -13,14 +13,16 @@ public class Staff {
     private String staffID;
     private String staffName;
     private String staffContactNo;
+    private String password;
 
     public Staff() {
     }
 
-    public Staff(String staffID, String staffName, String staffContactNo) {
+    public Staff(String staffID, String staffName, String staffContactNo, String password) {
         this.staffID = staffID;
         this.staffName = staffName;
         this.staffContactNo = staffContactNo;
+        this.password = password;
     }
 
     public String getStaffID() {
@@ -45,6 +47,14 @@ public class Staff {
 
     public void setStaffContactNo(String staffContactNo) {
         this.staffContactNo = staffContactNo;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     @Override

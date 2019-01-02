@@ -59,9 +59,9 @@ public class FioreFlowershop {
         
         //Staff Data
         ListInterface<Staff> staffList = new LinkedList<Staff>();
-        staffList.add(new Staff("S1001","Lim Yong Qi","019-7272566"));
-        staffList.add(new Staff("S1002","Jimmy Chew","012-3435617"));
-        staffList.add(new Staff("S1003","Cindy Lee","019-434580"));
+        staffList.add(new Staff("S1001", "Lim Yong Qi", "019-7272566","123"));
+        staffList.add(new Staff("S1002", "Jimmy Chew", "012-3435617","234"));
+        staffList.add(new Staff("S1003", "Cindy Lee", "019-434580","345"));
  
         //Payment Data
         ListInterface<Payment> paymentList = new LinkedList<Payment>();
