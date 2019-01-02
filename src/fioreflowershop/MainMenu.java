@@ -10,8 +10,15 @@ import CatalogMaintenance.*;
 import catalogOrder.*;
 import corporatecustomer.*;
 import customize.*;
+import java.awt.AWTException;
+import java.awt.Robot;
+import java.awt.Toolkit;
+import java.awt.event.InputEvent;
+import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.text.ParseException;
+import java.time.Duration;
+import java.time.Instant;
 import java.util.Scanner;
 import order.*;
 
@@ -20,7 +27,7 @@ public class MainMenu {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) throws IOException, ParseException {
+    public static void main(String[] args) throws IOException, ParseException, InterruptedException {
         //Product Type Data
         ListInterface<ProductType> prodTypeList = new LinkedList<>();
         prodTypeList.add(new ProductType("PT1001", "Fresh Flowers", "The flowers that will be wither..."));
@@ -49,9 +56,9 @@ public class MainMenu {
 
         //Staff Data
         ListInterface<Staff> staffList = new LinkedList<Staff>();
-        staffList.add(new Staff("S1001", "Lim Yong Qi", "019-7272566"));
-        staffList.add(new Staff("S1002", "Jimmy Chew", "012-3435617"));
-        staffList.add(new Staff("S1003", "Cindy Lee", "019-434580"));
+        staffList.add(new Staff("S1001", "Lim Yong Qi", "019-7272566","123"));
+        staffList.add(new Staff("S1002", "Jimmy Chew", "012-3435617","234"));
+        staffList.add(new Staff("S1003", "Cindy Lee", "019-434580","345"));
 
         //Payment Data
         ListInterface<Payment> paymentList = new LinkedList<Payment>();
@@ -61,8 +68,8 @@ public class MainMenu {
 
         //Order Data
         ListInterface<Order> orderDataList = new LinkedList<Order>();
-        orderDataList.add(new Order("O1001", "Give to my girlfriend ", "11/11/2018", "Process", customerList.get(0), paymentList.get(0), staffList.get(0), "Customer"));
-        orderDataList.add(new Order("O1002", "", "15/11/2018", "Process", customerList.get(1), paymentList.get(1), staffList.get(1), "Customer"));
+        orderDataList.add(new Order("O1001", "Give to my girlfriend", "11/11/2018", "Process", customerList.get(0), paymentList.get(0), staffList.get(0), "Customer"));
+        orderDataList.add(new Order("O1002", "Give to my girlfriend", "15/11/2018", "Process", customerList.get(1), paymentList.get(1), staffList.get(1), "Customer"));
         orderDataList.add(new Order("O1003", "Please say happy to the receiver", "15/11/2018", "Process", customerList.get(2), paymentList.get(2), staffList.get(2), "Customer"));
         orderDataList.add(new Order("O1004", "Please say birthday to the receiver", "15/11/2018", "Process", corporateCustomerList.get(2), paymentList.get(2), staffList.get(2), "Corporate"));
         orderDataList.add(new Order("O1005", "Please say hi to the receiver", "15/11/2018", "Process", corporateCustomerList.get(1), paymentList.get(2), staffList.get(2), "Corporate"));
@@ -123,52 +130,118 @@ public class MainMenu {
         Scanner input = new Scanner(System.in);
         Scanner scan = new Scanner(System.in);
         String option = "";
+        int count=3;
+        Staff loginStaff = new Staff();
+        boolean found=false;
+        do{
+            found=false;
+            System.out.printf("\n*********************************\n \t%5sLogging\n*********************************\n"," ");
+            String staffID="",password="";
+            do{
+                System.out.print("Staff ID: ");
+                staffID = scan.nextLine();
+                staffID = staffID.toUpperCase();
+                if(staffID.equals("")){
+                    System.out.println(ConsoleColors.RED + "Staff ID Cannot Be Empty!" + ConsoleColors.RESET);
+                }
+            }while(staffID.equals(""));
+            
+            do{
+                System.out.print("Password: ");
+                password = scan.nextLine();
 
-        do {
-            do {
-                System.out.println("\n*******************************\n Product Maintenance Main Menu\n*******************************");
-                System.out.println("1. Product Maintenance");
-                System.out.println("2. Corporate Customer Maintenance");
-                System.out.println("3. Make Order (Order/Customize)");
-                System.out.println("4. Delivery Maintenance");
-                System.out.println("5. Generate Report");
-                System.out.println("6. Exit");
-
-                System.out.printf("\nOption > ");
-                option = input.next();
-                //Validation of User Input(Only can be digit)                
-            } while (!Validation.CheckDigit(option));
-
-            switch (Integer.parseInt(option)) {
-                case 1: //Product Maintenance
-                    ProductMaintenance.ProductMainMenu(prodList, prodTypeList, prodPromotionList);
+                if(password.equals("")){
+                    System.out.println(ConsoleColors.RED + "Password Cannot Be Empty!" + ConsoleColors.RESET);
+                }
+            }while(password.equals(""));
+            
+            for(int r=0;r<staffList.size();r++){
+                if(staffList.get(r).getStaffID().equals(staffID) && staffList.get(r).getPassword().equals(password)){
+                    loginStaff = staffList.get(r);
+                    found=true;
+                    System.out.printf(ConsoleColors.BLUE + "Logging" + ConsoleColors.RESET);
+                    for(int e = 0; e < 3;e++){
+                        Thread.sleep(400);
+                        System.out.print(ConsoleColors.BLUE+"."+ConsoleColors.RESET);
+                    }
+                    Thread.sleep(400);
                     break;
-                case 2: //Corporate Customer Maintenance
-                    CorporateCustomerMaintenance.Menu(corporateCustomerList, staffList.get(1), orderDataList, paymentList, customerList);
-                    break;
-
-                case 3: //Make Order (Order/Customize) Maintenance
-
-                    break;
-                case 4: //Delivery Maintenance
-
-                    break;
-                case 5: //Generate Report
-                    orderLL = GenerateSalesOrder.GenerateReportMaintenanceMenu(prodTypeList, prodList, orderDataList, orderLL, corporateCustomerList, customerList);
-                    break;
-                case 6: //Exit the system
-                    System.out.print("Existing...");
-                    System.in.read();
-                    System.out.print("Thank you for using this system :D");
-                    System.out.println();
-                    break;
-                default: //Display error message if not within the options provided
-                    System.out.println(ConsoleColors.RED + "Invalid Option! Please Try Again" + ConsoleColors.RESET);
-                    System.out.print("Please Enter Any Key to Proceed...");
-                    System.in.read();
-                    System.out.println();
+                }
             }
-        } while (Integer.parseInt(option) != 6);
+            
+            count--;
+            
+            if(!found){
+                System.out.println(ConsoleColors.RED + "Incorrect Staff ID or Password!" + ConsoleColors.RESET);
+                if(count!=0){
+                    System.out.println(ConsoleColors.RED + "Logging Remaining Times: " + count + ConsoleColors.RESET);
+                }
+            }else{
+                break;
+            }
+        }while(count!=0);
+        
+        if(found){
+            System.out.println(ConsoleColors.GREEN + "\nLogging Successfully!" + ConsoleColors.RESET);
+            System.out.printf(ConsoleColors.BLUE + "\nRedirecting" + ConsoleColors.RESET);
+            for(int e = 0; e < 3;e++){
+                Thread.sleep(400);
+                System.out.print(ConsoleColors.BLUE+"."+ConsoleColors.RESET);
+            }
+            Thread.sleep(400);
+            
+            System.out.println();
+            do {
+                do {
+                    
+                    System.out.printf("\nStaff ID  : " + ConsoleColors.BLUE + loginStaff.getStaffID() + ConsoleColors.RESET);
+                    System.out.printf("\nStaff Name: " + ConsoleColors.BLUE + loginStaff.getStaffName() + ConsoleColors.RESET);
+                    System.out.printf("\n*********************************\n \t%3sMain Menu\n*********************************\n"," ");
+                    System.out.println("1. Product Maintenance");
+                    System.out.println("2. Corporate Customer Maintenance");
+                    System.out.println("3. Make Order (Order/Customize)");
+                    System.out.println("4. Delivery Maintenance");
+                    System.out.println("5. Generate Report");
+                    System.out.println(ConsoleColors.RED + "6. Exit" + ConsoleColors.RESET);
+
+                    System.out.printf("\nOption > ");
+                    option = input.next();
+                    //Validation of User Input(Only can be digit)                
+                } while (!Validation.CheckDigit(option));
+
+                switch (Integer.parseInt(option)) {
+                    case 1: //Product Maintenance
+                        ProductMaintenance.ProductMainMenu(prodList, prodTypeList, prodPromotionList);
+                        break;
+                    case 2: //Corporate Customer Maintenance
+                        CorporateCustomerMaintenance.Menu(corporateCustomerList, loginStaff, orderDataList, paymentList, customerList);
+                        break;
+
+                    case 3: //Make Order (Order/Customize) Maintenance
+
+                        break;
+                    case 4: //Delivery Maintenance
+
+                        break;
+                    case 5: //Generate Report
+                        orderLL = GenerateSalesOrder.GenerateReportMaintenanceMenu(prodTypeList, prodList, orderDataList, orderLL, corporateCustomerList, customerList);
+                        break;
+                    case 6: //Exit the system
+                        System.out.println(ConsoleColors.RED + "Existing..." + ConsoleColors.RESET);
+                        System.in.read();
+                        System.out.println(ConsoleColors.BLUE + "Thank you for using this system :D" + ConsoleColors.RESET);
+                        System.out.println();
+                        break;
+                    default: //Display error message if not within the options provided
+                        System.out.println(ConsoleColors.RED + "Invalid Option! Please Try Again" + ConsoleColors.RESET);
+                        System.out.print("Please Enter Any Key to Proceed...");
+                        System.in.read();
+                        System.out.println();
+                }
+            } while (Integer.parseInt(option) != 6);
+        }else{
+            System.out.println(ConsoleColors.RED + "Existing..." + ConsoleColors.RESET);
+        }
 
     }
 }
