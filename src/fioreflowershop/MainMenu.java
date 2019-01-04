@@ -218,7 +218,25 @@ public class MainMenu {
                         break;
 
                     case 3: //Make Order (Order/Customize) Maintenance
-
+                         String selection ="";
+                        do{
+                        System.out.println("1. Customize Order");
+                        System.out.println("2. Normal Order");
+                        Scanner scanInt = new Scanner(System.in);
+                        
+                        do{
+                        System.out.println("Please Select");
+                        selection = scanInt.next();
+                        if(!Validation.CheckDigit(selection)){
+                            System.out.println("Please Enter Only Digit!");
+                        }
+                        } while (!Validation.CheckDigit(selection));
+                        switch(Integer.parseInt(selection)){
+                            case 1:CustomizeOrder.Customize(customerList, customizedList, orderDataList, styleList, sizeList, prodList, accessoriesList, paymentList,staffList.get(2),pickupList);break;
+                            case 2:Catalog_Order.CatalogOrderM(prodTypeList, prodList, orderDataList, customerList, staffList.get(0), paymentList, corporateCustomerList, orderLL, deliveryList, staffList, pickupList);break;
+                        }
+                        }while(Integer.parseInt(selection)<1||Integer.parseInt(selection)>2);
+                        
                         break;
                     case 4: //Delivery Maintenance
 

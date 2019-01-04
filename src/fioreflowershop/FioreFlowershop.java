@@ -139,9 +139,9 @@ public class FioreFlowershop {
         ListInterface<Product> prodPromotionList = new LinkedList<Product>();
         prodPromotionList.add(new Product("PM1001","Flowers and Chocolates Gift","DESC...","Red",60.00,5,prodTypeList.get(0),"FEBRUARY"));
         QueueInterface<Delivery> deliveryqueue = new LinkedQueue<>();
-  //      orderLL =GenerateSalesOrder.GenerateReportMaintenanceMenu(prodTypeList, prodList, orderDataList, orderLL, corporateCustomerList, customerList);
-        //ProductMaintenance.PromotionProductMaintenanceMenu(prodPromotionList, prodTypeList);
-        
+  //     orderLL =GenerateSalesOrder.GenerateReportMaintenanceMenu(prodTypeList, prodList, orderDataList, orderLL, corporateCustomerList, customerList);
+  //     ProductMaintenance.PromotionProductMaintenanceMenu(prodPromotionList, prodTypeList);
+  
 //        System.out.print("\n**********************\n Before Current Product List \n**********************\n");
 //        System.out.println("Product ID\tName\t\t\t\tDescription\t\tColor\t\tPrice\t\tQuantity\tType");
 //        for(int r=0;r<prodList.size();r++){    
