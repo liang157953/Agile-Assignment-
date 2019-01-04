@@ -326,20 +326,32 @@ public class Catalog_Order {
         selectionDeliveryMode = scan.nextInt();
         System.out.println("\n");
         if(selectionDeliveryMode == 1){
-            System.out.printf("Enter date : ");
             requirePickUpDate = Date();
 
-            System.out.printf("Enter time : ");
             requirePickUpTime = Time();
             
-            System.out.println("Pick Up staff Details");
+            System.out.println("\nPick Up staff Details");
+
+            System.out.println("====================================");
             System.out.println("Staff ID \t\tStaff Name");
+            System.out.println("====================================");
             for(int k=0; k<staffList.size();k++){
-                System.out.println(staffList.get(k).getStaffID()+"\t\t"+staffList.get(k).getStaffName());
+                System.out.println(staffList.get(k).getStaffID()+"\t\t\t"+staffList.get(k).getStaffName());
             }
-            System.out.print("Enter Pick Up Staff ID > ");
-            pickUpStaffID = scan.next();
-            
+            do{
+                checkid=false;                
+                System.out.print("Enter Pick Up Staff ID > ");
+                pickUpStaffID = scan.next();
+                for(int j=0; j<staffList.size(); j++){
+                    if(staffList.get(j).getStaffID().equals(pickUpStaffID)){
+                        checkid=true;  
+                        
+                    }  
+                }
+                if(!checkid){
+                            System.out.println("\nPlease reenter again Pick Up Staff ID !");
+                }
+            }while(!checkid);
         }else if(selectionDeliveryMode == 2){
             Scanner scn = new Scanner(System.in);
             System.out.print("Enter Delivery Address : ");
@@ -352,19 +364,27 @@ public class Catalog_Order {
             requireDeliveryDate = Date();
             requireDeliveryTime = Time();
             
-            System.out.println("Delivery staff Details");
+            System.out.println("\nDelivery staff Details");
+            System.out.println("====================================");
             System.out.println("Staff ID \t\tStaff Name");
+            System.out.println("====================================");
             for(int k=0; k<staffList.size();k++){
-                System.out.println(staffList.get(k).getStaffID()+"\t\t"+staffList.get(k).getStaffName());
+                System.out.println(staffList.get(k).getStaffID()+"\t\t\t"+staffList.get(k).getStaffName());
             }
-            System.out.print("Enter Delivery Staff ID > ");
-            deliveryStaffID = scan.next();
-            //compare the id get the id to store the id that user input
-            for(int r=0; r<staffList.size();r++){
-                if(staffList.get(r).getStaffID().equals(deliveryStaffID)){
-                    addDeliveryStaff = staffList.get(r);
+            do{
+                checkid=false;    
+                System.out.print("\nEnter Delivery Staff ID > ");
+                deliveryStaffID = scan.next();
+                //compare the id get the id to store the id that user input
+                for(int r=0; r<staffList.size();r++){
+                    if(staffList.get(r).getStaffID().equals(deliveryStaffID)){
+                        checkid=true;
+                        addDeliveryStaff = staffList.get(r);
+                    }
                 }
-            }      
+                if(!checkid)
+                    System.out.println("Please reenter again Delivery Staff ID !");
+            }while(!checkid);
             //Enter priotity
             System.out.println("\nPick Up Priority");
             System.out.println("***************************");
